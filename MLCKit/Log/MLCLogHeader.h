@@ -8,10 +8,6 @@
 #ifndef MLCLogHeader_h
 #define MLCLogHeader_h
 
-#if DEBUG
-#define  MLCLog(...) NSLog(@"%@",[NSString stringWithFormat:__VA_ARGS__])
-#else
-#define MLCLog(...)
-#endif
+
 
 #endif /* MLCLogHeader_h */

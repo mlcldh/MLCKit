@@ -6,3 +6,4 @@ target:'MLCKitDemo'
 
 pod 'Masonry', '1.1.0'
 pod 'MLCKit', :path => '../../MLCKit'
+#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git'#, :commit => 'ac5c694'
