@@ -1,0 +1,31 @@
+PODS:
+  - Masonry (1.1.0)
+  - MLCKit (0.0.1):
+    - MLCKit/Category (= 0.0.1)
+    - MLCKit/Log (= 0.0.1)
+    - MLCKit/UI (= 0.0.1)
+    - MLCKit/Utility (= 0.0.1)
+  - MLCKit/Category (0.0.1)
+  - MLCKit/Log (0.0.1)
+  - MLCKit/UI (0.0.1)
+  - MLCKit/Utility (0.0.1)
+
+DEPENDENCIES:
+  - Masonry (= 1.1.0)
+  - MLCKit (from `../../MLCKit`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Masonry
+
+EXTERNAL SOURCES:
+  MLCKit:
+    :path: "../../MLCKit"
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MLCKit: d97fae959c7c6733425fc41abd19a7fc12790bfc
+
+PODFILE CHECKSUM: 1762d86ccb98a3f9da659ae26958fec83377d8e9
+
+COCOAPODS: 1.7.4
