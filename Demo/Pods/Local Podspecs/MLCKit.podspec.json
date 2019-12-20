@@ -27,23 +27,19 @@
   "subspecs": [
     {
       "name": "Utility",
-      "source_files": "MLCKit/Utility/*.{h,m}",
-      "public_header_files": "MLCKit/Utility/*.h"
+      "source_files": "MLCKit/Utility/*.{h,m}"
     },
     {
       "name": "Category",
-      "source_files": "MLCKit/Category/*.{h,m,mm}",
-      "public_header_files": "MLCKit/Category/*.h"
+      "source_files": "MLCKit/Category/*.{h,m,mm}"
     },
     {
-      "name": "Log",
-      "source_files": "MLCKit/Log/*.{h,m,mm}",
-      "public_header_files": "MLCKit/Log/*.h"
+      "name": "Macro",
+      "source_files": "MLCKit/Macro/*.{h,m,mm}"
     },
     {
       "name": "UI",
-      "source_files": "MLCKit/UI/*.{h,m,mm}",
-      "public_header_files": "MLCKit/UI/*.h"
+      "source_files": "MLCKit/UI/*.{h,m,mm}"
     }
   ]
 }
