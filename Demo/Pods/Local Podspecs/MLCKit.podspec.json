@@ -17,7 +17,7 @@
     "git": "https://github.com/mlcldh/MLCKit.git",
     "tag": "0.0.1"
   },
-  "source_files": "MLCKit/**/*.{h,m}",
+  "source_files": "MLCKit/MLCKit.h",
   "frameworks": [
     "UIKit",
     "Foundation"

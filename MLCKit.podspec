@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/mlcldh/MLCKit.git", :tag => s.version.to_s }
 #  s.source_files = "MLCKit"
-  s.source_files = 'MLCKit/**/*.{h,m}'
+  s.source_files = 'MLCKit/MLCKit.h'
   s.frameworks = 'UIKit', 'Foundation'
 
   s.requires_arc = true
