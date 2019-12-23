@@ -1,8 +1,9 @@
 //
 //  MLCMacror.h
-//  Pods
+//  MLCKit
 //
 //  Created by menglingchao on 2019/12/20.
+//  Copyright © 2019 MengLingChao. All rights reserved.
 //
 
 #ifndef MLCMacror_h

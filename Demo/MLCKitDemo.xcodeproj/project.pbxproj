@@ -48,7 +48,6 @@
 				3325DB394482C779B27B6273 /* Pods-MLCKitDemo.debug.xcconfig */,
 				7B26288BF695D298AA9C8D0D /* Pods-MLCKitDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

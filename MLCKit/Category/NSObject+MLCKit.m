@@ -1,8 +1,9 @@
 //
 //  NSObject+MLCKit.m
-//  Masonry
+//  MLCKit
 //
 //  Created by menglingchao on 2019/12/20.
+//  Copyright © 2019 MengLingChao. All rights reserved.
 //
 
 #import "NSObject+MLCKit.h"
@@ -10,9 +11,9 @@
 
 //#import <AppKit/AppKit.h>
 
-
 @implementation NSObject (MLCKit)
 
+#pragma mark -
 - (void)mlc_setValuesWithCoder:(NSCoder *)aDecoder {
     u_int count;
     objc_property_t *properties  = class_copyPropertyList([self class], &count);
