@@ -52,7 +52,7 @@ static CTTelephonyNetworkInfo *MLCNetworkInfo = nil;
         MLCNetworkInfo = CTTelephonyNetworkInfo.new;
     }
     NSString *carrierName = MLCNetworkInfo.subscriberCellularProvider.carrierName;
-//    KKLog(@"menglc carrierName = %@", carrierName);
+//    MLCLog(@"menglc carrierName = %@", carrierName);
 //    NSAssert(carrierName.length, @"不能为空");
     return carrierName;
 }

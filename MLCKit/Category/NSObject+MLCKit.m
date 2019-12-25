@@ -21,7 +21,7 @@
         const char *propertyName =property_getName(properties[i]);
         NSString *propertyString = [NSString stringWithUTF8String: propertyName];
         id value = [aDecoder decodeObjectForKey:propertyString];
-        //            KKLog(@"menglc propertyString %@, %@", propertyString, value);
+        //            MLCLog(@"menglc propertyString %@, %@", propertyString, value);
         [self setValue:value forKey:propertyString];
     }
     free(properties);
@@ -33,7 +33,7 @@
         const char *propertyName =property_getName(properties[i]);
         NSString *propertyString = [NSString stringWithUTF8String: propertyName];
         id value = [self valueForKey:propertyString];
-//        KKLog(@"menglc propertyString encodeWithCoder %@, %@", propertyString, value);
+//        MLCLog(@"menglc propertyString encodeWithCoder %@, %@", propertyString, value);
 //        if ([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]]) {
             [aCoder encodeObject:value forKey:propertyString];
 //        }
