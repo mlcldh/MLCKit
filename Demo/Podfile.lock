@@ -2,10 +2,12 @@ PODS:
   - Masonry (1.1.0)
   - MLCKit (0.0.1):
     - MLCKit/Category (= 0.0.1)
+    - MLCKit/LocalFolder (= 0.0.1)
     - MLCKit/Macro (= 0.0.1)
     - MLCKit/UI (= 0.0.1)
     - MLCKit/Utility (= 0.0.1)
   - MLCKit/Category (0.0.1)
+  - MLCKit/LocalFolder (0.0.1)
   - MLCKit/Macro (0.0.1)
   - MLCKit/UI (0.0.1)
   - MLCKit/Utility (0.0.1)
@@ -24,7 +26,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MLCKit: b1ad38c89859c568de685fa372159ba1ee2ee054
+  MLCKit: 680f35b29669c69e7efa283c3c6c41b1ebaa50ff
 
 PODFILE CHECKSUM: 1f02dc70e228e2496e8e9d79c67030ed1b12da13
 

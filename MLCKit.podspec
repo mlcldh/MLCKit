@@ -22,26 +22,25 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.static_framework = true
   
-
-  s.subspec 'Utility' do |ss|
-    ss.source_files = 'MLCKit/Utility/*.{h,m}'
-#    ss.public_header_files = 'MLCKit/Utility/*.h'
-  end
-  
   s.subspec 'Category' do |ss|
     ss.source_files = 'MLCKit/Category/*.{h,m,mm}'
-#    ss.public_header_files = 'MLCKit/Category/*.h'
+  end
+  
+  s.subspec 'LocalFolder' do |ss|
+    ss.source_files = 'MLCKit/LocalFolder/*.{h,m,mm}'
   end
   
   s.subspec 'Macro' do |ss|
     ss.source_files = 'MLCKit/Macro/*.{h,m,mm}'
-#    ss.public_header_files = 'MLCKit/Macro/*.h'
   end
   
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
-#    ss.public_header_files = 'MLCKit/UI/*.h'
   end
+  
+  s.subspec 'Utility' do |ss|
+      ss.source_files = 'MLCKit/Utility/*.{h,m}'
+    end
   
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
