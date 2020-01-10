@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
+    ss.dependency 'Masonry'
   end
   
   s.subspec 'Utility' do |ss|
