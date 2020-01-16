@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MLCKit"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "文本相关的工具类。"
 
   s.homepage     = "https://github.com/mlcldh/MLCKit"
@@ -21,6 +21,11 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
   s.static_framework = true
+  
+  s.subspec 'Cache' do |ss|
+    ss.source_files = 'MLCKit/Cache/*.{h,m,mm}'
+    ss.dependency 'YYCache'
+  end
   
   s.subspec 'Category' do |ss|
     ss.source_files = 'MLCKit/Category/*.{h,m,mm}'

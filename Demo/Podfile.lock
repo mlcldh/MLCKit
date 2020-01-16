@@ -1,17 +1,21 @@
 PODS:
   - Masonry (1.1.0)
-  - MLCKit (0.0.1):
-    - MLCKit/Category (= 0.0.1)
-    - MLCKit/LocalFolder (= 0.0.1)
-    - MLCKit/Macro (= 0.0.1)
-    - MLCKit/UI (= 0.0.1)
-    - MLCKit/Utility (= 0.0.1)
-  - MLCKit/Category (0.0.1)
-  - MLCKit/LocalFolder (0.0.1)
-  - MLCKit/Macro (0.0.1)
-  - MLCKit/UI (0.0.1):
+  - MLCKit (0.0.2):
+    - MLCKit/Cache (= 0.0.2)
+    - MLCKit/Category (= 0.0.2)
+    - MLCKit/LocalFolder (= 0.0.2)
+    - MLCKit/Macro (= 0.0.2)
+    - MLCKit/UI (= 0.0.2)
+    - MLCKit/Utility (= 0.0.2)
+  - MLCKit/Cache (0.0.2):
+    - YYCache
+  - MLCKit/Category (0.0.2)
+  - MLCKit/LocalFolder (0.0.2)
+  - MLCKit/Macro (0.0.2)
+  - MLCKit/UI (0.0.2):
     - Masonry
-  - MLCKit/Utility (0.0.1)
+  - MLCKit/Utility (0.0.2)
+  - YYCache (1.0.4)
 
 DEPENDENCIES:
   - Masonry (= 1.1.0)
@@ -20,6 +24,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Masonry
+    - YYCache
 
 EXTERNAL SOURCES:
   MLCKit:
@@ -27,7 +32,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MLCKit: d94ae49da292c0dc91985931a8c8cbcab8150a17
+  MLCKit: c5864bfe9e974c8a525d286dba738d40f8e054dd
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
 PODFILE CHECKSUM: 1f02dc70e228e2496e8e9d79c67030ed1b12da13
 
