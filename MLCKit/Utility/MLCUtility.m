@@ -7,6 +7,7 @@
 //
 
 #import "MLCUtility.h"
+#import <AdSupport/AdSupport.h>
 
 @import CoreTelephony.CTTelephonyNetworkInfo;
 @import CoreTelephony.CTCarrier;
@@ -46,6 +47,16 @@ static CTTelephonyNetworkInfo *MLCNetworkInfo = nil;
     }
 //    NSAssert(string.length, @"不能为空");
     return string;
+}
++ (NSString *)idfa {
+    NSString *idfa = [ASIdentifierManager sharedManager].advertisingIdentifier.UUIDString;
+    return idfa;
+}
++ (BOOL)advertisingTrackingEnabled {
+    return [ASIdentifierManager sharedManager].isAdvertisingTrackingEnabled;
+}
++ (NSString *)identifierForVendor {
+    return [UIDevice currentDevice].identifierForVendor.UUIDString;
 }
 + (NSString *)carrierName {
     if (!MLCNetworkInfo) {

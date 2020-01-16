@@ -20,6 +20,12 @@
 + (NSString *)appName;
 /**app的bundle ID*/
 + (NSString *)bundleIdentifier;
+/**IDFA，广告标示符*/
++ (NSString *)idfa;
+/**广告跟踪是否开启*/
++ (BOOL)advertisingTrackingEnabled;
+/**IDFV*/
++ (NSString *)identifierForVendor;
 /**运营商名字*/
 + (NSString *)carrierName;
 /**蜂窝网络类型*/
