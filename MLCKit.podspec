@@ -17,7 +17,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/mlcldh/MLCKit.git", :tag => s.version.to_s }
 #  s.source_files = "MLCKit"
   s.source_files = 'MLCKit/MLCKit.h'
-  s.frameworks = 'UIKit', 'Foundation'
 
   s.requires_arc = true
   s.static_framework = true
@@ -25,28 +24,33 @@ Pod::Spec.new do |s|
   s.subspec 'Cache' do |ss|
     ss.source_files = 'MLCKit/Cache/*.{h,m,mm}'
     ss.dependency 'YYCache'
+    ss.frameworks = 'Foundation'
   end
   
   s.subspec 'Category' do |ss|
     ss.source_files = 'MLCKit/Category/*.{h,m,mm}'
+    ss.frameworks = 'UIKit', 'Foundation'
   end
   
   s.subspec 'LocalFolder' do |ss|
     ss.source_files = 'MLCKit/LocalFolder/*.{h,m,mm}'
+    ss.frameworks = 'UIKit', 'Foundation'
   end
   
   s.subspec 'Macro' do |ss|
     ss.source_files = 'MLCKit/Macro/*.{h,m,mm}'
+    ss.frameworks = 'UIKit', 'Foundation'
   end
   
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
+    ss.frameworks = 'UIKit', 'Foundation'
     ss.dependency 'Masonry'
   end
   
   s.subspec 'Utility' do |ss|
       ss.source_files = 'MLCKit/Utility/*.{h,m}'
-      ss.frameworks = 'AdSupport', 'CoreTelephony'
+      ss.frameworks = 'UIKit', 'Foundation', 'AdSupport', 'CoreTelephony'
     end
   
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
