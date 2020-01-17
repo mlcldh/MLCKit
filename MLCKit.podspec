@@ -46,6 +46,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Utility' do |ss|
       ss.source_files = 'MLCKit/Utility/*.{h,m}'
+      ss.frameworks = 'AdSupport', 'CoreTelephony'
     end
   
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
