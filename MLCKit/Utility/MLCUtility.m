@@ -8,9 +8,10 @@
 
 #import "MLCUtility.h"
 #import <AdSupport/AdSupport.h>
-
-@import CoreTelephony.CTTelephonyNetworkInfo;
-@import CoreTelephony.CTCarrier;
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+//@import CoreTelephony.CTTelephonyNetworkInfo;
+//@import CoreTelephony.CTCarrier;
 
 static CTTelephonyNetworkInfo *MLCNetworkInfo = nil;
 
