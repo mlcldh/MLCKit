@@ -11,83 +11,123 @@
 
 //#import <AppKit/AppKit.h>
 
-@interface UIView ()
+@interface MLCViewTarget : NSObject
 
-/**点击手势*/
-@property (nonatomic, strong) UITapGestureRecognizer *mlc_tapGestureRecognizer;
-/**长按手势*/
-@property (nonatomic, strong) UILongPressGestureRecognizer *mlc_longPressGestureRecognizer;
-/**点击回调*/
-@property (nonatomic, copy) void(^mlc_tapBlock)(UIView *currentView);
-/**长按手势回调*/
-@property (nonatomic, copy) void(^mlc_longPressBlock)(UIView *currentView, UILongPressGestureRecognizer *recognizer);
+@property (nonatomic, weak) UIGestureRecognizer *gestureRecognizer;
+@property (nonatomic, copy) void (^actionCallback)(id recognizer);
+
+@end
+
+@implementation MLCViewTarget
+
+- (void)senderAction:(id)sender {
+    if (_actionCallback) {
+        _actionCallback(sender);
+    }
+}
 
 @end
 
 @implementation UIView (MLCKit)
 
-- (UITapGestureRecognizer *)mlc_addTapGestureRecognizer:(void (^)(UIView *))callback {
-    self.mlc_tapBlock = callback;
-    [self removeGestureRecognizer:self.mlc_tapGestureRecognizer];
-    self.mlc_tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleTap:)];
-    [self addGestureRecognizer:self.mlc_tapGestureRecognizer];
-    self.userInteractionEnabled = YES;
-    return self.mlc_tapGestureRecognizer;
-}
-- (void)mlc_removeTapGestureRecognizer {
-    self.mlc_tapBlock = nil;
-    [self removeGestureRecognizer:self.mlc_tapGestureRecognizer];
-}
-- (UILongPressGestureRecognizer *)mlc_addLongPressGestureRecognizer:(void (^)(UIView *, UILongPressGestureRecognizer *))callback {
-    self.mlc_longPressBlock = callback;
-    [self removeGestureRecognizer:self.mlc_longPressGestureRecognizer];
-    self.mlc_longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleLongPress:)];
-    [self addGestureRecognizer:self.mlc_longPressGestureRecognizer];
-    self.userInteractionEnabled = YES;
-    return self.mlc_longPressGestureRecognizer;
-}
-- (void)mlc_removeLongPressGestureRecognizer {
-    self.mlc_longPressBlock = nil;
-    [self removeGestureRecognizer:self.mlc_longPressGestureRecognizer];
-}
-#pragma mark - Getter
-- (void (^)(UIView *))mlc_tapBlock {
-    return objc_getAssociatedObject(self, _cmd);
-}
-- (void (^)(UIView *, UILongPressGestureRecognizer *))mlc_longPressBlock {
-    return objc_getAssociatedObject(self, _cmd);
-}
-- (UITapGestureRecognizer *)mlc_tapGestureRecognizer {
-    return objc_getAssociatedObject(self, _cmd);
-}
-- (UILongPressGestureRecognizer *)mlc_longPressGestureRecognizer {
-    return objc_getAssociatedObject(self, _cmd);
-}
-#pragma mark - Setter
-- (void)setMlc_tapBlock:(void (^)(UIView *))mlc_tapBlock {
-    objc_setAssociatedObject(self, @selector(mlc_tapBlock), mlc_tapBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-- (void)setMlc_longPressBlock:(void (^)(UIView *, UILongPressGestureRecognizer *))mlc_longPressBlock {
-    objc_setAssociatedObject(self, @selector(mlc_longPressBlock), mlc_longPressBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-- (void)setMlc_tapGestureRecognizer:(UITapGestureRecognizer *)mlc_tapGestureRecognizer {
-    objc_setAssociatedObject(self, @selector(mlc_tapGestureRecognizer), mlc_tapGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-- (void)setMlc_longPressGestureRecognizer:(UILongPressGestureRecognizer *)mlc_longPressGestureRecognizer {
-    objc_setAssociatedObject(self, @selector(mlc_longPressGestureRecognizer), mlc_longPressGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-#pragma mark - Event
-- (void)mlc_handleTap:(UITapGestureRecognizer *)recognizer {
-    if (self.mlc_tapBlock) {
-        self.mlc_tapBlock(recognizer.view);
+- (id)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void (^)(id))callback {
+    MLCViewTarget *viewTarget = [[MLCViewTarget alloc] init];
+    UIGestureRecognizer *recognizer = nil;
+    switch (type) {
+        case MLCGestureRecognizerTypeTap: {
+            recognizer = [[UITapGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        case MLCGestureRecognizerTypeLongPress: {
+            recognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        case MLCGestureRecognizerTypePan: {
+            recognizer = [[UITapGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        case MLCGestureRecognizerTypeSwipe: {
+            recognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        case MLCGestureRecognizerTypeRotation: {
+            recognizer = [[UIRotationGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        case MLCGestureRecognizerTypePinch: {
+            recognizer = [[UIPinchGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+        }
+            break;
+        default:
+            break;
     }
-}
-- (void)mlc_handleLongPress:(UILongPressGestureRecognizer *)recognizer {
-    if (self.mlc_longPressBlock) {
-        self.mlc_longPressBlock(recognizer.view, recognizer);
+    if (recognizer) {
+        [self addGestureRecognizer:recognizer];
+        self.userInteractionEnabled = YES;
     }
+    viewTarget.gestureRecognizer = recognizer;
+    viewTarget.actionCallback = callback;
+    NSMutableArray *viewTargets = [self mlc_viewTargets];
+    [viewTargets addObject:viewTarget];
+    return recognizer;
 }
-#pragma mark -
+- (void)mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerType)type {
+    NSMutableArray<MLCViewTarget *> *viewTargets = [self mlc_viewTargets];
+    for (MLCViewTarget *viewTarget in viewTargets) {
+        BOOL is = NO;
+        switch (type) {
+            case MLCGestureRecognizerTypeTap: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            case MLCGestureRecognizerTypeLongPress: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            case MLCGestureRecognizerTypePan: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            case MLCGestureRecognizerTypeSwipe: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            case MLCGestureRecognizerTypeRotation: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            case MLCGestureRecognizerTypePinch: {
+                if ([viewTarget.gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]]) {
+                    is = YES;
+                }
+            }
+                break;
+            default:
+                break;
+        }
+        if (is) {
+            [self removeGestureRecognizer:viewTarget.gestureRecognizer];
+        }
+    }
+    [viewTargets removeAllObjects];
+}
+- (void)mlc_removeAllGestureRecognizers {
+    NSMutableArray<MLCViewTarget *> *viewTargets = [self mlc_viewTargets];
+    for (MLCViewTarget *viewTarget in viewTargets) {
+        [self removeGestureRecognizer:viewTarget.gestureRecognizer];
+    }
+    [viewTargets removeAllObjects];
+}
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute {//移除某一些约束
     for (NSLayoutConstraint *constraint in self.constraints) {
         if (constraint.firstItem == firstItem && constraint.firstAttribute == firstAttribute) {
@@ -98,6 +138,15 @@
             }
         }
     }
+}
+#pragma mark - Getter
+- (NSMutableArray<MLCViewTarget *> *)mlc_viewTargets {
+    NSMutableArray *viewTargets = objc_getAssociatedObject(self, _cmd);
+    if (!viewTargets) {
+        viewTargets = [NSMutableArray array];
+        objc_setAssociatedObject(self, @selector(mlc_viewTargets), viewTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return viewTargets;
 }
 
 @end

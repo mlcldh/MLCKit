@@ -33,12 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self aLabel];
+    [self aLabel];
 //    [self button];
 //    [self aSwitch];
 //    [self seeLocalFileButton];
-    [self requestAlbumPermissionButton];
-    [self requestCameraPermissionButton];
+//    [self requestAlbumPermissionButton];
+//    [self requestCameraPermissionButton];
 //    [MLCUtility idfa];
 //    [self useUrlEncode];
 //    [self useUrlDecode];
@@ -52,15 +52,16 @@
         _aLabel.textAlignment = NSTextAlignmentCenter;
 //        _aLabel.font = [UIFont systemFontOfSize:18];
         _aLabel.text = @"轻学堂";
-        [_aLabel mlc_addTapGestureRecognizer:^(UIView *currentView) {
-            UILabel *label = (UILabel *)currentView;
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(id recognizer) {
+            UILabel *label = (UILabel *)(((UITapGestureRecognizer *) recognizer).view);
             MLCLog(@"tap %@", label.text);
         }];
-        [_aLabel mlc_addLongPressGestureRecognizer:^(UIView *currentView, UILongPressGestureRecognizer *recognizer) {
-            if (recognizer.state != UIGestureRecognizerStateBegan) {
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(id recognizer) {
+            UILongPressGestureRecognizer *longPressGestureRecognizer = recognizer;
+            if (longPressGestureRecognizer.state != UIGestureRecognizerStateBegan) {
                 return;
             }
-            UILabel *label = (UILabel *)currentView;
+            UILabel *label = (UILabel *)longPressGestureRecognizer.view;
             MLCLog(@"longPress %@", label.text);
         }];
         [self.view addSubview:_aLabel];
