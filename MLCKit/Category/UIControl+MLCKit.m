@@ -11,22 +11,76 @@
 
 //#import <AppKit/AppKit.h>
 
+@interface MLCControlTarget : NSObject
+
+@property (nonatomic, copy) void (^actionCallback)(id sender);
+@property (nonatomic) UIControlEvents controlEvents;
+
+@end
+
+@implementation MLCControlTarget
+
+- (instancetype)initWithActionCallback:(void (^)(id))actionCallback controlEvents:(UIControlEvents)controlEvents {
+    if (self = [super init]) {
+        _actionCallback   = actionCallback;
+        _controlEvents = controlEvents;
+    }
+    return self;
+}
+- (void)senderAction:(id)sender {
+    if (_actionCallback) {
+        _actionCallback(sender);
+    }
+}
+
+@end
 
 @implementation UIControl (MLCKit)
 
+- (void)mlc_addActionForControlEvents:(UIControlEvents)controlEvents callback:(void (^)(id))callback {
+    if (!controlEvents) return;
+    MLCControlTarget *controlTarget = [[MLCControlTarget alloc] initWithActionCallback:callback controlEvents:controlEvents];
+    [self addTarget:controlTarget action:@selector(senderAction:) forControlEvents:controlEvents];
+    NSMutableArray *controlTargets = [self mlc_controlTargets];
+    [controlTargets addObject:controlTarget];
+}
+- (void)mlc_removeAllActionsForControlEvents:(UIControlEvents)controlEvents {
+    if (!controlEvents) return;
+    NSMutableArray *controlTargets = [self mlc_controlTargets];
+    NSMutableArray *removedTargets = [NSMutableArray array];
+    for (MLCControlTarget *controlTarget in controlTargets) {
+        if (controlTarget.controlEvents == controlEvents) {
+            [removedTargets addObject:controlTarget];
+        }
+    }
+    for (MLCControlTarget *controlTarget in removedTargets) {
+        [self removeTarget:controlTarget action:@selector(senderMethod:) forControlEvents:controlEvents];
+        [controlTargets removeObject:controlTarget];
+    }
+}
+- (void)mlc_removeAllActions {
+    NSMutableArray *controlTargets = [self mlc_controlTargets];
+    for (MLCControlTarget *controlTarget in controlTargets) {
+        [self removeTarget:controlTarget action:@selector(senderMethod:) forControlEvents:controlTarget.controlEvents];
+    }
+    [controlTargets removeAllObjects];
+}
 #pragma mark - Getter
-- (void (^)(void))mlc_touchUpInsideBlock {
-    return objc_getAssociatedObject(self, _cmd);
+- (NSMutableArray *)mlc_controlTargets {
+    NSMutableArray *controlTargets = objc_getAssociatedObject(self, _cmd);
+    if (!controlTargets) {
+        controlTargets = [NSMutableArray array];
+        objc_setAssociatedObject(self, @selector(mlc_controlTargets), controlTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return controlTargets;
 }
 #pragma mark - Setter
 - (void)setMlc_touchUpInsideBlock:(void (^)(void))mlc_touchUpInsideBlock {
-    objc_setAssociatedObject(self, @selector(mlc_touchUpInsideBlock), mlc_touchUpInsideBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    [self addTarget:self action:@selector(mlc_handleUIControlEventTouchUpInside:) forControlEvents:(UIControlEventTouchUpInside)];
-}
-- (void)mlc_handleUIControlEventTouchUpInside:(UIControl *)control {
-    if (self.mlc_touchUpInsideBlock) {
-        self.mlc_touchUpInsideBlock();
-    }
+    [self mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(UIControl *sender) {
+        if (mlc_touchUpInsideBlock) {
+            mlc_touchUpInsideBlock();
+        }
+    }];
 }
 
 @end

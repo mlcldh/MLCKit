@@ -13,10 +13,43 @@
 
 @interface UIView ()
 
+/**点击手势*/
+@property (nonatomic, strong) UITapGestureRecognizer *mlc_tapGestureRecognizer;
+/**长按手势*/
+@property (nonatomic, strong) UILongPressGestureRecognizer *mlc_longPressGestureRecognizer;
+/**点击回调*/
+@property (nonatomic, copy) void(^mlc_tapBlock)(UIView *currentView);
+/**长按手势回调*/
+@property (nonatomic, copy) void(^mlc_longPressBlock)(UIView *currentView, UILongPressGestureRecognizer *recognizer);
+
 @end
 
 @implementation UIView (MLCKit)
 
+- (UITapGestureRecognizer *)mlc_addTapGestureRecognizer:(void (^)(UIView *))callback {
+    self.mlc_tapBlock = callback;
+    [self removeGestureRecognizer:self.mlc_tapGestureRecognizer];
+    self.mlc_tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleTap:)];
+    [self addGestureRecognizer:self.mlc_tapGestureRecognizer];
+    self.userInteractionEnabled = YES;
+    return self.mlc_tapGestureRecognizer;
+}
+- (void)mlc_removeTapGestureRecognizer {
+    self.mlc_tapBlock = nil;
+    [self removeGestureRecognizer:self.mlc_tapGestureRecognizer];
+}
+- (UILongPressGestureRecognizer *)mlc_addLongPressGestureRecognizer:(void (^)(UIView *, UILongPressGestureRecognizer *))callback {
+    self.mlc_longPressBlock = callback;
+    [self removeGestureRecognizer:self.mlc_longPressGestureRecognizer];
+    self.mlc_longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleLongPress:)];
+    [self addGestureRecognizer:self.mlc_longPressGestureRecognizer];
+    self.userInteractionEnabled = YES;
+    return self.mlc_longPressGestureRecognizer;
+}
+- (void)mlc_removeLongPressGestureRecognizer {
+    self.mlc_longPressBlock = nil;
+    [self removeGestureRecognizer:self.mlc_longPressGestureRecognizer];
+}
 #pragma mark - Getter
 - (void (^)(UIView *))mlc_tapBlock {
     return objc_getAssociatedObject(self, _cmd);
@@ -32,18 +65,10 @@
 }
 #pragma mark - Setter
 - (void)setMlc_tapBlock:(void (^)(UIView *))mlc_tapBlock {
-    [self removeGestureRecognizer:self.mlc_tapGestureRecognizer];
-    self.mlc_tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleTap:)];
-    [self addGestureRecognizer:self.mlc_tapGestureRecognizer];
     objc_setAssociatedObject(self, @selector(mlc_tapBlock), mlc_tapBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    self.userInteractionEnabled = YES;
 }
 - (void)setMlc_longPressBlock:(void (^)(UIView *, UILongPressGestureRecognizer *))mlc_longPressBlock {
-    [self removeGestureRecognizer:self.mlc_longPressGestureRecognizer];
-    self.mlc_longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(mlc_handleLongPress:)];
-    [self addGestureRecognizer:self.mlc_longPressGestureRecognizer];
     objc_setAssociatedObject(self, @selector(mlc_longPressBlock), mlc_longPressBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-    self.userInteractionEnabled = YES;
 }
 - (void)setMlc_tapGestureRecognizer:(UITapGestureRecognizer *)mlc_tapGestureRecognizer {
     objc_setAssociatedObject(self, @selector(mlc_tapGestureRecognizer), mlc_tapGestureRecognizer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);

@@ -13,12 +13,18 @@
 #import "UIControl+MLCKit.h"
 #import "NSObject+MLCKit.h"
 #import "NSString+MLCKit.h"
+#import "MLCUtility.h"
+#import "MLCPhotoPermissionManager.h"
 #import "Masonry.h"
 
 @interface ViewController ()
 
 @property (nonatomic, strong) UILabel *aLabel;//
+@property (nonatomic, strong) UIButton *button;//
+@property (nonatomic, strong) UISwitch *aSwitch;//
 @property (nonatomic, strong) UIButton *seeLocalFileButton;//
+@property (nonatomic, strong) UIButton *requestAlbumPermissionButton;//
+@property (nonatomic, strong) UIButton *requestCameraPermissionButton;//
 
 @end
 
@@ -28,7 +34,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    [self aLabel];
-    [self seeLocalFileButton];
+//    [self button];
+//    [self aSwitch];
+//    [self seeLocalFileButton];
+    [self requestAlbumPermissionButton];
+    [self requestCameraPermissionButton];
+//    [MLCUtility idfa];
 //    [self useUrlEncode];
 //    [self useUrlDecode];
 }
@@ -41,15 +52,16 @@
         _aLabel.textAlignment = NSTextAlignmentCenter;
 //        _aLabel.font = [UIFont systemFontOfSize:18];
         _aLabel.text = @"轻学堂";
-        [_aLabel setMlc_tapBlock:^(UIView *currentView) {
+        [_aLabel mlc_addTapGestureRecognizer:^(UIView *currentView) {
             UILabel *label = (UILabel *)currentView;
-            MLCLog(@"tapBlock %@", label.text);
+            MLCLog(@"tap %@", label.text);
         }];
-        [_aLabel setMlc_longPressBlock:^(UIView *currentView, UILongPressGestureRecognizer *recognizer) {
-            if (recognizer.state == UIGestureRecognizerStateBegan) {
-                UILabel *label = (UILabel *)currentView;
-                MLCLog(@"longPressBlock %@", label.text);
+        [_aLabel mlc_addLongPressGestureRecognizer:^(UIView *currentView, UILongPressGestureRecognizer *recognizer) {
+            if (recognizer.state != UIGestureRecognizerStateBegan) {
+                return;
             }
+            UILabel *label = (UILabel *)currentView;
+            MLCLog(@"longPress %@", label.text);
         }];
         [self.view addSubview:_aLabel];
         [_aLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -59,6 +71,49 @@
         }];
     }
     return _aLabel;
+}
+- (UIButton *)button {
+    if (!_button) {
+        _button = [[UIButton alloc]init];
+        _button.backgroundColor = [UIColor purpleColor];
+        [_button setTitle:@"button" forState:(UIControlStateNormal)];
+        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+            MLCLog(@"menglc button UIControlEventTouchUpInside");
+        }];
+        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+            MLCLog(@"menglc button UIControlEventTouchUpInside 2");
+        }];
+//        [_button mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
+        [_button mlc_removeAllActions];
+        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+            MLCLog(@"menglc button UIControlEventTouchUpInside 3");
+        }];
+        [self.view addSubview:_button];
+        [_button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(20);
+            make.top.equalTo(self.view).offset(100);
+        }];
+    }
+    return _button;
+}
+- (UISwitch *)aSwitch {
+    if (!_aSwitch) {
+        _aSwitch = [[UISwitch alloc]init];
+        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
+            UISwitch *switch2 = sender;
+            MLCLog(@"menglc switch2.isOn = %@", @(switch2.isOn));
+        }];
+//        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
+//            UISwitch *switch2 = sender;
+//            MLCLog(@"menglc switch2.isOn 2 = %@", @(switch2.isOn));
+//        }];
+        [self.view addSubview:_aSwitch];
+        [_aSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(20);
+            make.top.equalTo(self.view).offset(100);
+        }];
+    }
+    return _aSwitch;
 }
 - (UIButton *)seeLocalFileButton {
     if (!_seeLocalFileButton) {
@@ -79,6 +134,46 @@
         }];
     }
     return _seeLocalFileButton;
+}
+- (UIButton *)requestAlbumPermissionButton {
+    if (!_requestAlbumPermissionButton) {
+        _requestAlbumPermissionButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        _requestAlbumPermissionButton.backgroundColor = [UIColor purpleColor];
+        [_requestAlbumPermissionButton setTitle:@"请求相册权限" forState:(UIControlStateNormal)];
+        @weakify(self)
+        [_requestAlbumPermissionButton setMlc_touchUpInsideBlock:^{
+            @strongify(self)
+            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) successCallback:^{
+                NSLog(@"已经获得权限");
+            } fromViewController:self];
+        }];
+        [self.view addSubview:_requestAlbumPermissionButton];
+        [_requestAlbumPermissionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.view).offset(20);
+            make.top.equalTo(self.view).offset(100);
+        }];
+    }
+    return _requestAlbumPermissionButton;
+}
+- (UIButton *)requestCameraPermissionButton {
+    if (!_requestCameraPermissionButton) {
+        _requestCameraPermissionButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        _requestCameraPermissionButton.backgroundColor = [UIColor purpleColor];
+        [_requestCameraPermissionButton setTitle:@"请求相机权限" forState:(UIControlStateNormal)];
+        @weakify(self)
+        [_requestCameraPermissionButton setMlc_touchUpInsideBlock:^{
+            @strongify(self)
+            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) successCallback:^{
+                NSLog(@"已经获得权限");
+            } fromViewController:self];
+        }];
+        [self.view addSubview:_requestCameraPermissionButton];
+        [_requestCameraPermissionButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.requestAlbumPermissionButton.mas_right).offset(20);
+            make.top.equalTo(self.view).offset(100);
+        }];
+    }
+    return _requestCameraPermissionButton;
 }
 #pragma mark -
 - (void)useUrlEncode {//URL编码

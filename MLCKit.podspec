@@ -49,9 +49,16 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'Utility' do |ss|
-      ss.source_files = 'MLCKit/Utility/*.{h,m}'
-      ss.frameworks = 'UIKit', 'Foundation', 'AdSupport', 'CoreTelephony'
-    end
+    ss.source_files = 'MLCKit/Utility/*.{h,m}'
+    ss.frameworks = 'UIKit', 'Foundation', 'AdSupport', 'CoreTelephony'
+  end
+  
+  s.subspec 'PhotoPermission' do |ss|
+    ss.source_files = 'MLCKit/PhotoPermission/*.{h,m,mm}'
+    ss.frameworks = 'AVFoundation', 'Photos', 'UIKit', 'Foundation'
+    ss.dependency 'MLCKit/Macro'
+    ss.dependency 'MLCKit/Utility'
+  end
   
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 

@@ -15,14 +15,14 @@
 
 @interface UIView (MLCKit)
 
-/**点击手势*/
-@property (nonatomic, strong) UITapGestureRecognizer *mlc_tapGestureRecognizer;
-/**长按手势*/
-@property (nonatomic, strong) UILongPressGestureRecognizer *mlc_longPressGestureRecognizer;
-/**点击回调*/
-@property (nonatomic, copy) void(^mlc_tapBlock)(UIView *currentView);
-/**长按手势回调*/
-@property (nonatomic, copy) void(^mlc_longPressBlock)(UIView *currentView, UILongPressGestureRecognizer *recognizer);
+/**添加点击回调*/
+- (UITapGestureRecognizer *)mlc_addTapGestureRecognizer:(void(^)(UIView *currentView))callback;
+/**移除点击手势及其回调*/
+- (void)mlc_removeTapGestureRecognizer;
+/**添加长按手势*/
+- (UILongPressGestureRecognizer *)mlc_addLongPressGestureRecognizer:(void(^)(UIView *currentView, UILongPressGestureRecognizer *recognizer))callback;
+/**移除长按手势及其回调*/
+- (void)mlc_removeLongPressGestureRecognizer;
 /**移除某一些约束*/
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
 
