@@ -14,13 +14,13 @@
 @interface MLCViewTarget : NSObject
 
 @property (nonatomic, weak) UIGestureRecognizer *gestureRecognizer;
-@property (nonatomic, copy) void (^actionCallback)(id recognizer);
+@property (nonatomic, copy) void (^actionCallback)(UIGestureRecognizer *recognizer);
 
 @end
 
 @implementation MLCViewTarget
 
-- (void)senderAction:(id)sender {
+- (void)senderAction:(UIGestureRecognizer *)sender {
     if (_actionCallback) {
         _actionCallback(sender);
     }
@@ -30,7 +30,7 @@
 
 @implementation UIView (MLCKit)
 
-- (id)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void (^)(id))callback {
+- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void (^)(UIGestureRecognizer *))callback {
     MLCViewTarget *viewTarget = [[MLCViewTarget alloc] init];
     UIGestureRecognizer *recognizer = nil;
     switch (type) {
@@ -43,7 +43,7 @@
         }
             break;
         case MLCGestureRecognizerTypePan: {
-            recognizer = [[UITapGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
+            recognizer = [[UIPanGestureRecognizer alloc]initWithTarget:viewTarget action:@selector(senderAction:)];
         }
             break;
         case MLCGestureRecognizerTypeSwipe: {
@@ -73,6 +73,7 @@
 }
 - (void)mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerType)type {
     NSMutableArray<MLCViewTarget *> *viewTargets = [self mlc_viewTargets];
+    NSMutableArray<MLCViewTarget *> *removedViewTargets = [NSMutableArray array];
     for (MLCViewTarget *viewTarget in viewTargets) {
         BOOL is = NO;
         switch (type) {
@@ -116,10 +117,13 @@
                 break;
         }
         if (is) {
-            [self removeGestureRecognizer:viewTarget.gestureRecognizer];
+            [removedViewTargets addObject:viewTarget];
         }
     }
-    [viewTargets removeAllObjects];
+    for (MLCViewTarget *viewTarget in removedViewTargets) {
+        [self removeGestureRecognizer:viewTarget.gestureRecognizer];
+        [viewTargets removeObject:viewTarget];
+    }
 }
 - (void)mlc_removeAllGestureRecognizers {
     NSMutableArray<MLCViewTarget *> *viewTargets = [self mlc_viewTargets];

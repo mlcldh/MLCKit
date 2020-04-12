@@ -52,17 +52,25 @@
         _aLabel.textAlignment = NSTextAlignmentCenter;
 //        _aLabel.font = [UIFont systemFontOfSize:18];
         _aLabel.text = @"轻学堂";
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(id recognizer) {
-            UILabel *label = (UILabel *)(((UITapGestureRecognizer *) recognizer).view);
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+            UILabel *label = (UILabel *)(recognizer.view);
             MLCLog(@"tap %@", label.text);
         }];
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(id recognizer) {
-            UILongPressGestureRecognizer *longPressGestureRecognizer = recognizer;
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(UIGestureRecognizer *recognizer) {
+            UILongPressGestureRecognizer *longPressGestureRecognizer = (UILongPressGestureRecognizer *)recognizer;
             if (longPressGestureRecognizer.state != UIGestureRecognizerStateBegan) {
                 return;
             }
             UILabel *label = (UILabel *)longPressGestureRecognizer.view;
             MLCLog(@"longPress %@", label.text);
+        }];
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypePan) callback:^(UIGestureRecognizer *recognizer) {
+            MLCLog(@"menglc pan");
+        }];
+        [_aLabel mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerTypePan)];
+        [_aLabel mlc_removeAllGestureRecognizers];
+        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeSwipe) callback:^(UIGestureRecognizer *recognizer) {
+            MLCLog(@"menglc swipe");
         }];
         [self.view addSubview:_aLabel];
         [_aLabel mas_makeConstraints:^(MASConstraintMaker *make) {
