@@ -15,7 +15,7 @@
     return self;
 }
 + (instancetype)proxyWithTarget:(id)target {
-    return [[KKProxy alloc] initWithTarget:target];
+    return [[MLCProxy alloc] initWithTarget:target];
 }
 - (id)forwardingTargetForSelector:(SEL)selector {
     return _target;
