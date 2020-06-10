@@ -10,6 +10,8 @@
 
 @implementation MLCProxy
 
+- (void)dealloc {
+}
 - (instancetype)initWithTarget:(id)target {
     _target = target;
     return self;
