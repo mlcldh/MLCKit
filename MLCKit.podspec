@@ -42,6 +42,11 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit', 'Foundation'
   end
   
+  s.subspec 'Proxy' do |ss|
+    ss.source_files = 'MLCKit/Proxy/*.{h,m,mm}'
+    ss.frameworks = 'Foundation'
+  end
+  
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
     ss.frameworks = 'UIKit', 'Foundation'

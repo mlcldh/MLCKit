@@ -1,6 +1,6 @@
 //
 //  MLCPhotoPermissionManager.m
-//  Masonry
+//  MLCKit
 //
 //  Created by menglingchao on 2020/4/11.
 //

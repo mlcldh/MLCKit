@@ -33,9 +33,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self aLabel];
+//    [self aLabel];
 //    [self button];
-//    [self aSwitch];
+    [self aSwitch];
 //    [self seeLocalFileButton];
 //    [self requestAlbumPermissionButton];
 //    [self requestCameraPermissionButton];

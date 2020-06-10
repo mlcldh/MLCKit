@@ -70,7 +70,7 @@
     NSMutableArray *controlTargets = objc_getAssociatedObject(self, _cmd);
     if (!controlTargets) {
         controlTargets = [NSMutableArray array];
-        objc_setAssociatedObject(self, @selector(mlc_controlTargets), controlTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, _cmd, controlTargets, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return controlTargets;
 }
