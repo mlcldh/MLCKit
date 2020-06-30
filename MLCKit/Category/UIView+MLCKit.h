@@ -11,7 +11,7 @@
 
 #import <UIKit/UIKit.h>
 
-/* Values for NSTextAlignment */
+/**手势类型枚举 */
 typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
     MLCGestureRecognizerTypeTap = 0,//
     MLCGestureRecognizerTypeLongPress = 1,//
@@ -20,8 +20,6 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
     MLCGestureRecognizerTypeRotation = 4,//
     MLCGestureRecognizerTypePinch = 5,//
 };
-
-//NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (MLCKit)
 
@@ -35,5 +33,3 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
 
 @end
-
-//NS_ASSUME_NONNULL_END

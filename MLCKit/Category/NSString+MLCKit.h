@@ -11,8 +11,6 @@
 
 #import <Foundation/Foundation.h>
 
-//NS_ASSUME_NONNULL_BEGIN
-
 @interface NSString (MLCKit)
 
 /**URL编码*/
@@ -21,5 +19,3 @@
 - (NSString *)mlc_urlDecode;
 
 @end
-
-//NS_ASSUME_NONNULL_END

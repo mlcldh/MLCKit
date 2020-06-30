@@ -11,8 +11,6 @@
 
 #import <Foundation/Foundation.h>
 
-//NS_ASSUME_NONNULL_BEGIN
-
 @interface NSObject (MLCKit)
 
 /**反序列化*/
@@ -21,5 +19,3 @@
 - (void)mlc_encodeWithCoder:(NSCoder *)aCoder;
 
 @end
-
-//NS_ASSUME_NONNULL_END

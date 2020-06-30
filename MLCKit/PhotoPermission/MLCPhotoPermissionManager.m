@@ -45,29 +45,29 @@
     return _cameraPermissionModel;
 }
 #pragma mark -
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType successCallback:(void (^)(BOOL, BOOL, BOOL))successCallback {
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType callback:(void (^)(BOOL, BOOL, BOOL))callback {
     
     if (![UIImagePickerController isSourceTypeAvailable:souceType]) {
-        successCallback(NO, NO, NO);
+        callback(NO, NO, NO);
         return;
     }
     if (souceType == UIImagePickerControllerSourceTypeCamera) {
         AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         switch (authorizationStatus) {
             case AVAuthorizationStatusAuthorized:
-                successCallback(YES, YES, NO);
+                callback(YES, YES, NO);
                 break;
                 
             case AVAuthorizationStatusDenied:
             case AVAuthorizationStatusRestricted:
-                successCallback(YES, NO, NO);
+                callback(YES, NO, NO);
                 break;
                 
             case AVAuthorizationStatusNotDetermined:
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                                          completionHandler:^(BOOL granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        successCallback(YES, granted, YES);
+                        callback(YES, granted, YES);
                     });
                 }];
                 break;
@@ -75,30 +75,30 @@
     } else {
         switch ([PHPhotoLibrary authorizationStatus]) {
             case PHAuthorizationStatusAuthorized:
-                successCallback(YES, YES, NO);
+                callback(YES, YES, NO);
                 break;
                 
             case PHAuthorizationStatusDenied:
             case PHAuthorizationStatusRestricted:
-                successCallback(YES, NO, NO);
+                callback(YES, NO, NO);
                 break;
                 
             case PHAuthorizationStatusNotDetermined:
                 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        successCallback(YES, (status == PHAuthorizationStatusAuthorized), YES);
+                        callback(YES, (status == PHAuthorizationStatusAuthorized), YES);
                     });
                 }];
                 break;
         }
     }
 }
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType successCallback:(void (^)(void))successCallback fromViewController:(UIViewController *)viewController {
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType callback:(void (^)(void))callback fromViewController:(UIViewController *)viewController {
     if (!viewController) {
         return;
     }
     @weakify(self)
-    void(^successBlock)(BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+    void(^aCallback)(BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
         @strongify(self)
         if (!isSourceTypeAvailable) {
             NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
@@ -115,7 +115,7 @@
             return;
         }
         if (success) {
-            successCallback();
+            callback();
             return;
         }
         NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.openPermissionTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.openPermissionTitle;
@@ -143,7 +143,7 @@
                                    completion:nil];
     };
     
-    [self requestPermissionWithSourceType:sourceType successCallback:successBlock];
+    [self requestPermissionWithSourceType:sourceType callback:aCallback];
 }
 
 @end

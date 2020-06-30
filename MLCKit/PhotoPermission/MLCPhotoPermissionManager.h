@@ -9,8 +9,6 @@
 
 @class MLCPhotoPermissionModel;
 
-//NS_ASSUME_NONNULL_BEGIN
-
 /**相册/相机权限*/
 @interface MLCPhotoPermissionManager : NSObject
 
@@ -22,10 +20,8 @@
 /**单例*/
 + (instancetype)sharedInstance;
 /**判断、获取相册/相机权限*/
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType successCallback:(void (^)(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined))successCallback;
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType callback:(void (^)(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined))callback;
 /**判断、获取相册/相机权限，权限不足时，弹出alert*/
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType successCallback:(void (^)(void))successCallback fromViewController:(UIViewController *)viewController;
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType callback:(void (^)(void))callback fromViewController:(UIViewController *)viewController;
 
 @end
-
-//NS_ASSUME_NONNULL_END

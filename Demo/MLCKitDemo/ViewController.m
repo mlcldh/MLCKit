@@ -35,10 +35,10 @@
     // Do any additional setup after loading the view.
 //    [self aLabel];
 //    [self button];
-    [self aSwitch];
+//    [self aSwitch];
 //    [self seeLocalFileButton];
-//    [self requestAlbumPermissionButton];
-//    [self requestCameraPermissionButton];
+    [self requestAlbumPermissionButton];
+    [self requestCameraPermissionButton];
 //    [MLCUtility idfa];
 //    [self useUrlEncode];
 //    [self useUrlDecode];
@@ -152,8 +152,22 @@
         @weakify(self)
         [_requestAlbumPermissionButton setMlc_touchUpInsideBlock:^{
             @strongify(self)
-            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) successCallback:^{
-                NSLog(@"已经获得权限");
+//            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+//                if (!isSourceTypeAvailable) {
+//                    NSLog(@"当前设备没有相册功能");
+//                    return;
+//                }
+//                if (isNotDetermined) {
+//                    NSLog(@"相册权限还未处理");
+//                }
+//                if (success) {
+//                    NSLog(@"已经获得相册权限");
+//                } else {
+//                    NSLog(@"相册权限被拒绝");
+//                }
+//            }];
+            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^{
+                NSLog(@"已经获得相册权限");
             } fromViewController:self];
         }];
         [self.view addSubview:_requestAlbumPermissionButton];
@@ -172,8 +186,22 @@
         @weakify(self)
         [_requestCameraPermissionButton setMlc_touchUpInsideBlock:^{
             @strongify(self)
-            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) successCallback:^{
-                NSLog(@"已经获得权限");
+//            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+//                if (!isSourceTypeAvailable) {
+//                    NSLog(@"当前设备没有相机功能");
+//                    return;
+//                }
+//                if (isNotDetermined) {
+//                    NSLog(@"相机权限还未处理");
+//                }
+//                if (success) {
+//                    NSLog(@"已经获得相机权限");
+//                } else {
+//                    NSLog(@"相机权限被拒绝");
+//                }
+//            }];
+            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^{
+                NSLog(@"已经获得相机权限");
             } fromViewController:self];
         }];
         [self.view addSubview:_requestCameraPermissionButton];
