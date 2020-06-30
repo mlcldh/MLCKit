@@ -9,6 +9,8 @@ MLCKit封装一些常用的iOS方法。
 
 提供了两个单例分别保存在Documents、Library文件夹，另外提供实例来设置自定义路径。
 
+支持对缓存数据的同步/异步读取、设置。
+
 ```objective-c
 /**单例，存放在Documents文件夹内，app设置里面清理缓存不可以删除的缓存*/
 + (instancetype)coreCache;
@@ -20,13 +22,13 @@ MLCKit封装一些常用的iOS方法。
 + (instancetype)cacheWithPath:(NSString *)path;
 ```
 
-
-
 `pod 'MLCKit/Cache'`
 
 ## Category
 
 Category里面是常用类目，有URL编解码、UIView的点击回调、UIControl的点击block回调等。
+
+使用归档、反归档进行序列化、反序列化的话，可以下面的方法：
 
 ```objective-c
 @interface NSObject (MLCKit)
@@ -38,6 +40,8 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 @end
 ```
+
+使用URL编解码的话，可以使用下面的方法：
 
 ```objective-c
 @interface NSString (MLCKit)
