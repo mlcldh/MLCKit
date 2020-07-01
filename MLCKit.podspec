@@ -29,17 +29,17 @@ Pod::Spec.new do |s|
   
   s.subspec 'Category' do |ss|
     ss.source_files = 'MLCKit/Category/*.{h,m,mm}'
-    ss.frameworks = 'UIKit', 'Foundation'
+    ss.frameworks = 'UIKit'
   end
   
   s.subspec 'LocalFolder' do |ss|
     ss.source_files = 'MLCKit/LocalFolder/*.{h,m,mm}'
-    ss.frameworks = 'UIKit', 'Foundation'
+    ss.frameworks = 'UIKit'
   end
   
   s.subspec 'Macro' do |ss|
     ss.source_files = 'MLCKit/Macro/*.{h,m,mm}'
-    ss.frameworks = 'UIKit', 'Foundation'
+    ss.frameworks = 'UIKit'
   end
   
   s.subspec 'Proxy' do |ss|
@@ -49,19 +49,18 @@ Pod::Spec.new do |s|
   
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
-    ss.frameworks = 'UIKit', 'Foundation'
+    ss.frameworks = 'UIKit'
     ss.dependency 'Masonry'
   end
   
   s.subspec 'Utility' do |ss|
     ss.source_files = 'MLCKit/Utility/*.{h,m}'
-    ss.frameworks = 'UIKit', 'Foundation', 'AdSupport', 'CoreTelephony'
+    ss.frameworks = 'UIKit', 'AdSupport', 'CoreTelephony'
   end
   
   s.subspec 'PhotoPermission' do |ss|
     ss.source_files = 'MLCKit/PhotoPermission/*.{h,m,mm}'
-    ss.frameworks = 'AVFoundation', 'Photos', 'UIKit', 'Foundation'
-    ss.dependency 'MLCKit/Macro'
+    ss.frameworks = 'AVFoundation', 'Photos'
     ss.dependency 'MLCKit/Utility'
   end
   

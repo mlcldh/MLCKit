@@ -9,7 +9,6 @@
 #import <AVFoundation/AVFoundation.h>
 //#import <PhotosUI/PhotosUI.h>
 #import <Photos/Photos.h>
-#import "MLCMacror.h"
 #import "MLCUtility.h"
 #import "MLCPhotoPermissionModel.h"
 
@@ -97,9 +96,7 @@
     if (!viewController) {
         return;
     }
-    @weakify(self)
     void(^aCallback)(BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-        @strongify(self)
         if (!isSourceTypeAvailable) {
             NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
             NSString *message = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableMessage : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableMessage;

@@ -15,7 +15,6 @@ PODS:
   - MLCKit/LocalFolder (0.0.2)
   - MLCKit/Macro (0.0.2)
   - MLCKit/PhotoPermission (0.0.2):
-    - MLCKit/Macro
     - MLCKit/Utility
   - MLCKit/Proxy (0.0.2)
   - MLCKit/UI (0.0.2):
@@ -39,7 +38,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MLCKit: c5f39521a35f363ebbf97c9192183f1e8597a7a4
+  MLCKit: 08d755905d5e875491da32ec45f40e357ff797a8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
 PODFILE CHECKSUM: 450ba4f9391e91bca251a4c3aad8d162db8d22e3
