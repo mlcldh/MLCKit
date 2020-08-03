@@ -135,7 +135,7 @@
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute {//移除某一些约束
     for (NSLayoutConstraint *constraint in self.constraints) {
         if (constraint.firstItem == firstItem && constraint.firstAttribute == firstAttribute) {
-            if ([constraint respondsToSelector:@selector(active)]) {
+            if (@available(iOS 8.0, *)) {
                 constraint.active = NO;
             } else {
                 [self removeConstraint:constraint];
