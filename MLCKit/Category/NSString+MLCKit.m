@@ -1,6 +1,6 @@
 //
 //  NSString+MLCKit.m
-//  MLCKitDemo
+//  MLCKit
 //
 //  Created by menglingchao on 2019/12/23.
 //  Copyright © 2019 MengLingChao. All rights reserved.

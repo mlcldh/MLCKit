@@ -13,6 +13,7 @@
 #import "UIControl+MLCKit.h"
 #import "NSObject+MLCKit.h"
 #import "NSString+MLCKit.h"
+#import "NSArray+MLCKit.h"
 #import "MLCUtility.h"
 #import "MLCPhotoPermissionManager.h"
 #import "Masonry.h"
@@ -37,11 +38,13 @@
 //    [self button];
 //    [self aSwitch];
 //    [self seeLocalFileButton];
-    [self requestAlbumPermissionButton];
-    [self requestCameraPermissionButton];
-//    [MLCUtility idfa];
+//    [self requestAlbumPermissionButton];
+//    [self requestCameraPermissionButton];
 //    [self useUrlEncode];
 //    [self useUrlDecode];
+//    [self getIdfaAndIdfv];
+//    [self combineViewsVertically];
+    [self combineViewsHorizontally];
 }
 #pragma mark - Getter
 - (UILabel *)aLabel {
@@ -225,6 +228,53 @@
     NSString *encodeString = [string mlc_urlEncode];
     NSString *decodeString = [encodeString mlc_urlDecode];
     NSLog(@"string = %@,\n encodeString = %@,\n decodeString = %@",string, encodeString, decodeString);
+}
+- (void)getIdfaAndIdfv {
+    NSString *idfa = [MLCUtility idfa];
+    NSString *idfv = [MLCUtility identifierForVendor];
+    NSLog(@"menglc %@, %@", idfa, idfv);
+}
+- (void)combineViewsVertically {
+    NSMutableArray <UIButton *>*buttons = [NSMutableArray array];
+    
+    NSArray<NSString *> *titles = @[@"中国", @"美国", @"津巴布韦", @"加拿大"];
+    [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        button.backgroundColor = [UIColor purpleColor];
+        [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        [button setTitle:obj forState:(UIControlStateNormal)];
+        [buttons addObject:button];
+        [self.view addSubview:button];
+    }];
+    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+    }];
+    [buttons.firstObject mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(100);
+    }];
+    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisVertical) withFixedSpacing:20];
+    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisVertical) withFixedSpacings:@[@20, @40, @40]];
+}
+- (void)combineViewsHorizontally {
+    NSMutableArray <UIButton *>*buttons = [NSMutableArray array];
+    
+    NSArray<NSString *> *titles = @[@"中国", @"美国", @"津巴布韦", @"加拿大"];
+    [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+        button.backgroundColor = [UIColor purpleColor];
+        [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        [button setTitle:obj forState:(UIControlStateNormal)];
+        [buttons addObject:button];
+        [self.view addSubview:button];
+    }];
+    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).offset(100);
+    }];
+    [buttons.firstObject mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+    }];
+//    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisHorizontal) withFixedSpacing:20];
+    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisHorizontal) withFixedSpacings:@[@20, @40, @40]];
 }
 
 @end

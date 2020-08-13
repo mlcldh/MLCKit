@@ -31,5 +31,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 - (void)mlc_removeAllGestureRecognizers;
 /**移除某一些约束*/
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
+/**返回离两个view最近的父视图*/
+- (instancetype)mlc_closestCommonSuperview:(UIView *)view;
 
 @end

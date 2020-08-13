@@ -143,6 +143,22 @@
         }
     }
 }
+- (instancetype)mlc_closestCommonSuperview:(UIView *)view {
+    UIView *closestCommonSuperview = nil;
+    
+    UIView *secondViewSuperview = view;
+    while (!closestCommonSuperview && secondViewSuperview) {
+        UIView *firstViewSuperview = self;
+        while (!closestCommonSuperview && firstViewSuperview) {
+            if (secondViewSuperview == firstViewSuperview) {
+                closestCommonSuperview = secondViewSuperview;
+            }
+            firstViewSuperview = firstViewSuperview.superview;
+        }
+        secondViewSuperview = secondViewSuperview.superview;
+    }
+    return closestCommonSuperview;
+}
 #pragma mark - Getter
 - (NSMutableArray<MLCViewTarget *> *)mlc_viewTargets {
     NSMutableArray *viewTargets = objc_getAssociatedObject(self, _cmd);

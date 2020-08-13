@@ -21,16 +21,19 @@ PODS:
     - Masonry
   - MLCKit/Utility (0.0.2)
   - YYCache (1.0.4)
+  - YYModel (1.0.4)
 
 DEPENDENCIES:
   - Masonry (= 1.1.0)
   - MLCKit (from `../../MLCKit`)
   - YYCache (= 1.0.4)
+  - YYModel (= 1.0.4)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Masonry
     - YYCache
+    - YYModel
 
 EXTERNAL SOURCES:
   MLCKit:
@@ -40,7 +43,8 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MLCKit: 08d755905d5e875491da32ec45f40e357ff797a8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 450ba4f9391e91bca251a4c3aad8d162db8d22e3
+PODFILE CHECKSUM: ba49429dc955289a37835b5d314e12b7c82b39ad
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.3

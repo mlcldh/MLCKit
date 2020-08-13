@@ -6,5 +6,6 @@ target:'MLCKitDemo'
 
 pod 'Masonry', '1.1.0'
 pod 'YYCache', '1.0.4'
+pod 'YYModel', '1.0.4'
 pod 'MLCKit', :path => '../../MLCKit'
-#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git'#, :commit => 'ac5c694'
+#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git'#, :commit => '4a5635b'
