@@ -17,8 +17,6 @@
 /**相机*/
 @property (nonatomic, copy) MLCPhotoPermissionModel *cameraPermissionModel;
 
-/**单例*/
-+ (instancetype)sharedInstance;
 /**判断、获取相册/相机权限*/
 + (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType callback:(void (^)(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined))callback;
 /**判断、获取相册/相机权限，权限不足时，弹出alert*/

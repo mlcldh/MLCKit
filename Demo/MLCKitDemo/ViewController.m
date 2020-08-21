@@ -7,25 +7,12 @@
 //
 
 #import "ViewController.h"
-#import "MLCLocalFolderViewController.h"
-#import "MLCMacror.h"
-#import "UIView+MLCKit.h"
-#import "UIControl+MLCKit.h"
-#import "NSObject+MLCKit.h"
-#import "NSString+MLCKit.h"
-#import "NSArray+MLCKit.h"
-#import "MLCUtility.h"
-#import "MLCPhotoPermissionManager.h"
 #import "Masonry.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UILabel *aLabel;//
-@property (nonatomic, strong) UIButton *button;//
-@property (nonatomic, strong) UISwitch *aSwitch;//
-@property (nonatomic, strong) UIButton *seeLocalFileButton;//
-@property (nonatomic, strong) UIButton *requestAlbumPermissionButton;//
-@property (nonatomic, strong) UIButton *requestCameraPermissionButton;//
+@property (nonatomic,strong) NSArray *titles;//
+@property (nonatomic,strong) UITableView *tableView;//
 
 @end
 
@@ -34,247 +21,72 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    [self aLabel];
-//    [self button];
-//    [self aSwitch];
-//    [self seeLocalFileButton];
-//    [self requestAlbumPermissionButton];
-//    [self requestCameraPermissionButton];
-//    [self useUrlEncode];
-//    [self useUrlDecode];
-//    [self getIdfaAndIdfv];
-//    [self combineViewsVertically];
-    [self combineViewsHorizontally];
+    
+    self.title = @"首页列表";
+    [self tableView];
 }
 #pragma mark - Getter
-- (UILabel *)aLabel {
-    if (!_aLabel) {
-        _aLabel = [[UILabel alloc]init];
-        _aLabel.backgroundColor = [UIColor purpleColor];
-        _aLabel.textColor = [UIColor blackColor];
-        _aLabel.textAlignment = NSTextAlignmentCenter;
-//        _aLabel.font = [UIFont systemFontOfSize:18];
-        _aLabel.text = @"轻学堂";
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
-            UILabel *label = (UILabel *)(recognizer.view);
-            MLCLog(@"tap %@", label.text);
-        }];
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(UIGestureRecognizer *recognizer) {
-            UILongPressGestureRecognizer *longPressGestureRecognizer = (UILongPressGestureRecognizer *)recognizer;
-            if (longPressGestureRecognizer.state != UIGestureRecognizerStateBegan) {
-                return;
-            }
-            UILabel *label = (UILabel *)longPressGestureRecognizer.view;
-            MLCLog(@"longPress %@", label.text);
-        }];
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypePan) callback:^(UIGestureRecognizer *recognizer) {
-            MLCLog(@"menglc pan");
-        }];
-        [_aLabel mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerTypePan)];
-        [_aLabel mlc_removeAllGestureRecognizers];
-        [_aLabel mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeSwipe) callback:^(UIGestureRecognizer *recognizer) {
-            MLCLog(@"menglc swipe");
-        }];
-        [self.view addSubview:_aLabel];
-        [_aLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(20);
-            make.top.equalTo(self.view).offset(100);
-            make.size.mas_equalTo(CGSizeMake(80, 40));
+- (NSArray *)titles {
+    if (!_titles) {
+        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"使用工具类MLCUtility", @"获取相册/相机权限", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用"];
+    }
+    return _titles;
+}
+- (UITableView *)tableView {
+    if (! _tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:(UITableViewStylePlain)];
+        //        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:(UITableViewStyleGrouped)];
+//        _tableView.backgroundColor = [UIColor purpleColor];
+        _tableView.estimatedRowHeight = 44.0f;
+        //        _tableView.rowHeight = UITableViewAutomaticDimension;
+        //        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+//        _tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeInteractive;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [self.view addSubview:_tableView];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.view);
+//            if (@available(iOS 11.0, *)) {
+//                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+//            } else {
+//                make.top.equalTo(self.mas_topLayoutGuideBottom);
+//            }
         }];
     }
-    return _aLabel;
+    return _tableView;
 }
-- (UIButton *)button {
-    if (!_button) {
-        _button = [[UIButton alloc]init];
-        _button.backgroundColor = [UIColor purpleColor];
-        [_button setTitle:@"button" forState:(UIControlStateNormal)];
-        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
-            MLCLog(@"menglc button UIControlEventTouchUpInside");
-        }];
-        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
-            MLCLog(@"menglc button UIControlEventTouchUpInside 2");
-        }];
-//        [_button mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
-        [_button mlc_removeAllActions];
-        [_button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
-            MLCLog(@"menglc button UIControlEventTouchUpInside 3");
-        }];
-        [self.view addSubview:_button];
-        [_button mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(20);
-            make.top.equalTo(self.view).offset(100);
-        }];
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewAutomaticDimension;
+}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    static NSArray *vcClassNames = nil;
+    if (!vcClassNames) {
+        vcClassNames = @[@"LCViewGestureViewController", @"LCUrlEncodeViewController", @"LCCombineViewsViewController", @"LCUseUtilityViewController", @"LCPhotoPermissionViewController", @"LCSeeLocalFileViewController", @"LCUseProxyViewController", @""];
     }
-    return _button;
-}
-- (UISwitch *)aSwitch {
-    if (!_aSwitch) {
-        _aSwitch = [[UISwitch alloc]init];
-        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
-            UISwitch *switch2 = sender;
-            MLCLog(@"menglc switch2.isOn = %@", @(switch2.isOn));
-        }];
-//        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
-//            UISwitch *switch2 = sender;
-//            MLCLog(@"menglc switch2.isOn 2 = %@", @(switch2.isOn));
-//        }];
-        [self.view addSubview:_aSwitch];
-        [_aSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(20);
-            make.top.equalTo(self.view).offset(100);
-        }];
+    Class class = NSClassFromString(vcClassNames[indexPath.row]);
+    UIViewController *vc = [[class alloc]init];
+    if (!vc) {
+        return;
     }
-    return _aSwitch;
+    vc.title = vcClassNames[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-- (UIButton *)seeLocalFileButton {
-    if (!_seeLocalFileButton) {
-        _seeLocalFileButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        _seeLocalFileButton.backgroundColor = [UIColor purpleColor];
-        [_seeLocalFileButton setTitle:@"seeLocalFile" forState:(UIControlStateNormal)];
-        @weakify(self)
-        [_seeLocalFileButton setMlc_touchUpInsideBlock:^{
-            @strongify(self)
-            NSString *folderPath = NSHomeDirectory();
-            MLCLocalFolderViewController *localFolderVC = [[MLCLocalFolderViewController alloc]initWithFolderPath:folderPath];
-            [self.navigationController pushViewController:localFolderVC animated:YES];
-        }];
-        [self.view addSubview:_seeLocalFileButton];
-        [_seeLocalFileButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(100);
-            make.top.equalTo(self.view).offset(100);
-        }];
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.titles.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellID = @"cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:cellID];
+//        cell.contentView.backgroundColor = [UIColor cyanColor];
     }
-    return _seeLocalFileButton;
-}
-- (UIButton *)requestAlbumPermissionButton {
-    if (!_requestAlbumPermissionButton) {
-        _requestAlbumPermissionButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        _requestAlbumPermissionButton.backgroundColor = [UIColor purpleColor];
-        [_requestAlbumPermissionButton setTitle:@"请求相册权限" forState:(UIControlStateNormal)];
-        @weakify(self)
-        [_requestAlbumPermissionButton setMlc_touchUpInsideBlock:^{
-            @strongify(self)
-//            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-//                if (!isSourceTypeAvailable) {
-//                    NSLog(@"当前设备没有相册功能");
-//                    return;
-//                }
-//                if (isNotDetermined) {
-//                    NSLog(@"相册权限还未处理");
-//                }
-//                if (success) {
-//                    NSLog(@"已经获得相册权限");
-//                } else {
-//                    NSLog(@"相册权限被拒绝");
-//                }
-//            }];
-            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^{
-                NSLog(@"已经获得相册权限");
-            } fromViewController:self];
-        }];
-        [self.view addSubview:_requestAlbumPermissionButton];
-        [_requestAlbumPermissionButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.view).offset(20);
-            make.top.equalTo(self.view).offset(100);
-        }];
-    }
-    return _requestAlbumPermissionButton;
-}
-- (UIButton *)requestCameraPermissionButton {
-    if (!_requestCameraPermissionButton) {
-        _requestCameraPermissionButton = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        _requestCameraPermissionButton.backgroundColor = [UIColor purpleColor];
-        [_requestCameraPermissionButton setTitle:@"请求相机权限" forState:(UIControlStateNormal)];
-        @weakify(self)
-        [_requestCameraPermissionButton setMlc_touchUpInsideBlock:^{
-            @strongify(self)
-//            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-//                if (!isSourceTypeAvailable) {
-//                    NSLog(@"当前设备没有相机功能");
-//                    return;
-//                }
-//                if (isNotDetermined) {
-//                    NSLog(@"相机权限还未处理");
-//                }
-//                if (success) {
-//                    NSLog(@"已经获得相机权限");
-//                } else {
-//                    NSLog(@"相机权限被拒绝");
-//                }
-//            }];
-            [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^{
-                NSLog(@"已经获得相机权限");
-            } fromViewController:self];
-        }];
-        [self.view addSubview:_requestCameraPermissionButton];
-        [_requestCameraPermissionButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.requestAlbumPermissionButton.mas_right).offset(20);
-            make.top.equalTo(self.view).offset(100);
-        }];
-    }
-    return _requestCameraPermissionButton;
-}
-#pragma mark -
-- (void)useUrlEncode {//URL编码
-//    NSString *string = @"汉字666";
-    NSString *string = @"https://www.baidu.com/s?ie=UTF-8&wd=mac电脑&name=你猜啊";
-    NSString *encodeString = [string mlc_urlEncode];
-    NSLog(@"%@, %@",string, encodeString);
-}
-- (void)useUrlDecode {//URL解码
-//    NSString *string = @"汉字666";
-    NSString *string = @"https://www.baidu.com/s?ie=UTF-8&wd=mac电脑&name=你猜啊";
-    NSString *encodeString = [string mlc_urlEncode];
-    NSString *decodeString = [encodeString mlc_urlDecode];
-    NSLog(@"string = %@,\n encodeString = %@,\n decodeString = %@",string, encodeString, decodeString);
-}
-- (void)getIdfaAndIdfv {
-    NSString *idfa = [MLCUtility idfa];
-    NSString *idfv = [MLCUtility identifierForVendor];
-    NSLog(@"menglc %@, %@", idfa, idfv);
-}
-- (void)combineViewsVertically {
-    NSMutableArray <UIButton *>*buttons = [NSMutableArray array];
+    cell.textLabel.text = self.titles[indexPath.row];//
     
-    NSArray<NSString *> *titles = @[@"中国", @"美国", @"津巴布韦", @"加拿大"];
-    [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        button.backgroundColor = [UIColor purpleColor];
-        [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        [button setTitle:obj forState:(UIControlStateNormal)];
-        [buttons addObject:button];
-        [self.view addSubview:button];
-    }];
-    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(20);
-    }];
-    [buttons.firstObject mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(100);
-    }];
-    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisVertical) withFixedSpacing:20];
-    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisVertical) withFixedSpacings:@[@20, @40, @40]];
-}
-- (void)combineViewsHorizontally {
-    NSMutableArray <UIButton *>*buttons = [NSMutableArray array];
-    
-    NSArray<NSString *> *titles = @[@"中国", @"美国", @"津巴布韦", @"加拿大"];
-    [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
-        button.backgroundColor = [UIColor purpleColor];
-        [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-        [button setTitle:obj forState:(UIControlStateNormal)];
-        [buttons addObject:button];
-        [self.view addSubview:button];
-    }];
-    [buttons mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(100);
-    }];
-    [buttons.firstObject mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view).offset(20);
-    }];
-//    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisHorizontal) withFixedSpacing:20];
-    [buttons mlc_combineViewsWithAxis:(UILayoutConstraintAxisHorizontal) withFixedSpacings:@[@20, @40, @40]];
+    return cell;
 }
 
 @end
