@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "Masonry.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic,strong) NSArray *titles;//
 @property (nonatomic,strong) UITableView *tableView;//
@@ -28,7 +28,7 @@
 #pragma mark - Getter
 - (NSArray *)titles {
     if (!_titles) {
-        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"使用工具类MLCUtility", @"获取相册/相机权限", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档"];
+        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"直接调用系统方法操作约束", @"使用工具类MLCUtility", @"获取相册/相机权限", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档"];
     }
     return _titles;
 }
@@ -63,7 +63,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     static NSArray *vcClassNames = nil;
     if (!vcClassNames) {
-        vcClassNames = @[@"LCViewGestureViewController", @"LCUrlEncodeViewController", @"LCCombineViewsViewController", @"LCUseUtilityViewController", @"LCPhotoPermissionViewController", @"LCSeeLocalFileViewController", @"LCUseProxyViewController", @"MengUseArchiverViewController"];
+        vcClassNames = @[@"LCViewGestureViewController", @"LCUrlEncodeViewController", @"LCCombineViewsViewController", @"LCUseConstraintPurelyViewController", @"LCUseUtilityViewController", @"LCPhotoPermissionViewController", @"LCSeeLocalFileViewController", @"LCUseProxyViewController", @"MengUseArchiverViewController"];
     }
     Class class = NSClassFromString(vcClassNames[indexPath.row]);
     UIViewController *vc = [[class alloc]init];

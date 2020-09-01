@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */; };
 		8D1766DE24EFB713000F6975 /* LCViewGestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */; };
 		8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */; };
 		8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */; };
@@ -29,6 +30,8 @@
 		3325DB394482C779B27B6273 /* Pods-MLCKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLCKitDemo.debug.xcconfig"; path = "Target Support Files/Pods-MLCKitDemo/Pods-MLCKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		7B26288BF695D298AA9C8D0D /* Pods-MLCKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLCKitDemo.release.xcconfig"; path = "Target Support Files/Pods-MLCKitDemo/Pods-MLCKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		7E9931728D6BE47AE2F8DE15 /* libPods-MLCKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLCKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D0E725824FE520900C52EE4 /* LCUseConstraintPurelyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseConstraintPurelyViewController.h; sourceTree = "<group>"; };
+		8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseConstraintPurelyViewController.m; sourceTree = "<group>"; };
 		8D1766DC24EFB713000F6975 /* LCViewGestureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCViewGestureViewController.h; sourceTree = "<group>"; };
 		8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCViewGestureViewController.m; sourceTree = "<group>"; };
 		8D1766DF24EFBAA2000F6975 /* LCUrlEncodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUrlEncodeViewController.h; sourceTree = "<group>"; };
@@ -133,6 +136,8 @@
 				8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */,
 				8D1766E524EFBB85000F6975 /* LCCombineViewsViewController.h */,
 				8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */,
+				8D0E725824FE520900C52EE4 /* LCUseConstraintPurelyViewController.h */,
+				8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */,
 				8D1766E824EFBCCB000F6975 /* LCUseUtilityViewController.h */,
 				8D1766E924EFBCCB000F6975 /* LCUseUtilityViewController.m */,
 				8D1766EB24EFBD7D000F6975 /* LCPhotoPermissionViewController.h */,
@@ -254,6 +259,7 @@
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
 				8D1766EA24EFBCCB000F6975 /* LCUseUtilityViewController.m in Sources */,
 				8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */,
+				8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */,
 				8D17670024EFCF3C000F6975 /* LCPerson.m in Sources */,
 				8D5705DE23ACC953003B89D8 /* AppDelegate.m in Sources */,
 				8D5705EF23ACC955003B89D8 /* main.m in Sources */,

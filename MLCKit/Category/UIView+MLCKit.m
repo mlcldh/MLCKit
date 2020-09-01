@@ -132,7 +132,7 @@
     }
     [viewTargets removeAllObjects];
 }
-- (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute {//移除某一些约束
+- (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute {//移除自己的某一些约束
     for (NSLayoutConstraint *constraint in self.constraints) {
         if (constraint.firstItem == firstItem && constraint.firstAttribute == firstAttribute) {
             if (@available(iOS 8.0, *)) {
@@ -140,6 +140,20 @@
             } else {
                 [self removeConstraint:constraint];
             }
+        }
+    }
+}
+- (void)mlc_addConstraintWithFirstAttribute:(NSLayoutAttribute)firstAttribute relation:(NSLayoutRelation)relation secondItem:(id)secondItem secondAttribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant {
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
+    if (@available(iOS 8.0, *)) {
+        constraint.active = YES;
+    } else {
+        BOOL isSizeAttribute = (firstAttribute == NSLayoutAttributeWidth) || (firstAttribute == NSLayoutAttributeHeight);
+        if (isSizeAttribute) {
+            [self addConstraint:constraint];
+        } else {
+            UIView *superview = [self mlc_closestCommonSuperview:secondItem];
+            [superview addConstraint:constraint];
         }
     }
 }
