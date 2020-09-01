@@ -38,6 +38,7 @@
         @strongify(self)
         @strongify(button)
         [self.view mlc_removeConstraintsWithFirstItem:button firstAttribute:(NSLayoutAttributeLeft)];
+//        [button mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttributeLeft) secondItem:self.view];
         [button mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeRight) relation:(NSLayoutRelationEqual) secondItem:self.view secondAttribute:(NSLayoutAttributeRight) multiplier:1 constant:-50];
         [UIView animateWithDuration:2 animations:^{
             [self.view layoutIfNeeded];
