@@ -48,7 +48,7 @@
     button.translatesAutoresizingMaskIntoConstraints = NO;
     [button mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeLeft) relation:(NSLayoutRelationEqual) secondItem:self.view secondAttribute:(NSLayoutAttributeLeft) multiplier:1 constant:50];
     [button mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeTop) relation:(NSLayoutRelationEqual) secondItem:self.view secondAttribute:(NSLayoutAttributeTop) multiplier:1 constant:50];
-    NSLog(@"menglc constraints %@", self.view.constraints);
+    NSLog(@"menglc self.view.constraints %@", self.view.constraints);
 }
 
 @end

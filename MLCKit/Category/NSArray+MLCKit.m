@@ -37,15 +37,9 @@
 - (void)mlc_combineView:(UIView *)view lastView:(UIView *)lastView withAxis:(UILayoutConstraintAxis)axis fixedSpacing:(CGFloat)fixedSpacing  {
     NSLayoutConstraint *constraint = nil;
     if (axis == UILayoutConstraintAxisHorizontal) {
-        constraint = [NSLayoutConstraint constraintWithItem:view attribute:(NSLayoutAttributeLeft) relatedBy:(NSLayoutRelationEqual) toItem:lastView attribute:(NSLayoutAttributeRight) multiplier:1 constant:fixedSpacing];
+        [view mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeLeft) relation:(NSLayoutRelationEqual) secondItem:lastView secondAttribute:(NSLayoutAttributeRight) multiplier:1 constant:fixedSpacing];
     } else {
-        constraint = [NSLayoutConstraint constraintWithItem:view attribute:(NSLayoutAttributeTop) relatedBy:(NSLayoutRelationEqual) toItem:lastView attribute:(NSLayoutAttributeBottom) multiplier:1 constant:fixedSpacing];
-    }
-    if (@available(iOS 8.0, *)) {
-        constraint.active = YES;
-    } else {
-        UIView *closestCommonSuperview = [view mlc_closestCommonSuperview:lastView];
-        [closestCommonSuperview addConstraint:constraint];
+        [view mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeTop) relation:(NSLayoutRelationEqual) secondItem:lastView secondAttribute:(NSLayoutAttributeBottom) multiplier:1 constant:fixedSpacing];
     }
 }
 
