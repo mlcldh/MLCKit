@@ -34,6 +34,51 @@
         lastView = view;
     }
 }
+- (void)mlc_distributeViewsEqualCenterSpacingWithAxis:(UILayoutConstraintAxis)axis leadCenterSpacing:(CGFloat)leadCenterSpacing tailCenterSpacing:(CGFloat)tailCenterSpacing {
+    if (self.count < 2) {
+        return;
+    }
+    UIView *tempSuperView = [self.firstObject superview];
+    if (axis == UILayoutConstraintAxisHorizontal) {
+        UIView *prev;
+        for (int i = 0; i < self.count; i++) {
+            UIView *v = self[i];
+            
+            if (prev) {
+                if (i == self.count - 1) {//last one
+                    [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterX) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeRight) multiplier:1 constant:-tailCenterSpacing];
+                }
+                else {
+                    CGFloat offset = (1-(i/((CGFloat)self.count-1)))*leadCenterSpacing - i*tailCenterSpacing/(((CGFloat)self.count-1));
+                    [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterX) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeRight) multiplier:i/((CGFloat)self.count-1) constant:offset];
+                }
+            }
+            else {//first one
+                [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterX) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeLeft) multiplier:1 constant:leadCenterSpacing];
+            }
+            prev = v;
+        }
+    }
+    else {
+        UIView *prev;
+        for (int i = 0; i < self.count; i++) {
+            UIView *v = self[i];
+            if (prev) {
+                if (i == self.count - 1) {//last one
+                    [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterY) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeBottom) multiplier:1 constant:-tailCenterSpacing];
+                }
+                else {
+                    CGFloat offset = (1-(i/((CGFloat)self.count-1)))*leadCenterSpacing - i*tailCenterSpacing/(((CGFloat)self.count-1));
+                    [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterY) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeBottom) multiplier:i/((CGFloat)self.count-1) constant:offset];
+                }
+            }
+            else {//first one
+                [v mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeCenterY) relation:(NSLayoutRelationEqual) secondItem:tempSuperView secondAttribute:(NSLayoutAttributeTop) multiplier:1 constant:leadCenterSpacing];
+            }
+            prev = v;
+        }
+    }
+}
 - (void)mlc_combineView:(UIView *)view lastView:(UIView *)lastView withAxis:(UILayoutConstraintAxis)axis fixedSpacing:(CGFloat)fixedSpacing  {
     NSLayoutConstraint *constraint = nil;
     if (axis == UILayoutConstraintAxisHorizontal) {
