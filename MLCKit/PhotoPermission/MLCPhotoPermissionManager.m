@@ -47,26 +47,34 @@
 + (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType callback:(void (^)(BOOL, BOOL, BOOL))callback {
     
     if (![UIImagePickerController isSourceTypeAvailable:souceType]) {
-        callback(NO, NO, NO);
+        if (callback) {
+            callback(NO, NO, NO);
+        }
         return;
     }
     if (souceType == UIImagePickerControllerSourceTypeCamera) {
         AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         switch (authorizationStatus) {
             case AVAuthorizationStatusAuthorized:
-                callback(YES, YES, NO);
+                if (callback) {
+                    callback(YES, YES, NO);
+                }
                 break;
                 
             case AVAuthorizationStatusDenied:
             case AVAuthorizationStatusRestricted:
-                callback(YES, NO, NO);
+                if (callback) {
+                    callback(YES, NO, NO);
+                }
                 break;
                 
             case AVAuthorizationStatusNotDetermined:
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                                          completionHandler:^(BOOL granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        callback(YES, granted, YES);
+                        if (callback) {
+                            callback(YES, granted, YES);
+                        }
                     });
                 }];
                 break;
@@ -74,18 +82,24 @@
     } else {
         switch ([PHPhotoLibrary authorizationStatus]) {
             case PHAuthorizationStatusAuthorized:
-                callback(YES, YES, NO);
+                if (callback) {
+                    callback(YES, YES, NO);
+                }
                 break;
                 
             case PHAuthorizationStatusDenied:
             case PHAuthorizationStatusRestricted:
-                callback(YES, NO, NO);
+                if (callback) {
+                    callback(YES, NO, NO);
+                }
                 break;
                 
             case PHAuthorizationStatusNotDetermined:
                 [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        callback(YES, (status == PHAuthorizationStatusAuthorized), YES);
+                        if (callback) {
+                            callback(YES, (status == PHAuthorizationStatusAuthorized), YES);
+                        }
                     });
                 }];
                 break;

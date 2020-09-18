@@ -15,8 +15,6 @@
 @property (nonatomic, strong) UILabel *label;
 /***/
 @property (nonatomic) UIEdgeInsets labelContainerInset;
-/**点击回调*/
-@property (nonatomic, copy) void(^tapBlock)(void);
 
 @end
 

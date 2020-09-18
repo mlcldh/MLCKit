@@ -15,8 +15,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self label];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-        [self addGestureRecognizer:tap];
     }
     return self;
 }
@@ -37,12 +35,6 @@
     [self.label mas_updateConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).insets(labelContainerInset);
     }];
-}
-#pragma mark -
-- (void)tapAction:(UITapGestureRecognizer *)recognizer {
-    if (self.tapBlock) {
-        self.tapBlock();
-    }
 }
 
 @end

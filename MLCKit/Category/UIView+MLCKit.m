@@ -13,6 +13,7 @@
 
 @interface MLCViewTarget : NSObject
 
+@property (nonatomic) MLCGestureRecognizerType type;//
 @property (nonatomic, weak) UIGestureRecognizer *gestureRecognizer;
 @property (nonatomic, copy) void (^actionCallback)(UIGestureRecognizer *recognizer);
 
@@ -65,6 +66,7 @@
         [self addGestureRecognizer:recognizer];
         self.userInteractionEnabled = YES;
     }
+    viewTarget.type = type;
     viewTarget.gestureRecognizer = recognizer;
     viewTarget.actionCallback = callback;
     NSMutableArray *viewTargets = [self mlc_viewTargets];
@@ -75,48 +77,7 @@
     NSMutableArray<MLCViewTarget *> *viewTargets = [self mlc_viewTargets];
     NSMutableArray<MLCViewTarget *> *removedViewTargets = [NSMutableArray array];
     for (MLCViewTarget *viewTarget in viewTargets) {
-        BOOL is = NO;
-        switch (type) {
-            case MLCGestureRecognizerTypeTap: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            case MLCGestureRecognizerTypeLongPress: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UILongPressGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            case MLCGestureRecognizerTypePan: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            case MLCGestureRecognizerTypeSwipe: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            case MLCGestureRecognizerTypeRotation: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UIRotationGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            case MLCGestureRecognizerTypePinch: {
-                if ([viewTarget.gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]]) {
-                    is = YES;
-                }
-            }
-                break;
-            default:
-                break;
-        }
-        if (is) {
+        if (viewTarget.type == type) {
             [removedViewTargets addObject:viewTarget];
         }
     }
