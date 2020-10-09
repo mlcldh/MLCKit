@@ -31,5 +31,12 @@
     }
     return decodeString;
 }
+- (id)mlc_JSONObject {
+    NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:kNilOptions error:&err];
+    return jsonObject;
+}
 
 @end

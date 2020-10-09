@@ -23,6 +23,7 @@
 		8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705E823ACC955003B89D8 /* Assets.xcassets */; };
 		8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */; };
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
+		8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE93F112530783C0022E552 /* LCJsonViewController.m */; };
 		B6F0184CB0111C6A1A58431E /* libPods-MLCKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9931728D6BE47AE2F8DE15 /* libPods-MLCKitDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		8D5705EB23ACC955003B89D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5705ED23ACC955003B89D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5705EE23ACC955003B89D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DE93F102530783C0022E552 /* LCJsonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCJsonViewController.h; sourceTree = "<group>"; };
+		8DE93F112530783C0022E552 /* LCJsonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCJsonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +149,8 @@
 				8D1766EF24EFBF09000F6975 /* LCSeeLocalFileViewController.m */,
 				8D1766F124EFC363000F6975 /* LCUseProxyViewController.h */,
 				8D1766F224EFC363000F6975 /* LCUseProxyViewController.m */,
+				8DE93F102530783C0022E552 /* LCJsonViewController.h */,
+				8DE93F112530783C0022E552 /* LCJsonViewController.m */,
 				8D1766FB24EFCF3C000F6975 /* UseArchiver */,
 				8D5705E823ACC955003B89D8 /* Assets.xcassets */,
 				8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */,
@@ -257,6 +262,7 @@
 				8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */,
 				8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */,
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
+				8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */,
 				8D1766EA24EFBCCB000F6975 /* LCUseUtilityViewController.m in Sources */,
 				8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */,
 				8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */,

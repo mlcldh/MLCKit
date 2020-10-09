@@ -17,5 +17,7 @@
 - (void)mlc_setValuesWithCoder:(NSCoder *)aDecoder;
 /**序列化*/
 - (void)mlc_encodeWithCoder:(NSCoder *)aCoder;
+/**转换成json字符串*/
+- (NSString *)mlc_JSONString;
 
 @end
