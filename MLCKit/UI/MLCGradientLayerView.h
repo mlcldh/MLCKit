@@ -1,5 +1,5 @@
 //
-//  MLCGradientView.h
+//  MLCGradientLayerView.h
 //  MLCKit
 //
 //  Created by menglingchao on 2019/12/20.
@@ -10,7 +10,7 @@
 
 //NS_ASSUME_NONNULL_BEGIN
 
-@interface MLCGradientView : UIView
+@interface MLCGradientLayerView : UIView
 
 /**即self.layer*/
 - (CAGradientLayer *)gradientLayer;

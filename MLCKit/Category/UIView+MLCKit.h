@@ -37,5 +37,8 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 - (void)mlc_addConstraintWithFirstAttribute:(NSLayoutAttribute)firstAttribute relation:(NSLayoutRelation)relation secondItem:(id)secondItem secondAttribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant;
 /**返回离两个view最近的父视图*/
 - (instancetype)mlc_closestCommonSuperview:(UIView *)view;
+/**加部分圆角*/
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius;
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius size:(CGSize)size;
 
 @end

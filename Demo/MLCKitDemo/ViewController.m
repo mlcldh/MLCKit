@@ -28,7 +28,7 @@
 #pragma mark - Getter
 - (NSArray *)titles {
     if (!_titles) {
-        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"直接调用系统方法操作约束", @"使用工具类MLCUtility", @"获取相册/相机权限", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档", @"json使用"];
+        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"直接调用系统方法操作约束", @"使用工具类MLCUtility", @"获取相册/相机权限", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档", @"json使用", @"圆角处理", @"弹出UIAlertController"];
     }
     return _titles;
 }
@@ -63,7 +63,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     static NSArray *vcClassNames = nil;
     if (!vcClassNames) {
-        vcClassNames = @[@"LCViewGestureViewController", @"LCUrlEncodeViewController", @"LCCombineViewsViewController", @"LCUseConstraintPurelyViewController", @"LCUseUtilityViewController", @"LCPhotoPermissionViewController", @"LCSeeLocalFileViewController", @"LCUseProxyViewController", @"MengUseArchiverViewController", @"LCJsonViewController"];
+        vcClassNames = @[@"LCViewGestureViewController", @"LCUrlEncodeViewController", @"LCCombineViewsViewController", @"LCUseConstraintPurelyViewController", @"LCUseUtilityViewController", @"LCPhotoPermissionViewController", @"LCSeeLocalFileViewController", @"LCUseProxyViewController", @"MengUseArchiverViewController", @"LCJsonViewController", @"LCHandleCornerViewController", @"LCShowAlertViewController"];
     }
     Class class = NSClassFromString(vcClassNames[indexPath.row]);
     UIViewController *vc = [[class alloc]init];

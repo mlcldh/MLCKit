@@ -1,14 +1,14 @@
 //
-//  MLCGradientView.m
+//  MLCGradientLayerView.m
 //  MLCKit
 //
 //  Created by menglingchao on 2019/12/20.
 //  Copyright © 2019 MengLingChao. All rights reserved.
 //
 
-#import "MLCGradientView.h"
+#import "MLCGradientLayerView.h"
 
-@implementation MLCGradientView
+@implementation MLCGradientLayerView
 
 + (Class)layerClass {
     return [CAGradientLayer class];

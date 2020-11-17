@@ -144,7 +144,7 @@ _timer = [NSTimer timerWithTimeInterval:interval target:[MLCProxy proxyWithTarge
 
 UI里面是UI控件。
 
-### MLCGradientView
+### MLCGradientLayerView
 
 layerClass是CAGradientLayer的。
 

@@ -29,14 +29,14 @@
 //    NSString *string = @"汉字666";
     NSString *string = @"https://www.baidu.com/s?ie=UTF-8&wd=mac电脑&name=你猜啊";
     NSString *encodeString = [string mlc_urlEncode];
-    NSLog(@"%@, %@",string, encodeString);
+    NSLog(@"menglc %@, encodeString = %@",string, encodeString);
 }
 - (void)useUrlDecode {//URL解码
 //    NSString *string = @"汉字666";
     NSString *string = @"https://www.baidu.com/s?ie=UTF-8&wd=mac电脑&name=你猜啊";
     NSString *encodeString = [string mlc_urlEncode];
     NSString *decodeString = [encodeString mlc_urlDecode];
-    NSLog(@"string = %@,\n encodeString = %@,\n decodeString = %@",string, encodeString, decodeString);
+    NSLog(@"menglc string = %@,\n encodeString = %@,\n decodeString = %@",string, encodeString, decodeString);
 }
 
 @end

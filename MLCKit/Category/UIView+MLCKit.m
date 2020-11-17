@@ -142,6 +142,15 @@
     }
     return closestCommonSuperview;
 }
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius {
+    [self mlc_becomeRoundedbyRoundingCorners:corners cornerRadius:cornerRadius size:self.bounds.size];
+}
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius size:(CGSize)size {
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, size.width, size.height) byRoundingCorners:corners cornerRadii:CGSizeMake(cornerRadius, cornerRadius)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.path = maskPath.CGPath;
+    self.layer.mask = maskLayer;
+}
 #pragma mark - Getter
 - (NSMutableArray<MLCViewTarget *> *)mlc_viewTargets {
     NSMutableArray *viewTargets = objc_getAssociatedObject(self, _cmd);
