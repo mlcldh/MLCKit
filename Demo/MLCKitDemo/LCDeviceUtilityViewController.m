@@ -1,19 +1,19 @@
 //
-//  LCUseUtilityViewController.m
+//  LCDeviceUtilityViewController.m
 //  MLCKitDemo
 //
 //  Created by menglingchao on 2020/8/21.
 //  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import "LCUseUtilityViewController.h"
-#import "MLCUtility.h"
+#import "LCDeviceUtilityViewController.h"
+#import "MLCDeviceUtility.h"
 
-@interface LCUseUtilityViewController ()
+@interface LCDeviceUtilityViewController ()
 
 @end
 
-@implementation LCUseUtilityViewController
+@implementation LCDeviceUtilityViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,8 +25,8 @@
 }
 #pragma mark -
 - (void)getIdfaAndIdfv {
-    NSString *idfa = [MLCUtility idfa];
-    NSString *idfv = [MLCUtility identifierForVendor];
+    NSString *idfa = [MLCDeviceUtility idfa];
+    NSString *idfv = [MLCDeviceUtility identifierForVendor];
     NSLog(@"menglc %@, %@", idfa, idfv);
 }
 

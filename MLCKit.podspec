@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
 
   s.author             = { "mlcldh" => "1228225993@qq.com" }
 
-  s.platform     = :ios, '6.0'
-  s.ios.deployment_target = '6.0'
+  s.platform     = :ios, '8.0'
+  s.ios.deployment_target = '8.0'
 
   s.source       = { :git => "https://github.com/mlcldh/MLCKit.git", :tag => s.version.to_s }
 #  s.source_files = "MLCKit"

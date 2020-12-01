@@ -159,7 +159,7 @@ layerClass是CAGradientLayer的。
 Utility里面是工具类，有获取app版本号、app构建版本号、app名字、app的bundle ID、运营商名字、蜂窝网络类型、安全区域、让UIApplication打开链接等功能。
 
 ```objective-c
-@interface MLCUtility : NSObject
+@interface MLCDeviceUtility : NSObject
 
 /**app版本号*/
 + (NSString *)appVersion;

@@ -11,7 +11,7 @@
 		8D1766DE24EFB713000F6975 /* LCViewGestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */; };
 		8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */; };
 		8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */; };
-		8D1766EA24EFBCCB000F6975 /* LCUseUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E924EFBCCB000F6975 /* LCUseUtilityViewController.m */; };
+		8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */; };
 		8D1766ED24EFBD7D000F6975 /* LCPhotoPermissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */; };
 		8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EF24EFBF09000F6975 /* LCSeeLocalFileViewController.m */; };
 		8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766F224EFC363000F6975 /* LCUseProxyViewController.m */; };
@@ -23,6 +23,8 @@
 		8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705E823ACC955003B89D8 /* Assets.xcassets */; };
 		8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */; };
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
+		8DDBF6A825763AFE00D0A48C /* LCOpenUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */; };
+		8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */; };
 		8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */; };
 		8DE4A0FF2549773C0026653A /* gallery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE4A0FE2549773C0026653A /* gallery.jpg */; };
 		8DE4A10325497A360026653A /* LCHandleCornerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4A10225497A360026653A /* LCHandleCornerViewController.m */; };
@@ -42,8 +44,8 @@
 		8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUrlEncodeViewController.m; sourceTree = "<group>"; };
 		8D1766E524EFBB85000F6975 /* LCCombineViewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCombineViewsViewController.h; sourceTree = "<group>"; };
 		8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCombineViewsViewController.m; sourceTree = "<group>"; };
-		8D1766E824EFBCCB000F6975 /* LCUseUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseUtilityViewController.h; sourceTree = "<group>"; };
-		8D1766E924EFBCCB000F6975 /* LCUseUtilityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseUtilityViewController.m; sourceTree = "<group>"; };
+		8D1766E824EFBCCB000F6975 /* LCDeviceUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDeviceUtilityViewController.h; sourceTree = "<group>"; };
+		8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCDeviceUtilityViewController.m; sourceTree = "<group>"; };
 		8D1766EB24EFBD7D000F6975 /* LCPhotoPermissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCPhotoPermissionViewController.h; sourceTree = "<group>"; };
 		8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCPhotoPermissionViewController.m; sourceTree = "<group>"; };
 		8D1766EE24EFBF09000F6975 /* LCSeeLocalFileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCSeeLocalFileViewController.h; sourceTree = "<group>"; };
@@ -65,6 +67,10 @@
 		8D5705EB23ACC955003B89D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5705ED23ACC955003B89D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5705EE23ACC955003B89D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DDBF6A625763AFE00D0A48C /* LCOpenUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCOpenUtilityViewController.h; sourceTree = "<group>"; };
+		8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCOpenUtilityViewController.m; sourceTree = "<group>"; };
+		8DDBF6EF257657A900D0A48C /* LCLocationManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLocationManagerViewController.h; sourceTree = "<group>"; };
+		8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLocationManagerViewController.m; sourceTree = "<group>"; };
 		8DDD84B82563B2BC003346B3 /* LCShowAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowAlertViewController.h; sourceTree = "<group>"; };
 		8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowAlertViewController.m; sourceTree = "<group>"; };
 		8DE4A0FE2549773C0026653A /* gallery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gallery.jpg; sourceTree = "<group>"; };
@@ -149,8 +155,12 @@
 				8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */,
 				8D0E725824FE520900C52EE4 /* LCUseConstraintPurelyViewController.h */,
 				8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */,
-				8D1766E824EFBCCB000F6975 /* LCUseUtilityViewController.h */,
-				8D1766E924EFBCCB000F6975 /* LCUseUtilityViewController.m */,
+				8D1766E824EFBCCB000F6975 /* LCDeviceUtilityViewController.h */,
+				8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */,
+				8DDBF6A625763AFE00D0A48C /* LCOpenUtilityViewController.h */,
+				8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */,
+				8DDBF6EF257657A900D0A48C /* LCLocationManagerViewController.h */,
+				8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */,
 				8D1766EB24EFBD7D000F6975 /* LCPhotoPermissionViewController.h */,
 				8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */,
 				8D1766EE24EFBF09000F6975 /* LCSeeLocalFileViewController.h */,
@@ -276,9 +286,11 @@
 				8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */,
 				8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */,
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
+				8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */,
 				8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */,
-				8D1766EA24EFBCCB000F6975 /* LCUseUtilityViewController.m in Sources */,
+				8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */,
 				8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */,
+				8DDBF6A825763AFE00D0A48C /* LCOpenUtilityViewController.m in Sources */,
 				8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */,
 				8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */,
 				8D17670024EFCF3C000F6975 /* LCPerson.m in Sources */,
@@ -419,7 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AS4ANJJUVM;
+				DEVELOPMENT_TEAM = J32AD5KDR3;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -438,7 +450,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = AS4ANJJUVM;
+				DEVELOPMENT_TEAM = J32AD5KDR3;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (

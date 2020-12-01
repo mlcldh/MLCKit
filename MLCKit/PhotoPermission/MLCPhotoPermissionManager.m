@@ -9,7 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 //#import <PhotosUI/PhotosUI.h>
 #import <Photos/Photos.h>
-#import "MLCUtility.h"
+#import "MLCOpenUtility.h"
 #import "MLCPhotoPermissionModel.h"
 
 @implementation MLCPhotoPermissionManager
@@ -142,7 +142,7 @@
                                                           handler:^(UIAlertAction * _Nonnull action) {
             NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
         //                UIApplication *application = [UIApplication sharedApplication];
-            [MLCUtility openURL:URL];
+            [MLCOpenUtility openURL:URL completionHandler:nil];
         //                if (@available(iOS 10.0, *)) {
         //                    [application openURL:URL options:@{} completionHandler:nil];
         //                } else {

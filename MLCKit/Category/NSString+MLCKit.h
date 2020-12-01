@@ -17,6 +17,8 @@
 - (NSString *)mlc_urlEncode;
 /**URL解码*/
 - (NSString *)mlc_urlDecode;
+/**使用SHA1计算hash*/
+- (NSString *)mlc_sha1String;
 /**将json字符串转换成字典或数组等*/
 - (id)mlc_JSONObject;
 
