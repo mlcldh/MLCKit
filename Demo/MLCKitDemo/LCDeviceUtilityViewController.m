@@ -22,12 +22,18 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self getIdfaAndIdfv];
+    [self getIPInfo];
 }
 #pragma mark -
 - (void)getIdfaAndIdfv {
     NSString *idfa = [MLCDeviceUtility idfa];
     NSString *idfv = [MLCDeviceUtility identifierForVendor];
-    NSLog(@"menglc %@, %@", idfa, idfv);
+    NSLog(@"menglc getIdfaAndIdfv %@, %@", idfa, idfv);
+}
+- (void)getIPInfo {
+    NSString *deviceIP = [MLCDeviceUtility deviceIPAdress];
+    NSString *wifiName = [MLCDeviceUtility wifiName];
+    NSLog(@"menglc getIPInfo %@, %@", deviceIP, wifiName);
 }
 
 @end

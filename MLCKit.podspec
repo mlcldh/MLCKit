@@ -58,8 +58,8 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit', 'AdSupport', 'CoreTelephony'
   end
   
-  s.subspec 'PhotoPermission' do |ss|
-    ss.source_files = 'MLCKit/PhotoPermission/*.{h,m,mm}'
+  s.subspec 'Photos' do |ss|
+    ss.source_files = 'MLCKit/Photos/*.{h,m,mm}'
     ss.frameworks = 'AVFoundation', 'Photos'
     ss.dependency 'MLCKit/Utility'
   end

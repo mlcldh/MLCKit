@@ -54,14 +54,14 @@
         }
     }
     for (MLCControlTarget *controlTarget in removedTargets) {
-        [self removeTarget:controlTarget action:@selector(senderMethod:) forControlEvents:controlEvents];
+        [self removeTarget:controlTarget action:@selector(senderAction:) forControlEvents:controlEvents];
         [controlTargets removeObject:controlTarget];
     }
 }
 - (void)mlc_removeAllActions {
     NSMutableArray *controlTargets = [self mlc_controlTargets];
     for (MLCControlTarget *controlTarget in controlTargets) {
-        [self removeTarget:controlTarget action:@selector(senderMethod:) forControlEvents:controlTarget.controlEvents];
+        [self removeTarget:controlTarget action:@selector(senderAction:) forControlEvents:controlTarget.controlEvents];
     }
     [controlTargets removeAllObjects];
 }

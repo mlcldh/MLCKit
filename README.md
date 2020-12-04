@@ -1,7 +1,7 @@
 # MLCKit
 MLCKit封装一些常用的iOS方法。
 
-分成Cache、Category、LocalFolder、Macro、Proxy、UI、Utility、PhotoPermission等子pods。
+分成Cache、Category、LocalFolder、Macro、Proxy、UI、Utility、Photos等子pods。
 
 ## Cache
 
@@ -189,7 +189,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 
 `pod 'MLCKit/Utility'`
 
-## PhotoPermission
+## Photos
 
 相册、相机权限判断。
 
@@ -247,7 +247,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
             } fromViewController:self];
 ```
 
-`pod 'MLCKit/PhotoPermission'`
+`pod 'MLCKit/Photos'`
 
 # 安装
 
@@ -259,5 +259,5 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 
 # 系统要求
 
-该项目最低支持 `iOS 6.0`。
+该项目最低支持 `iOS 8.0`。
 

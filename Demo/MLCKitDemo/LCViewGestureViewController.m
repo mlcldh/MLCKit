@@ -32,13 +32,22 @@
 - (void)useLabelGesture {
     UILabel *label = [[UILabel alloc]init];
     label.backgroundColor = [UIColor purpleColor];
-    label.textColor = [UIColor blackColor];
+    label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     //        _aLabel.font = [UIFont systemFontOfSize:18];
     label.text = @"轻学堂";
     [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
         UILabel *label = (UILabel *)(recognizer.view);
         MLCLog(@"menglc tap %@", label.text);
+    }];
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+        UILabel *label = (UILabel *)(recognizer.view);
+        MLCLog(@"menglc tap2 %@", label.text);
+    }];
+    [label mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerTypeTap)];
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+        UILabel *label = (UILabel *)(recognizer.view);
+        MLCLog(@"menglc tap3 %@", label.text);
     }];
     [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(UIGestureRecognizer *recognizer) {
         UILongPressGestureRecognizer *longPressGestureRecognizer = (UILongPressGestureRecognizer *)recognizer;
@@ -71,14 +80,14 @@
     [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
         MLCLog(@"menglc button UIControlEventTouchUpInside");
     }];
-//    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
-//        MLCLog(@"menglc button UIControlEventTouchUpInside 2");
-//    }];
-//    //        [_button mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+        MLCLog(@"menglc button UIControlEventTouchUpInside 2");
+    }];
+    [button mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
 //    [button mlc_removeAllActions];
-//    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
-//        MLCLog(@"menglc button UIControlEventTouchUpInside 3");
-//    }];
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+        MLCLog(@"menglc button UIControlEventTouchUpInside 3");
+    }];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);

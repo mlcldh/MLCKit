@@ -80,7 +80,6 @@
     }
 }
 - (void)mlc_combineView:(UIView *)view lastView:(UIView *)lastView withAxis:(UILayoutConstraintAxis)axis fixedSpacing:(CGFloat)fixedSpacing  {
-    NSLayoutConstraint *constraint = nil;
     if (axis == UILayoutConstraintAxisHorizontal) {
         [view mlc_addConstraintWithFirstAttribute:(NSLayoutAttributeLeft) relation:(NSLayoutRelationEqual) secondItem:lastView secondAttribute:(NSLayoutAttributeRight) multiplier:1 constant:fixedSpacing];
     } else {
