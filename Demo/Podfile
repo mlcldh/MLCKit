@@ -1,6 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios,			'8.0'
-inhibit_all_warnings!
+#inhibit_all_warnings!
 
 target:'MLCKitDemo'
 
@@ -8,4 +8,4 @@ pod 'Masonry', '1.1.0'
 pod 'YYCache', '1.0.4'
 pod 'YYModel', '1.0.4'
 pod 'MLCKit', :path => '../../MLCKit'
-#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git', :commit => '8d2b59d'
+#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git', :commit => '0e76d84'

@@ -44,11 +44,11 @@
     return _cameraPermissionModel;
 }
 #pragma mark -
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType callback:(void (^)(BOOL, BOOL, BOOL))callback {
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType handler:(void (^)(BOOL, BOOL, BOOL, BOOL))handler {
     
     if (![UIImagePickerController isSourceTypeAvailable:souceType]) {
-        if (callback) {
-            callback(NO, NO, NO);
+        if (handler) {
+            handler(NO, NO, NO, NO);
         }
         return;
     }
@@ -56,61 +56,98 @@
         AVAuthorizationStatus authorizationStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         switch (authorizationStatus) {
             case AVAuthorizationStatusAuthorized:
-                if (callback) {
-                    callback(YES, YES, NO);
+                if (handler) {
+                    handler(YES, YES, NO, NO);
                 }
                 break;
-                
             case AVAuthorizationStatusDenied:
             case AVAuthorizationStatusRestricted:
-                if (callback) {
-                    callback(YES, NO, NO);
+                if (handler) {
+                    handler(YES, NO, NO, NO);
                 }
                 break;
-                
             case AVAuthorizationStatusNotDetermined:
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                                          completionHandler:^(BOOL granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        if (callback) {
-                            callback(YES, granted, YES);
+                        if (handler) {
+                            handler(YES, granted, NO, YES);
                         }
                     });
                 }];
                 break;
         }
     } else {
-        switch ([PHPhotoLibrary authorizationStatus]) {
-            case PHAuthorizationStatusAuthorized:
-                if (callback) {
-                    callback(YES, YES, NO);
+        if (@available(iOS 14, *)) {
+            PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite];
+            switch (authorizationStatus) {
+                case PHAuthorizationStatusNotDetermined: {
+                    [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelReadWrite handler:^(PHAuthorizationStatus status2) {
+                        [self handleStatus:status2 isNotDetermined:YES handler:handler];
+                    }];
                 }
-                break;
-                
-            case PHAuthorizationStatusDenied:
-            case PHAuthorizationStatusRestricted:
-                if (callback) {
-                    callback(YES, NO, NO);
+                    break;
+                default:
+                    [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+                    break;
+            }
+        } else {
+            PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
+            switch (authorizationStatus) {
+                case PHAuthorizationStatusNotDetermined: {
+                    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status2) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            if (handler) {
+                                handler(YES, (status2 == PHAuthorizationStatusAuthorized), NO, YES);
+                            }
+                        });
+                    }];
                 }
-                break;
-                
-            case PHAuthorizationStatusNotDetermined:
-                [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (callback) {
-                            callback(YES, (status == PHAuthorizationStatusAuthorized), YES);
-                        }
-                    });
-                }];
-                break;
+                    break;
+                default:
+                    [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+                    break;
+            }
         }
     }
 }
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType callback:(void (^)(void))callback fromViewController:(UIViewController *)viewController {
++ (void)handleStatus:(PHAuthorizationStatus)status isNotDetermined:(BOOL)isNotDetermined handler:(void (^)(BOOL, BOOL, BOOL, BOOL))handler {
+    if (![NSThread isMainThread]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self handleStatus:status isNotDetermined:isNotDetermined handler:handler];
+        });
+        return;
+    }
+    switch (status) {
+        case PHAuthorizationStatusAuthorized:
+            if (handler) {
+                handler(YES, YES, NO, isNotDetermined);
+            }
+            break;
+        case PHAuthorizationStatusLimited:
+            if (handler) {
+                handler(YES, YES, YES, isNotDetermined);
+            }
+            break;
+        case PHAuthorizationStatusRestricted:
+            if (handler) {
+                handler(YES, NO, NO, isNotDetermined);
+            }
+            break;
+        case PHAuthorizationStatusDenied:
+            if (handler) {
+                handler(YES, NO, NO, isNotDetermined);
+            }
+            break;
+        default:
+            break;
+    }
+}
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType handler:(void (^)(void))handler fromViewController:(UIViewController *)viewController {
     if (!viewController) {
         return;
     }
-    void(^aCallback)(BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+    void(^aCallback)(BOOL, BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
         if (!isSourceTypeAvailable) {
             NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
             NSString *message = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableMessage : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableMessage;
@@ -126,7 +163,7 @@
             return;
         }
         if (success) {
-            callback();
+            handler();
             return;
         }
         NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.openPermissionTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.openPermissionTitle;
@@ -154,7 +191,7 @@
                                    completion:nil];
     };
     
-    [self requestPermissionWithSourceType:sourceType callback:aCallback];
+    [self requestPermissionWithSourceType:sourceType handler:aCallback];
 }
 
 @end
