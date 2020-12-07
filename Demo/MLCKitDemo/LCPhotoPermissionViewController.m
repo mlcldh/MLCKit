@@ -70,8 +70,11 @@
     @weakify(self)
     [button setMlc_touchUpInsideBlock:^{
         @strongify(self)
-        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^{
+        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isLimited) {
             NSLog(@"已经获得相册权限");
+            if (isLimited) {
+                NSLog(@"读取相册受限");
+            }
         } fromViewController:self];
     }];
     [self.view addSubview:button];
@@ -118,7 +121,7 @@
     @weakify(self)
     [button setMlc_touchUpInsideBlock:^{
         @strongify(self)
-        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^{
+        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isLimited) {
             NSLog(@"已经获得相机权限");
         } fromViewController:self];
     }];

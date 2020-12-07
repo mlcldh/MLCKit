@@ -143,7 +143,7 @@
             break;
     }
 }
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType handler:(void (^)(void))handler fromViewController:(UIViewController *)viewController {
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType handler:(void (^)(BOOL))handler fromViewController:(UIViewController *)viewController {
     if (!viewController) {
         return;
     }
@@ -163,7 +163,7 @@
             return;
         }
         if (success) {
-            handler();
+            handler(isLimited);
             return;
         }
         NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.openPermissionTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.openPermissionTitle;
