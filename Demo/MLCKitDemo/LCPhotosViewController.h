@@ -1,5 +1,5 @@
 //
-//  LCPhotoPermissionViewController.h
+//  LCPhotosViewController.h
 //  MLCKitDemo
 //
 //  Created by menglingchao on 2020/8/21.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LCPhotoPermissionViewController : UIViewController
+@interface LCPhotosViewController : UIViewController
 
 @end
 

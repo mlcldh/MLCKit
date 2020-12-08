@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 @interface UIView (MLCKit)
 
 /**添加手势及其回调*/
-- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void(^)(UIGestureRecognizer *recognizer))callback;
+- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type handler:(void(^)(UIGestureRecognizer *recognizer))handler;
 /**移除某些类型手势及其回调*/
 - (void)mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerType)type;
 /**移除所有手势及其回调*/

@@ -34,7 +34,7 @@
     [button setTitle:@"button" forState:(UIControlStateNormal)];
     @weakify(self)
     @weakify(button)
-    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(id sender) {
         @strongify(self)
         @strongify(button)
         [self.view mlc_removeConstraintsWithFirstItem:button firstAttribute:(NSLayoutAttributeLeft)];

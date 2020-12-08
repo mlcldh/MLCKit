@@ -12,7 +12,7 @@
 		8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */; };
 		8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */; };
 		8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */; };
-		8D1766ED24EFBD7D000F6975 /* LCPhotoPermissionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */; };
+		8D1766ED24EFBD7D000F6975 /* LCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EC24EFBD7D000F6975 /* LCPhotosViewController.m */; };
 		8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EF24EFBF09000F6975 /* LCSeeLocalFileViewController.m */; };
 		8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766F224EFC363000F6975 /* LCUseProxyViewController.m */; };
 		8D17670024EFCF3C000F6975 /* LCPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766FE24EFCF3C000F6975 /* LCPerson.m */; };
@@ -46,8 +46,8 @@
 		8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCombineViewsViewController.m; sourceTree = "<group>"; };
 		8D1766E824EFBCCB000F6975 /* LCDeviceUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDeviceUtilityViewController.h; sourceTree = "<group>"; };
 		8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCDeviceUtilityViewController.m; sourceTree = "<group>"; };
-		8D1766EB24EFBD7D000F6975 /* LCPhotoPermissionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCPhotoPermissionViewController.h; sourceTree = "<group>"; };
-		8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCPhotoPermissionViewController.m; sourceTree = "<group>"; };
+		8D1766EB24EFBD7D000F6975 /* LCPhotosViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCPhotosViewController.h; sourceTree = "<group>"; };
+		8D1766EC24EFBD7D000F6975 /* LCPhotosViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCPhotosViewController.m; sourceTree = "<group>"; };
 		8D1766EE24EFBF09000F6975 /* LCSeeLocalFileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCSeeLocalFileViewController.h; sourceTree = "<group>"; };
 		8D1766EF24EFBF09000F6975 /* LCSeeLocalFileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCSeeLocalFileViewController.m; sourceTree = "<group>"; };
 		8D1766F124EFC363000F6975 /* LCUseProxyViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseProxyViewController.h; sourceTree = "<group>"; };
@@ -161,8 +161,8 @@
 				8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */,
 				8DDBF6EF257657A900D0A48C /* LCLocationManagerViewController.h */,
 				8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */,
-				8D1766EB24EFBD7D000F6975 /* LCPhotoPermissionViewController.h */,
-				8D1766EC24EFBD7D000F6975 /* LCPhotoPermissionViewController.m */,
+				8D1766EB24EFBD7D000F6975 /* LCPhotosViewController.h */,
+				8D1766EC24EFBD7D000F6975 /* LCPhotosViewController.m */,
 				8D1766EE24EFBF09000F6975 /* LCSeeLocalFileViewController.h */,
 				8D1766EF24EFBF09000F6975 /* LCSeeLocalFileViewController.m */,
 				8D1766F124EFC363000F6975 /* LCUseProxyViewController.h */,
@@ -297,7 +297,7 @@
 				8DE4A10325497A360026653A /* LCHandleCornerViewController.m in Sources */,
 				8D5705DE23ACC953003B89D8 /* AppDelegate.m in Sources */,
 				8D5705EF23ACC955003B89D8 /* main.m in Sources */,
-				8D1766ED24EFBD7D000F6975 /* LCPhotoPermissionViewController.m in Sources */,
+				8D1766ED24EFBD7D000F6975 /* LCPhotosViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

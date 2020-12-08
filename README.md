@@ -62,7 +62,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 /**点击回调*/
 @property (nonatomic, copy) void(^mlc_touchUpInsideBlock)(void);
 /**添加事件*/
-- (void)mlc_addActionForControlEvents:(UIControlEvents)controlEvents callback:(void(^)(id sender))callback;
+- (void)mlc_addActionForControlEvents:(UIControlEvents)controlEvents handler:(void(^)(id sender))handler;
 /**移除某些类型的所有事件*/
 - (void)mlc_removeAllActionsForControlEvents:(UIControlEvents)controlEvents;
 /**移除所有事件*/
@@ -87,7 +87,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 @interface UIView (MLCKit)
 
 /**添加手势及其回调*/
-- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void(^)(UIGestureRecognizer *recognizer))callback;
+- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type handler:(void(^)(UIGestureRecognizer *recognizer))handler;
 /**移除某些类型手势及其回调*/
 - (void)mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerType)type;
 /**移除所有手势及其回调*/
@@ -196,7 +196,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 判断相册权限，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
                 if (!isSourceTypeAvailable) {
                     NSLog(@"当前设备没有相册功能");
                     return;
@@ -215,7 +215,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 判断相册权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) callback:^{
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^{
                 NSLog(@"已经获得相册权限");
             } fromViewController:self];
 ```
@@ -223,7 +223,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 判断相机权限，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
                 if (!isSourceTypeAvailable) {
                     NSLog(@"当前设备没有相机功能");
                     return;
@@ -242,7 +242,7 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 判断相机权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) callback:^{
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^{
                 NSLog(@"已经获得相机权限");
             } fromViewController:self];
 ```

@@ -15,15 +15,15 @@
 
 @property (nonatomic) MLCGestureRecognizerType type;//
 @property (nonatomic, weak) UIGestureRecognizer *gestureRecognizer;
-@property (nonatomic, copy) void (^actionCallback)(UIGestureRecognizer *recognizer);
+@property (nonatomic, copy) void (^actionHandler)(UIGestureRecognizer *recognizer);
 
 @end
 
 @implementation MLCViewTarget
 
 - (void)senderAction:(UIGestureRecognizer *)sender {
-    if (_actionCallback) {
-        _actionCallback(sender);
+    if (_actionHandler) {
+        _actionHandler(sender);
     }
 }
 
@@ -31,7 +31,7 @@
 
 @implementation UIView (MLCKit)
 
-- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type callback:(void (^)(UIGestureRecognizer *))callback {
+- (UIGestureRecognizer *)mlc_addGestureRecognizerWithType:(MLCGestureRecognizerType)type handler:(void (^)(UIGestureRecognizer *))handler {
     MLCViewTarget *viewTarget = [[MLCViewTarget alloc] init];
     UIGestureRecognizer *recognizer = nil;
     switch (type) {
@@ -68,7 +68,7 @@
     }
     viewTarget.type = type;
     viewTarget.gestureRecognizer = recognizer;
-    viewTarget.actionCallback = callback;
+    viewTarget.actionHandler = handler;
     NSMutableArray *viewTargets = [self mlc_viewTargets];
     [viewTargets addObject:viewTarget];
     return recognizer;

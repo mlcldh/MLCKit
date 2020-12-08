@@ -1,24 +1,29 @@
 //
-//  LCPhotoPermissionViewController.m
+//  LCPhotosViewController.m
 //  MLCKitDemo
 //
 //  Created by menglingchao on 2020/8/21.
 //  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import "LCPhotoPermissionViewController.h"
+#import "LCPhotosViewController.h"
 #import "Masonry.h"
 #import "MLCPhotoPermissionManager.h"
+#import "MLCPHPickerViewControllerManager.h"
+#import "MLCUIImagePickerControllerManager.h"
 #import "MLCMacror.h"
 #import "UIControl+MLCKit.h"
 #import "MLCOpenUtility.h"
 
-@interface LCPhotoPermissionViewController ()
+@interface LCPhotosViewController ()
 
 @end
 
-@implementation LCPhotoPermissionViewController
+@implementation LCPhotosViewController
 
+- (void)dealloc {
+    NSLog(@"menglc LCPhotosViewController dealloc");
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -30,6 +35,7 @@
     [self useRequestCameraPermission];
     [self useRequestCameraPermissionAndShowUI];
     [self addOpenSettingsButton];
+    [self addPickButton];
 }
 #pragma mark -
 - (void)requestAlbumPermission {
@@ -143,6 +149,64 @@
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);
         make.top.equalTo(self.view).offset(300);
+    }];
+}
+- (void)addPickButton {
+    UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    button.backgroundColor = [UIColor purpleColor];
+    [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [button setTitle:@"选择照片" forState:(UIControlStateNormal)];
+    @weakify(self)
+    [button setMlc_touchUpInsideBlock:^{
+        @strongify(self)
+        if (@available(iOS 14, *)) {
+            PHPickerConfiguration *configuration = [[PHPickerConfiguration alloc] init];
+//                    configuration.filter = [PHPickerFilter imagesFilter];
+//                configuration.filter = [PHPickerFilter videosFilter];
+            configuration.selectionLimit = 0; // 默认为1，为0时表示可多选。
+            
+            PHPickerViewController *pickerVC = [[PHPickerViewController alloc] initWithConfiguration:configuration];
+            pickerVC.modalPresentationStyle = UIModalPresentationFullScreen;
+            MLCPHPickerViewControllerManager *pickerVCManager = [[MLCPHPickerViewControllerManager alloc]initWithPickerViewController:pickerVC];
+            [pickerVCManager setDidFinishPickingHandler:^(NSArray<PHPickerResult *> *results) {
+                [pickerVC dismissViewControllerAnimated:YES completion:NULL];
+                NSLog(@"menglc MLCPHPickerViewControllerManager didFinishPickingHandler %@", results);
+            }];
+            [self presentViewController:pickerVC animated:YES completion:^{
+                
+            }];
+            return;
+        }
+        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isLimited) {
+            @strongify(self)
+            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+            pickerController.allowsEditing = YES;
+            // 3. 设置打开照片相册类型(显示所有相簿)
+            pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            pickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+            // pickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+            // 照相机
+//             pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+            pickerController.mediaTypes = [NSArray arrayWithObjects: @"public.image", nil];
+            pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+            MLCUIImagePickerControllerManager *pickerVCManager = [[MLCUIImagePickerControllerManager alloc]initWithPickerViewController:pickerController];
+            [pickerVCManager setDidFinishPickingMediaHandler:^(NSDictionary<UIImagePickerControllerInfoKey,id> *info) {
+                [pickerController dismissViewControllerAnimated:YES completion:NULL];
+                
+                UIImage *image = info[UIImagePickerControllerEditedImage];
+                NSLog(@"menglc MLCUIImagePickerControllerManager didFinishPickingMediaHandler %@", image);
+            }];
+            [pickerVCManager setDidCancelHandler:^{
+                [pickerController dismissViewControllerAnimated:YES completion:NULL];
+                NSLog(@"menglc MLCUIImagePickerControllerManager didCancelHandler");
+            }];
+            [self presentViewController:pickerController animated:YES completion:nil];
+        } fromViewController:self];
+    }];
+    [self.view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+        make.top.equalTo(self.view).offset(350);
     }];
 }
 

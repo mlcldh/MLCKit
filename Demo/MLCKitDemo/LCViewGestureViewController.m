@@ -36,20 +36,20 @@
     label.textAlignment = NSTextAlignmentCenter;
     //        _aLabel.font = [UIFont systemFontOfSize:18];
     label.text = @"轻学堂";
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) handler:^(UIGestureRecognizer *recognizer) {
         UILabel *label = (UILabel *)(recognizer.view);
         MLCLog(@"menglc tap %@", label.text);
     }];
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) handler:^(UIGestureRecognizer *recognizer) {
         UILabel *label = (UILabel *)(recognizer.view);
         MLCLog(@"menglc tap2 %@", label.text);
     }];
     [label mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerTypeTap)];
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeTap) handler:^(UIGestureRecognizer *recognizer) {
         UILabel *label = (UILabel *)(recognizer.view);
         MLCLog(@"menglc tap3 %@", label.text);
     }];
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeLongPress) handler:^(UIGestureRecognizer *recognizer) {
         UILongPressGestureRecognizer *longPressGestureRecognizer = (UILongPressGestureRecognizer *)recognizer;
         if (longPressGestureRecognizer.state != UIGestureRecognizerStateBegan) {
             return;
@@ -57,12 +57,12 @@
         UILabel *label = (UILabel *)longPressGestureRecognizer.view;
         MLCLog(@"menglc longPress %@", label.text);
     }];
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypePan) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypePan) handler:^(UIGestureRecognizer *recognizer) {
         MLCLog(@"menglc pan");
     }];
 //    [label mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerTypePan)];
 //    [label mlc_removeAllGestureRecognizers];
-    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeSwipe) callback:^(UIGestureRecognizer *recognizer) {
+    [label mlc_addGestureRecognizerWithType:(MLCGestureRecognizerTypeSwipe) handler:^(UIGestureRecognizer *recognizer) {
         MLCLog(@"menglc swipe");
     }];
     [self.view addSubview:label];
@@ -77,15 +77,15 @@
     button.backgroundColor = [UIColor purpleColor];
     [button setTitle:@"button" forState:(UIControlStateNormal)];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(id sender) {
         MLCLog(@"menglc button UIControlEventTouchUpInside");
     }];
-    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(id sender) {
         MLCLog(@"menglc button UIControlEventTouchUpInside 2");
     }];
     [button mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
 //    [button mlc_removeAllActions];
-    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(id sender) {
+    [button mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(id sender) {
         MLCLog(@"menglc button UIControlEventTouchUpInside 3");
     }];
     [self.view addSubview:button];
@@ -96,11 +96,11 @@
 }
 - (void)useSwitchAddAction {
     UISwitch *aSwitch = [[UISwitch alloc]init];
-    [aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
+    [aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) handler:^(id sender) {
         UISwitch *switch2 = sender;
         MLCLog(@"menglc switch2.isOn = %@", @(switch2.isOn));
     }];
-    //        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) callback:^(id sender) {
+    //        [_aSwitch mlc_addActionForControlEvents:(UIControlEventValueChanged) handler:^(id sender) {
     //            UISwitch *switch2 = sender;
     //            MLCLog(@"menglc switch2.isOn 2 = %@", @(switch2.isOn));
     //        }];

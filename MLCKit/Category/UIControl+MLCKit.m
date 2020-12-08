@@ -13,23 +13,23 @@
 
 @interface MLCControlTarget : NSObject
 
-@property (nonatomic, copy) void (^actionCallback)(id sender);
+@property (nonatomic, copy) void (^actionHandler)(id sender);
 @property (nonatomic) UIControlEvents controlEvents;
 
 @end
 
 @implementation MLCControlTarget
 
-- (instancetype)initWithActionCallback:(void (^)(id))actionCallback controlEvents:(UIControlEvents)controlEvents {
+- (instancetype)initWithActionHandler:(void (^)(id))actionHandler controlEvents:(UIControlEvents)controlEvents {
     if (self = [super init]) {
-        _actionCallback   = actionCallback;
+        _actionHandler   = actionHandler;
         _controlEvents = controlEvents;
     }
     return self;
 }
 - (void)senderAction:(id)sender {
-    if (_actionCallback) {
-        _actionCallback(sender);
+    if (_actionHandler) {
+        _actionHandler(sender);
     }
 }
 
@@ -37,9 +37,11 @@
 
 @implementation UIControl (MLCKit)
 
-- (void)mlc_addActionForControlEvents:(UIControlEvents)controlEvents callback:(void (^)(id))callback {
+@dynamic mlc_touchUpInsideBlock;
+
+- (void)mlc_addActionForControlEvents:(UIControlEvents)controlEvents handler:(void (^)(id))handler {
     if (!controlEvents) return;
-    MLCControlTarget *controlTarget = [[MLCControlTarget alloc] initWithActionCallback:callback controlEvents:controlEvents];
+    MLCControlTarget *controlTarget = [[MLCControlTarget alloc] initWithActionHandler:handler controlEvents:controlEvents];
     [self addTarget:controlTarget action:@selector(senderAction:) forControlEvents:controlEvents];
     NSMutableArray *controlTargets = [self mlc_controlTargets];
     [controlTargets addObject:controlTarget];
@@ -76,7 +78,7 @@
 }
 #pragma mark - Setter
 - (void)setMlc_touchUpInsideBlock:(void (^)(void))mlc_touchUpInsideBlock {
-    [self mlc_addActionForControlEvents:(UIControlEventTouchUpInside) callback:^(UIControl *sender) {
+    [self mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(UIControl *sender) {
         if (mlc_touchUpInsideBlock) {
             mlc_touchUpInsideBlock();
         }
