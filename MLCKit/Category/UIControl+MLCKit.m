@@ -78,6 +78,7 @@
 }
 #pragma mark - Setter
 - (void)setMlc_touchUpInsideBlock:(void (^)(void))mlc_touchUpInsideBlock {
+    [self mlc_removeAllActionsForControlEvents:(UIControlEventTouchUpInside)];
     [self mlc_addActionForControlEvents:(UIControlEventTouchUpInside) handler:^(UIControl *sender) {
         if (mlc_touchUpInsideBlock) {
             mlc_touchUpInsideBlock();
