@@ -6,9 +6,8 @@
 //  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LCBaseViewController.h"
 
-
-@interface LCLocationManagerViewController : UIViewController
+@interface LCLocationManagerViewController : LCBaseViewController
 
 @end

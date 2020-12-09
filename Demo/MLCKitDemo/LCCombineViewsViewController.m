@@ -20,8 +20,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self combineViewsVertically];
     [self combineViewsHorizontally];
     [self distributeViewsEqualCenterSpacingHorizontally];

@@ -1,18 +1,18 @@
 //
-//  MLCUIImagePickerControllerManager.h
+//  MLCImagePickerControllerManager.h
 //  MLCKit
 //
 //  Created by menglingchao on 2020/12/8.
+//  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 /**
  * 将UIImagePickerController部分协议方法通过block回调出来
  * 想扩展到更多部分协议方法的话，可以继承该类
  */
-@interface MLCUIImagePickerControllerManager : NSObject<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface MLCImagePickerControllerManager : NSObject<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 /***/
 @property (nonatomic, weak, readonly) UIImagePickerController *pickerViewController;

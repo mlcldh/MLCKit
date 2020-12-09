@@ -3,9 +3,10 @@
 //  Masonry
 //
 //  Created by menglingchao on 2020/4/11.
+//  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class MLCPhotoPermissionModel;
 

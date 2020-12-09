@@ -22,8 +22,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self useLabelGesture];
     [self useButtonAddAction];
     [self useSwitchAddAction];

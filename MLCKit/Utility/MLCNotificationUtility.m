@@ -10,7 +10,7 @@
 
 @implementation MLCNotificationUtility
 
-+ (void)registerNotificationWithDelegate:(id <UNUserNotificationCenterDelegate>)delegate {
++ (void)registerNotificationWithDelegate:(id)delegate {
     if (@available(iOS 10.0, *)) {
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         center.delegate = delegate;

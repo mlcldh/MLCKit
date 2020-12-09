@@ -6,9 +6,8 @@
 //  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LCBaseViewController.h"
 
-
-@interface LCDeviceUtilityViewController : UIViewController
+@interface LCDeviceUtilityViewController : LCBaseViewController
 
 @end

@@ -32,6 +32,21 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit'
   end
   
+  s.subspec 'Color' do |ss|
+    ss.source_files = 'MLCKit/Color/*.{h,m,mm}'
+    ss.frameworks = 'UIKit'
+  end
+  
+  s.subspec 'Document' do |ss|
+    ss.source_files = 'MLCKit/Document/*.{h,m,mm}'
+    ss.frameworks = 'UIKit'
+  end
+  
+  s.subspec 'Font' do |ss|
+    ss.source_files = 'MLCKit/Font/*.{h,m,mm}'
+    ss.frameworks = 'UIKit'
+  end
+  
   s.subspec 'LocalFolder' do |ss|
     ss.source_files = 'MLCKit/LocalFolder/*.{h,m,mm}'
     ss.frameworks = 'UIKit'

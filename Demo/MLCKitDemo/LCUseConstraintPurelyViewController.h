@@ -6,12 +6,8 @@
 //  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "LCBaseViewController.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface LCUseConstraintPurelyViewController : UIViewController
+@interface LCUseConstraintPurelyViewController : LCBaseViewController
 
 @end
-
-NS_ASSUME_NONNULL_END

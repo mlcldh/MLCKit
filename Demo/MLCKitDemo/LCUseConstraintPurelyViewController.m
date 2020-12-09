@@ -23,8 +23,6 @@
     
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    
     [self useConstraintPurely];
 }
 #pragma mark -

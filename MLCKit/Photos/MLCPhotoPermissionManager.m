@@ -3,6 +3,7 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2020/4/11.
+//  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
 #import "MLCPhotoPermissionManager.h"
@@ -147,7 +148,7 @@
     if (!viewController) {
         return;
     }
-    void(^aCallback)(BOOL, BOOL, BOOL, BOOL) = ^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
+    [self requestPermissionWithSourceType:sourceType handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
         if (!isSourceTypeAvailable) {
             NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
             NSString *message = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableMessage : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableMessage;
@@ -178,20 +179,12 @@
                                                             style:UIAlertActionStyleDefault
                                                           handler:^(UIAlertAction * _Nonnull action) {
             NSURL *URL = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        //                UIApplication *application = [UIApplication sharedApplication];
             [MLCOpenUtility openURL:URL completionHandler:nil];
-        //                if (@available(iOS 10.0, *)) {
-        //                    [application openURL:URL options:@{} completionHandler:nil];
-        //                } else {
-        //                    [application openURL:URL];
-        //                }
         }]];
         [viewController presentViewController:alertController
                                      animated:YES
                                    completion:nil];
-    };
-    
-    [self requestPermissionWithSourceType:sourceType handler:aCallback];
+    }];
 }
 
 @end

@@ -1,19 +1,20 @@
 //
-//  MLCUIImagePickerControllerManager.m
+//  MLCImagePickerControllerManager.m
 //  MLCKit
 //
 //  Created by menglingchao on 2020/12/8.
+//  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import "MLCUIImagePickerControllerManager.h"
+#import "MLCImagePickerControllerManager.h"
 #import <objc/runtime.h>
 
-static char *MLCUIImagePickerControllerManagerKey = "MLCUIImagePickerControllerManagerKey";
+static char *MLCImagePickerControllerManagerKey = "MLCImagePickerControllerManagerKey";
 
-@implementation MLCUIImagePickerControllerManager
+@implementation MLCImagePickerControllerManager
 
 - (void)dealloc {
-//    NSLog(@"menglc MLCUIImagePickerControllerManager dealloc");
+//    NSLog(@"menglc MLCImagePickerControllerManager dealloc");
 }
 - (instancetype)initWithPickerViewController:(UIImagePickerController *)pickerViewController {
     self = [super init];
@@ -21,7 +22,7 @@ static char *MLCUIImagePickerControllerManagerKey = "MLCUIImagePickerControllerM
         _pickerViewController = pickerViewController;
         _pickerViewController.delegate = self;
         if (pickerViewController) {
-            objc_setAssociatedObject(pickerViewController, MLCUIImagePickerControllerManagerKey, self, OBJC_ASSOCIATION_RETAIN_NONATOMIC);//防止自己被释放
+            objc_setAssociatedObject(pickerViewController, MLCImagePickerControllerManagerKey, self, OBJC_ASSOCIATION_RETAIN_NONATOMIC);//防止自己被释放
         }
     }
     return self;
@@ -30,7 +31,7 @@ static char *MLCUIImagePickerControllerManagerKey = "MLCUIImagePickerControllerM
     if (!_pickerViewController) {
         return;
     }
-    objc_setAssociatedObject(_pickerViewController, MLCUIImagePickerControllerManagerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(_pickerViewController, MLCImagePickerControllerManagerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(nonnull NSDictionary<UIImagePickerControllerInfoKey,id> *)info {

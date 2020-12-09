@@ -3,13 +3,13 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2020/12/8.
+//  Copyright © 2020 MengLingChao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <PhotosUI/PhotosUI.h>
 
+/**将PHPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(14))
-/**将PHPickerViewController部分协议方法通过block回调出来*/
 @interface MLCPHPickerViewControllerManager : NSObject<PHPickerViewControllerDelegate>
 
 /***/

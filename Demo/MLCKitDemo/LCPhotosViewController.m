@@ -10,7 +10,7 @@
 #import "Masonry.h"
 #import "MLCPhotoPermissionManager.h"
 #import "MLCPHPickerViewControllerManager.h"
-#import "MLCUIImagePickerControllerManager.h"
+#import "MLCImagePickerControllerManager.h"
 #import "MLCMacror.h"
 #import "UIControl+MLCKit.h"
 #import "MLCOpenUtility.h"
@@ -21,14 +21,9 @@
 
 @implementation LCPhotosViewController
 
-- (void)dealloc {
-    NSLog(@"menglc LCPhotosViewController dealloc");
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor whiteColor];
     
     [self requestAlbumPermission];
     [self requestAlbumPermissionAndShowUI];
@@ -189,16 +184,16 @@
 //             pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
             pickerController.mediaTypes = [NSArray arrayWithObjects: @"public.image", nil];
             pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
-            MLCUIImagePickerControllerManager *pickerVCManager = [[MLCUIImagePickerControllerManager alloc]initWithPickerViewController:pickerController];
+            MLCImagePickerControllerManager *pickerVCManager = [[MLCImagePickerControllerManager alloc]initWithPickerViewController:pickerController];
             [pickerVCManager setDidFinishPickingMediaHandler:^(NSDictionary<UIImagePickerControllerInfoKey,id> *info) {
                 [pickerController dismissViewControllerAnimated:YES completion:NULL];
                 
                 UIImage *image = info[UIImagePickerControllerEditedImage];
-                NSLog(@"menglc MLCUIImagePickerControllerManager didFinishPickingMediaHandler %@", image);
+                NSLog(@"menglc MLCImagePickerControllerManager didFinishPickingMediaHandler %@", image);
             }];
             [pickerVCManager setDidCancelHandler:^{
                 [pickerController dismissViewControllerAnimated:YES completion:NULL];
-                NSLog(@"menglc MLCUIImagePickerControllerManager didCancelHandler");
+                NSLog(@"menglc MLCImagePickerControllerManager didCancelHandler");
             }];
             [self presentViewController:pickerController animated:YES completion:nil];
         } fromViewController:self];

@@ -19,14 +19,11 @@
 @implementation LCUseProxyViewController
 
 - (void)dealloc {
-    NSLog(@"menglc LCUseProxyViewController dealloc");
     [self.timer invalidate];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.view.backgroundColor = [UIColor whiteColor];
     
     [self useProxy];
 }

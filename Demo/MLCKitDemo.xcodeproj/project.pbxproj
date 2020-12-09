@@ -23,6 +23,10 @@
 		8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705E823ACC955003B89D8 /* Assets.xcassets */; };
 		8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */; };
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
+		8DD40A2B2580A60A00F98F8C /* LCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */; };
+		8DD40A442580BE9100F98F8C /* LCDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A432580BE9100F98F8C /* LCDocumentViewController.m */; };
+		8DD40A6B2580D4E700F98F8C /* LCColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A6A2580D4E700F98F8C /* LCColorViewController.m */; };
+		8DD40A6F2580D4F400F98F8C /* LCFontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A6E2580D4F400F98F8C /* LCFontViewController.m */; };
 		8DDBF6A825763AFE00D0A48C /* LCOpenUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */; };
 		8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */; };
 		8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */; };
@@ -67,6 +71,14 @@
 		8D5705EB23ACC955003B89D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5705ED23ACC955003B89D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5705EE23ACC955003B89D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DD40A292580A60A00F98F8C /* LCBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCBaseViewController.h; sourceTree = "<group>"; };
+		8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCBaseViewController.m; sourceTree = "<group>"; };
+		8DD40A422580BE9100F98F8C /* LCDocumentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDocumentViewController.h; sourceTree = "<group>"; };
+		8DD40A432580BE9100F98F8C /* LCDocumentViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCDocumentViewController.m; sourceTree = "<group>"; };
+		8DD40A692580D4E700F98F8C /* LCColorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCColorViewController.h; sourceTree = "<group>"; };
+		8DD40A6A2580D4E700F98F8C /* LCColorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCColorViewController.m; sourceTree = "<group>"; };
+		8DD40A6D2580D4F400F98F8C /* LCFontViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCFontViewController.h; sourceTree = "<group>"; };
+		8DD40A6E2580D4F400F98F8C /* LCFontViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCFontViewController.m; sourceTree = "<group>"; };
 		8DDBF6A625763AFE00D0A48C /* LCOpenUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCOpenUtilityViewController.h; sourceTree = "<group>"; };
 		8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCOpenUtilityViewController.m; sourceTree = "<group>"; };
 		8DDBF6EF257657A900D0A48C /* LCLocationManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCLocationManagerViewController.h; sourceTree = "<group>"; };
@@ -147,6 +159,14 @@
 				8D5705DD23ACC953003B89D8 /* AppDelegate.m */,
 				8D5705E223ACC953003B89D8 /* ViewController.h */,
 				8D5705E323ACC953003B89D8 /* ViewController.m */,
+				8DD40A292580A60A00F98F8C /* LCBaseViewController.h */,
+				8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */,
+				8DD40A692580D4E700F98F8C /* LCColorViewController.h */,
+				8DD40A6A2580D4E700F98F8C /* LCColorViewController.m */,
+				8DD40A422580BE9100F98F8C /* LCDocumentViewController.h */,
+				8DD40A432580BE9100F98F8C /* LCDocumentViewController.m */,
+				8DD40A6D2580D4F400F98F8C /* LCFontViewController.h */,
+				8DD40A6E2580D4F400F98F8C /* LCFontViewController.m */,
 				8D1766DC24EFB713000F6975 /* LCViewGestureViewController.h */,
 				8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */,
 				8D1766DF24EFBAA2000F6975 /* LCUrlEncodeViewController.h */,
@@ -283,12 +303,16 @@
 				8D17670424EFCF79000F6975 /* LCDog.m in Sources */,
 				8D17670124EFCF3C000F6975 /* MengUseArchiverViewController.m in Sources */,
 				8D5705E423ACC953003B89D8 /* ViewController.m in Sources */,
+				8DD40A442580BE9100F98F8C /* LCDocumentViewController.m in Sources */,
+				8DD40A6B2580D4E700F98F8C /* LCColorViewController.m in Sources */,
 				8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */,
 				8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */,
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
 				8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */,
 				8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */,
 				8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */,
+				8DD40A2B2580A60A00F98F8C /* LCBaseViewController.m in Sources */,
+				8DD40A6F2580D4F400F98F8C /* LCFontViewController.m in Sources */,
 				8D1766F024EFBF09000F6975 /* LCSeeLocalFileViewController.m in Sources */,
 				8DDBF6A825763AFE00D0A48C /* LCOpenUtilityViewController.m in Sources */,
 				8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */,

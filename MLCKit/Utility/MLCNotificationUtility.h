@@ -12,7 +12,7 @@
 @interface MLCNotificationUtility : NSObject
 
 /**注册通知*/
-+ (void)registerNotificationWithDelegate:(id <UNUserNotificationCenterDelegate>)delegate;
++ (void)registerNotificationWithDelegate:(id)delegate;
 /**远程推送设备token字符串*/
 + (NSString *)remoteNotificationDeviceTokenStringWithDeviceToken:(NSData *)deviceToken;
 
