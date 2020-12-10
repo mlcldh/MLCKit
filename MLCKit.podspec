@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MLCKit"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "LCSKit的Objective-C版本，封装一些常用的iOS方法。"
 
   s.homepage     = "https://github.com/mlcldh/MLCKit"
