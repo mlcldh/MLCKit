@@ -7,12 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UserNotifications/UserNotifications.h>
 
+/**通知工具类*/
 @interface MLCNotificationUtility : NSObject
 
-/**注册通知*/
+/**
+ 注册通知
+ 
+ @param delegate UNUserNotificationCenterDelegate
+ **/
 + (void)registerNotificationWithDelegate:(id)delegate;
+
 /**远程推送设备token字符串*/
 + (NSString *)remoteNotificationDeviceTokenStringWithDeviceToken:(NSData *)deviceToken;
 

@@ -32,7 +32,7 @@
 - (NSDate *)mlc_dateByAddingMonths:(NSInteger)months;
 /**当前日期的基础上，增加年数，年数可以是负数*/
 - (NSDate *)mlc_dateByAddingYears:(NSInteger)years;
-/***/
+/**格式化后的字符串*/
 - (NSString *)mlc_stringWithFormat:(NSString *)format;
 
 @end

@@ -28,7 +28,7 @@
 #pragma mark - Getter
 - (NSArray *)titles {
     if (!_titles) {
-        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"直接调用系统方法操作约束", @"工具类MLCDeviceUtility", @"工具类MLCOpenUtility", @"定位", @"相册/相机相关", @"文档相关", @"颜色相关", @"字体相关", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档", @"json使用", @"圆角处理", @"弹出UIAlertController"];
+        _titles = @[@"UIView、UIControl的手势事件", @"URL编解码", @"批量连接视图", @"直接调用系统方法操作约束", @"工具类MLCDeviceUtility", @"工具类MLCOpenUtility", @"定位相关", @"相册/相机相关", @"文档相关", @"颜色相关", @"字体相关", @"查看本地沙盒文件", @"使用MLCProxy去除循环引用", @"归档、反归档", @"json使用", @"圆角处理", @"弹出UIAlertController"];
     }
     return _titles;
 }

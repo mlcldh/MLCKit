@@ -7,6 +7,7 @@ PODS:
     - MLCKit/Document (= 0.0.2)
     - MLCKit/Font (= 0.0.2)
     - MLCKit/LocalFolder (= 0.0.2)
+    - MLCKit/Location (= 0.0.2)
     - MLCKit/Macro (= 0.0.2)
     - MLCKit/Photos (= 0.0.2)
     - MLCKit/Proxy (= 0.0.2)
@@ -19,6 +20,7 @@ PODS:
   - MLCKit/Document (0.0.2)
   - MLCKit/Font (0.0.2)
   - MLCKit/LocalFolder (0.0.2)
+  - MLCKit/Location (0.0.2)
   - MLCKit/Macro (0.0.2)
   - MLCKit/Photos (0.0.2):
     - MLCKit/Utility
@@ -47,10 +49,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MLCKit: be83b24f6a0d792911b9bea442cef690c5bc3079
+  MLCKit: bc8294571ed65fa0e4f1137e7b33953b625c9889
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: edefdfc4acb9a62fd2c3b8f7e39b8cba54220bf6
+PODFILE CHECKSUM: d0f9b8030175d93ec25a3c5ebfd8750000652522
 
 COCOAPODS: 1.9.3

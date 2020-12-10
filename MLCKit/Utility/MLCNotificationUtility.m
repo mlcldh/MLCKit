@@ -7,6 +7,7 @@
 //
 
 #import "MLCNotificationUtility.h"
+#import <UserNotifications/UserNotifications.h>
 
 @implementation MLCNotificationUtility
 

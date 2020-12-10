@@ -1,7 +1,7 @@
 # MLCKit
 MLCKit封装一些常用的iOS方法。
 
-分成Cache、Category、LocalFolder、Macro、Proxy、UI、Utility、Photos等子pods。
+分成Cache、Category、Color、Document、Font、LocalFolder、Macro、Photos、Proxy、UI、Utility等子pods。
 
 ## Cache
 
@@ -28,6 +28,8 @@ MLCKit封装一些常用的iOS方法。
 
 Category里面是常用类目，有URL编解码、UIView的点击回调、UIControl的点击block回调等。
 
+### NSObject
+
 使用归档、反归档进行序列化、反序列化的话，可以下面的方法：
 
 ```objective-c
@@ -37,9 +39,61 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 - (void)mlc_setValuesWithCoder:(NSCoder *)aDecoder;
 /**序列化*/
 - (void)mlc_encodeWithCoder:(NSCoder *)aCoder;
+/**转换成json字符串*/
+- (NSString *)mlc_JSONString;
 
 @end
 ```
+
+### NSArray
+
+```objective-c
+@interface NSArray (MLCKit)
+
+/**将数组的view根据先后顺序，根据相同间距连接起来*/
+- (void)mlc_combineViewsWithAxis:(UILayoutConstraintAxis)axis withFixedSpacing:(CGFloat)fixedSpacing;
+/**将数组的view根据先后顺序，根据数组fixedSpacings的间距连接起来*/
+- (void)mlc_combineViewsWithAxis:(UILayoutConstraintAxis)axis withFixedSpacings:(NSArray <NSNumber *>*)fixedSpacings;
+/**将数组的view根据先后顺序，数组的view的中心位置等间距*/
+- (void)mlc_distributeViewsEqualCenterSpacingWithAxis:(UILayoutConstraintAxis)axis leadCenterSpacing:(CGFloat)leadCenterSpacing tailCenterSpacing:(CGFloat)tailCenterSpacing;
+
+@end
+```
+
+### NSDate
+
+```objective-c
+@interface NSDate (MLCKit)
+
+/**当前日期在当前日历的年*/
+- (NSInteger)mlc_year;
+/**当前日期在当前日历的月*/
+- (NSInteger)mlc_month;
+/**当前日期在当前日历的日*/
+- (NSInteger)mlc_day;
+/**当前日期在当前日历的组成成份，成份有年、月、日、时、分、秒、星期等等*/
+- (NSDateComponents *)mlc_components:(NSCalendarUnit)unitFlags;
+/**当前日期在农立的组成成份，成份有年、月、日、时、分、秒、星期等等*/
+- (NSDateComponents *)mlc_chineseComponents:(NSCalendarUnit)unitFlags;
+/**是否是今天*/
+- (BOOL)mlc_isToday;
+/**是否是昨天*/
+- (BOOL)mlc_isYesterday;
+/**和日期date是否是同一年*/
+- (BOOL)mlc_isSameYearWithDate:(NSDate *)date;
+/**当前日期的基础上，增加天数，天数可以是负数*/
+- (NSDate *)mlc_dateByAddingDays:(NSInteger)days;
+/**当前日期的基础上，增加月数，月数可以是负数*/
+- (NSDate *)mlc_dateByAddingMonths:(NSInteger)months;
+/**当前日期的基础上，增加年数，年数可以是负数*/
+- (NSDate *)mlc_dateByAddingYears:(NSInteger)years;
+/**格式化后的字符串*/
+- (NSString *)mlc_stringWithFormat:(NSString *)format;
+
+@end
+```
+
+### NSString
 
 使用URL编解码的话，可以使用下面的方法：
 
@@ -50,9 +104,15 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 - (NSString *)mlc_urlEncode;
 /**URL解码*/
 - (NSString *)mlc_urlDecode;
+/**使用SHA1计算hash*/
+- (NSString *)mlc_sha1String;
+/**将json字符串转换成字典或数组等*/
+- (id)mlc_JSONObject;
 
 @end
 ```
+
+### UIControl
 
 通过block获取UIControl及其子类的事件回调。UIControl的子类有UIButton、UISwitch、UISlider、UISegmentedControl、UIPageControl、UITextField、UIDatePicker等。
 
@@ -71,10 +131,12 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 @end
 ```
 
+### UIView
+
 通过block获取UIView及其子类的手势回调；移除某一些约束。
 
 ```objective-c
-/**手势类型枚举*/
+/**手势类型枚举 */
 typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
     MLCGestureRecognizerTypeTap = 0,//
     MLCGestureRecognizerTypeLongPress = 1,//
@@ -92,15 +154,112 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 - (void)mlc_removeGestureRecognizersWithType:(MLCGestureRecognizerType)type;
 /**移除所有手势及其回调*/
 - (void)mlc_removeAllGestureRecognizers;
-/**移除某一些约束*/
+/**移除自己的某一些约束*/
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
+/**移除firstItem是自己的某一些约束*/
+- (void)mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttribute)firstAttribute secondItem:(id)secondItem;
+/**添加约束*/
+- (void)mlc_addConstraintWithFirstAttribute:(NSLayoutAttribute)firstAttribute relation:(NSLayoutRelation)relation secondItem:(id)secondItem secondAttribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant;
+/**返回离两个view最近的父视图*/
+- (instancetype)mlc_closestCommonSuperview:(UIView *)view;
+/**加部分圆角*/
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius;
+- (void)mlc_becomeRoundedbyRoundingCorners:(UIRectCorner)corners cornerRadius:(CGFloat)cornerRadius size:(CGSize)size;
 
 @end
 ```
 
+### UIViewController
 
+```objective-c
+@interface UIViewController (MLCKit)
+
+/**弹出alert*/
+- (void)mlc_showAlertWithTitle:(NSString *)title message:(NSString *)message actionTitle:(NSString *)actionTitle handler:(void (^)(void))handler;
+/**弹出confirm，一个选项*/
+- (void)mlc_showConfirmWithTitle:(NSString *)title message:(NSString *)message confirmTitle:(NSString *)confirmTitle confirmHandler:(void (^)(void))confirmHandler cancelTitle:(NSString *)cancelTitle cancelHandler:(void (^)(void))cancelHandler;
+/**弹出confirm，多个选项*/
+- (void)mlc_showConfirmWithTitle:(NSString *)title message:(NSString *)message optionTitles:(NSArray<NSString *> *)optionTitles optionsHandler:(void (^)(NSInteger index))optionsHandler cancelTitle:(NSString *)cancelTitle cancelHandler:(void (^)(void))cancelHandler;
+/**弹出prompt，一个输入框*/
+- (void)mlc_showPromptWithTitle:(NSString *)title message:(NSString *)message configurationHandler:(void (^)(UITextField *textField))configurationHandler resultHandler:(void (^)(BOOL isCancel, NSString *result))resultHandler;
+/**弹出prompt，多个输入框*/
+- (void)mlc_showPromptWithTitle:(NSString *)title message:(NSString *)message textFieldCount:(NSInteger)textFieldCount configurationHandler:(void (^)(UITextField *textField, NSInteger index))configurationHandler resultHandler:(void (^)(BOOL isCancel, NSArray<NSString *> *results))resultHandler;
+
+@end
+```
 
 `pod 'MLCKit/Category'`
+
+## Color
+
+颜色相关。
+
+```objective-c
+/**将UIColorPickerViewController协议方法通过block回调出来*/
+API_AVAILABLE(ios(14.0))
+@interface MLCColorPickerViewControllerManager : NSObject<UIColorPickerViewControllerDelegate>
+
+/***/
+@property (nonatomic, weak, readonly) UIColorPickerViewController *pickerViewController;
+/**选取回调*/
+@property (nonatomic, copy) void(^didSelectColorHandler)(void);
+/**完成回调*/
+@property (nonatomic, copy) void(^didFinishHandler)(void);
+
+/**初始化方法*/
+- (instancetype)initWithPickerViewController:(UIColorPickerViewController *)pickerViewController;
+
+@end
+```
+
+`pod 'MLCKit/Color'`
+
+## Document
+
+文件相关。
+
+```objective-c
+/**将UIDocumentPickerViewController协议方法通过block回调出来*/
+@interface MLCDocumentPickerViewControllerManager : NSObject<UIDocumentPickerDelegate>
+
+/***/
+@property (nonatomic, weak, readonly) UIDocumentPickerViewController *pickerViewController;
+/**选取回调*/
+@property (nonatomic, copy) void(^didPickDocumentsHandler)(NSArray<NSURL *> *urls);
+/**取消回调*/
+@property (nonatomic, copy) void(^wasCancelledHandler)(void);
+
+/**初始化方法*/
+- (instancetype)initWithPickerViewController:(UIDocumentPickerViewController *)pickerViewController;
+
+@end
+```
+
+`pod 'MLCKit/Document'`
+
+## Font
+
+字体相关。
+
+```objective-c
+/**将UIFontPickerViewController协议方法通过block回调出来*/
+API_AVAILABLE(ios(13.0))
+@interface MLCFontPickerViewControllerManager : NSObject<UIFontPickerViewControllerDelegate>
+
+/***/
+@property (nonatomic, weak, readonly) UIFontPickerViewController *pickerViewController;
+/**选取回调*/
+@property (nonatomic, copy) void(^didPickFontHandler)(void);
+/**取消回调*/
+@property (nonatomic, copy) void(^didCancelHandler)(void);
+
+/**初始化方法*/
+- (instancetype)initWithPickerViewController:(UIFontPickerViewController *)pickerViewController;
+
+@end
+```
+
+`pod 'MLCKit/Font'`
 
 ## LocalFolder
 
@@ -116,11 +275,149 @@ MLCLocalFolderViewController *localFolderVC = [[MLCLocalFolderViewController all
 
 `pod 'MLCKit/LocalFolder'`
 
+## Location
+
+```objective-c
+/**定位管理*/
+@interface MLCLocationManager : NSObject
+
+/**单例*/
++ (instancetype)sharedInstance;
+/**更新位置回调*/
+@property (nonatomic, copy) BOOL(^didUpdateLocationsHandler)(NSArray<CLLocation *> *locations);
+/**失败回调*/
+@property (nonatomic, copy) void(^didFailHandler)(NSError *error);
+
+/**开始更新位置*/
+- (void)startUpdatingLocation;
+/**停止更新位置*/
+- (void)stopUpdatingLocation;
+
+@end
+```
+
+`pod 'MLCKit/Location'`
+
 ## Macro
 
 Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 `pod 'MLCKit/Macro'`
+
+## Photos
+
+相册、相机相关。
+
+### 权限
+
+#### 相册权限
+
+判断相册权限，可以如下调用：
+
+```objective-c
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+                if (!isSourceTypeAvailable) {
+                    NSLog(@"当前设备没有相册功能");
+                    return;
+                }
+                if (isNotDetermined) {
+                    NSLog(@"相册权限还未处理");
+                }
+                if (success) {
+                    NSLog(@"已经获得相册权限");
+                } else {
+                    NSLog(@"相册权限被拒绝");
+                }
+            }];
+```
+
+判断相册权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
+
+```objective-c
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^{
+                NSLog(@"已经获得相册权限");
+            } fromViewController:self];
+```
+
+#### 相机权限
+
+判断相机权限，可以如下调用：
+
+```objective-c
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
+                if (!isSourceTypeAvailable) {
+                    NSLog(@"当前设备没有相机功能");
+                    return;
+                }
+                if (isNotDetermined) {
+                    NSLog(@"相机权限还未处理");
+                }
+                if (success) {
+                    NSLog(@"已经获得相机权限");
+                } else {
+                    NSLog(@"相机权限被拒绝");
+                }
+            }];
+```
+
+判断相机权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
+
+```objective-c
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^{
+                NSLog(@"已经获得相机权限");
+            } fromViewController:self];
+```
+
+### PHPickerViewController
+
+MLCPHPickerViewControllerManager将PHPickerViewController的协议方法回调改成了block回调：
+
+```objective-c
+/**将PHPickerViewController协议方法通过block回调出来*/
+API_AVAILABLE(ios(14))
+@interface MLCPHPickerViewControllerManager : NSObject<PHPickerViewControllerDelegate>
+
+/***/
+@property (nonatomic, weak, readonly) PHPickerViewController *pickerViewController;
+/**选取回调*/
+@property (nonatomic, copy) void(^didFinishPickingHandler)(NSArray<PHPickerResult *> *results);
+
+/**初始化方法*/
+- (instancetype)initWithPickerViewController:(PHPickerViewController *)pickerViewController;
+
+@end
+```
+
+### UIImagePickerController
+
+MLCImagePickerControllerManager将UIImagePickerController的协议方法回调改成了block回调：
+
+```objective-c
+/**
+ * 将UIImagePickerController部分协议方法通过block回调出来
+ * 想扩展到更多部分协议方法的话，可以继承该类
+ */
+@interface MLCImagePickerControllerManager : NSObject<UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
+/***/
+@property (nonatomic, weak, readonly) UIImagePickerController *pickerViewController;
+/**选取回调*/
+@property (nonatomic, copy) void(^didFinishPickingMediaHandler)(NSDictionary<UIImagePickerControllerInfoKey,id> *info);
+/**点击回调*/
+@property (nonatomic, copy) void(^didCancelHandler)(void);
+
+/**初始化方法*/
+- (instancetype)initWithPickerViewController:(UIImagePickerController *)pickerViewController;
+/**
+ *将自己从pickerViewController上移除
+ *继承时使用
+ */
+- (void)clearSelfFromPickerViewController;
+
+@end
+```
+
+`pod 'MLCKit/Photos'`
 
 ## Proxy
 
@@ -156,9 +453,14 @@ layerClass是CAGradientLayer的。
 
 ## Utility
 
-Utility里面是工具类，有获取app版本号、app构建版本号、app名字、app的bundle ID、运营商名字、蜂窝网络类型、安全区域、让UIApplication打开链接等功能。
+Utility里面是工具类。
+
+### MLCDeviceUtility
+
+MLCDeviceUtility封装获取设备信息的方法。
 
 ```objective-c
+/**设备相关工具类*/
 @interface MLCDeviceUtility : NSObject
 
 /**app版本号*/
@@ -175,79 +477,114 @@ Utility里面是工具类，有获取app版本号、app构建版本号、app名�
 + (BOOL)advertisingTrackingEnabled;
 /**IDFV*/
 + (NSString *)identifierForVendor;
+/**IDFA或IDFV，IDFA能获取到就返回IDFA*/
++ (NSString *)idfaOrIdfv;
+/***/
++ (NSString *)machine;
+/**是否越狱*/
++ (BOOL)isJailbroken;
+
 /**运营商名字*/
 + (NSString *)carrierName;
 /**蜂窝网络类型*/
 + (NSString *)currentRadioAccessTechnology;
+/**电池状态*/
++ (UIDeviceBatteryState)batteryStauts;
+
+/**电池电量*/
++ (float)batteryLevel;
+/**总内存大小*/
++ (unsigned long long)totalMemorySize;
+
+/**当前可用内存大小*/
++ (unsigned long long)availableMemorySize;
+/**已使用内存大小*/
++ (unsigned long long)usedMemory;
+/**总磁盘容量*/
++ (unsigned long long)totalDiskSize;
+/**可用磁盘容量*/
++ (unsigned long long)availableDiskSize;
+
+/**IP地址*/
++ (NSString *)deviceIPAdress;
+/**连接的WIFI名称(SSID)*/
++ (NSString *)wifiName;
+/**状态栏高度*/
++ (CGFloat)statusBarHeight;
 /**安全区域，iOS 11以下的返回UIEdgeInsetsMake(20, 0, 0, 0)*/
 + (UIEdgeInsets)safeAreaInsets;
+
+@end
+```
+
+### MLCFileUtility
+
+```objective-c
+/**文件相关工具类*/
+@interface MLCFileUtility : NSObject
+
+/**获取Document文件目录*/
++ (NSString*)documentDirectoryPath;
+/**获取Temp文件目录*/
++ (NSString*)temporaryDirectoryPath;
+/**获取Home文件目录*/
++ (NSString*)homeDirectoryPath;
+/**获取Cache文件目录*/
++ (NSString*)cachesDirectoryPath;
+/**创建目录*/
++ (BOOL)creatDirectoryWithPath:(NSString *)path;
+/**删除目录或文件*/
++ (BOOL)removeItemAtPath:(NSString *)path;
+/**移动文件*/
++ (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;
+/**拷贝文件*/
++ (BOOL)copyItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;
+/** 获取文件或者文件夹大小(单位：B) */
++ (unsigned long long)sizeAtPath:(NSString *)path;
+
+@end
+```
+
+### MLCNotificationUtility
+
+```objective-c
+/**通知工具类*/
+@interface MLCNotificationUtility : NSObject
+
+/**
+ 注册通知
+ 
+ @param delegate UNUserNotificationCenterDelegate
+ **/
++ (void)registerNotificationWithDelegate:(id)delegate;
+
+/**远程推送设备token字符串*/
++ (NSString *)remoteNotificationDeviceTokenStringWithDeviceToken:(NSData *)deviceToken;
+
+@end
+```
+
+### MLCOpenUtility
+
+```objective-c
+/**打开相关工具类*/
+@interface MLCOpenUtility : NSObject
+
 /**让UIApplication打开链接*/
-+ (void)openURL:(NSURL*)url;
++ (void)openURL:(NSURL*)url completionHandler:(void (^)(BOOL success))completion;
+/**打电话*/
++ (void)callWithTelephoneNumber:(NSString*)telephoneNumber;
+/**发邮件*/
++ (void)sendEmail:(NSString*)email;
+/**发短信*/
++ (void)sendShortMessage:(NSString*)shortMessage;
+/**跳转到app设置页面*/
++ (void)openSettings;
 
 @end
 ```
 
 `pod 'MLCKit/Utility'`
-
-## Photos
-
-相册、相机权限判断。
-
-判断相册权限，可以如下调用：
-
-```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-                if (!isSourceTypeAvailable) {
-                    NSLog(@"当前设备没有相册功能");
-                    return;
-                }
-                if (isNotDetermined) {
-                    NSLog(@"相册权限还未处理");
-                }
-                if (success) {
-                    NSLog(@"已经获得相册权限");
-                } else {
-                    NSLog(@"相册权限被拒绝");
-                }
-            }];
-```
-
-判断相册权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
-
-```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^{
-                NSLog(@"已经获得相册权限");
-            } fromViewController:self];
-```
-
-判断相机权限，可以如下调用：
-
-```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-                if (!isSourceTypeAvailable) {
-                    NSLog(@"当前设备没有相机功能");
-                    return;
-                }
-                if (isNotDetermined) {
-                    NSLog(@"相机权限还未处理");
-                }
-                if (success) {
-                    NSLog(@"已经获得相机权限");
-                } else {
-                    NSLog(@"相机权限被拒绝");
-                }
-            }];
-```
-
-判断相机权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
-
-```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^{
-                NSLog(@"已经获得相机权限");
-            } fromViewController:self];
-```
-
-`pod 'MLCKit/Photos'`
 
 # 安装
 

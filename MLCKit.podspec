@@ -52,6 +52,11 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit'
   end
   
+  s.subspec 'Location' do |ss|
+    ss.source_files = 'MLCKit/Location/*.{h,m,mm}'
+    ss.frameworks = 'UIKit'
+  end
+  
   s.subspec 'Macro' do |ss|
     ss.source_files = 'MLCKit/Macro/*.{h,m,mm}'
     ss.frameworks = 'UIKit'

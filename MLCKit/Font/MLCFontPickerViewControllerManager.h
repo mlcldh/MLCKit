@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
-/**将UIDocumentPickerViewController协议方法通过block回调出来*/
+/**将UIFontPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(13.0))
 @interface MLCFontPickerViewControllerManager : NSObject<UIFontPickerViewControllerDelegate>
 
