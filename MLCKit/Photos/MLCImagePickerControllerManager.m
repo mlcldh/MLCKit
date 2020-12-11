@@ -45,6 +45,9 @@ static char *MLCImagePickerControllerManagerKey = "MLCImagePickerControllerManag
         self.didCancelHandler();
     }
     [self clearSelfFromPickerViewController];
+    if (!self.didCancelHandler) {
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 @end
