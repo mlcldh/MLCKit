@@ -10,20 +10,20 @@
 
 @implementation MLCOpenUtility
 
-+ (void)openURL:(NSURL*)url completionHandler:(void (^)(BOOL))completion {
++ (void)openURL:(NSURL*)url completionHandler:(void (^)(BOOL))completionHandler {
     UIApplication *app = [UIApplication sharedApplication];
     if (![app canOpenURL:url]) {
-        if (completion) {
-            completion(NO);
+        if (completionHandler) {
+            completionHandler(NO);
         }
         return;
     }
     if (@available(iOS 10.0, *)) {
-        [app openURL:url options:@{} completionHandler:completion];
+        [app openURL:url options:@{} completionHandler:completionHandler];
     } else {
         BOOL ok = [app openURL:url];
-        if (completion) {
-            completion(ok);
+        if (completionHandler) {
+            completionHandler(ok);
         }
     }
 }

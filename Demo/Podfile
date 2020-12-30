@@ -7,5 +7,7 @@ target:'MLCKitDemo'
 pod 'Masonry', '1.1.0'
 pod 'YYCache', '1.0.4'
 pod 'YYModel', '1.0.4'
-pod 'MLCKit', :path => '../../MLCKit'
-#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git', :commit => '2a28316'
+pod 'MLCKit', :path => '../', :modular_headers => true
+#pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git', :commit => '3fe5931'
+
+#use_modular_headers!

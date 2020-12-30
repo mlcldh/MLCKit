@@ -12,7 +12,7 @@
 @interface MLCOpenUtility : NSObject
 
 /**让UIApplication打开链接*/
-+ (void)openURL:(NSURL*)url completionHandler:(void (^)(BOOL success))completion;
++ (void)openURL:(NSURL*)url completionHandler:(void (^)(BOOL success))completionHandler;
 /**打电话*/
 + (void)callWithTelephoneNumber:(NSString*)telephoneNumber;
 /**发邮件*/

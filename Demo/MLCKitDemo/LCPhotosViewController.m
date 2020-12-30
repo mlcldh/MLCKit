@@ -25,15 +25,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self requestAlbumPermission];
-    [self requestAlbumPermissionAndShowUI];
-    [self useRequestCameraPermission];
-    [self useRequestCameraPermissionAndShowUI];
+    [self addRequestAlbumPermissionButton];
+    [self addRequestAlbumPermissionAndShowUIButton];
+    [self addUseRequestCameraPermissionButton];
+    [self addUseRequestCameraPermissionAndShowUIButton];
     [self addOpenSettingsButton];
     [self addPickButton];
 }
 #pragma mark -
-- (void)requestAlbumPermission {
+- (void)addRequestAlbumPermissionButton {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
     button.backgroundColor = [UIColor purpleColor];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -63,7 +63,7 @@
         make.top.equalTo(self.view).offset(100);
     }];
 }
-- (void)requestAlbumPermissionAndShowUI {
+- (void)addRequestAlbumPermissionAndShowUIButton {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
     button.backgroundColor = [UIColor purpleColor];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -84,7 +84,7 @@
         make.top.equalTo(self.view).offset(150);
     }];
 }
-- (void)useRequestCameraPermission {
+- (void)addUseRequestCameraPermissionButton {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
     button.backgroundColor = [UIColor purpleColor];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -114,7 +114,7 @@
         make.top.equalTo(self.view).offset(200);
     }];
 }
-- (void)useRequestCameraPermissionAndShowUI {
+- (void)addUseRequestCameraPermissionAndShowUIButton {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
     button.backgroundColor = [UIColor purpleColor];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
@@ -164,7 +164,7 @@
             pickerVC.modalPresentationStyle = UIModalPresentationFullScreen;
             MLCPHPickerViewControllerManager *pickerVCManager = [[MLCPHPickerViewControllerManager alloc]initWithPickerViewController:pickerVC];
             [pickerVCManager setDidFinishPickingHandler:^(NSArray<PHPickerResult *> *results) {
-                [pickerVC dismissViewControllerAnimated:YES completion:NULL];
+                [pickerVC dismissViewControllerAnimated:YES completion:nil];
                 NSLog(@"menglc MLCPHPickerViewControllerManager didFinishPickingHandler %@", results);
             }];
             [self presentViewController:pickerVC animated:YES completion:^{
@@ -172,31 +172,28 @@
             }];
             return;
         }
-        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isLimited) {
-            @strongify(self)
-            UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
-            pickerController.allowsEditing = YES;
-            // 3. 设置打开照片相册类型(显示所有相簿)
-            pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            pickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-            // pickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-            // 照相机
+        UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
+        pickerController.allowsEditing = YES;
+        // 3. 设置打开照片相册类型(显示所有相簿)
+        pickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        pickerController.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+        // pickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        // 照相机
 //             pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-            pickerController.mediaTypes = [NSArray arrayWithObjects: @"public.image", nil];
-            pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
-            MLCImagePickerControllerManager *pickerVCManager = [[MLCImagePickerControllerManager alloc]initWithPickerViewController:pickerController];
-            [pickerVCManager setDidFinishPickingMediaHandler:^(NSDictionary<UIImagePickerControllerInfoKey,id> *info) {
-                [pickerController dismissViewControllerAnimated:YES completion:NULL];
-                
-                UIImage *image = info[UIImagePickerControllerEditedImage];
-                NSLog(@"menglc MLCImagePickerControllerManager didFinishPickingMediaHandler %@", image);
-            }];
-            [pickerVCManager setDidCancelHandler:^{
-                [pickerController dismissViewControllerAnimated:YES completion:NULL];
-                NSLog(@"menglc MLCImagePickerControllerManager didCancelHandler");
-            }];
-            [self presentViewController:pickerController animated:YES completion:nil];
-        } fromViewController:self];
+        pickerController.mediaTypes = [NSArray arrayWithObjects: @"public.image", nil];
+        pickerController.modalPresentationStyle = UIModalPresentationFullScreen;
+        MLCImagePickerControllerManager *pickerVCManager = [[MLCImagePickerControllerManager alloc]initWithPickerViewController:pickerController];
+        [pickerVCManager setDidFinishPickingMediaHandler:^(NSDictionary<UIImagePickerControllerInfoKey,id> *info) {
+            [pickerController dismissViewControllerAnimated:YES completion:NULL];
+            
+            UIImage *image = info[UIImagePickerControllerEditedImage];
+            NSLog(@"menglc MLCImagePickerControllerManager didFinishPickingMediaHandler %@", image);
+        }];
+        [pickerVCManager setDidCancelHandler:^{
+            [pickerController dismissViewControllerAnimated:YES completion:NULL];
+            NSLog(@"menglc MLCImagePickerControllerManager didCancelHandler");
+        }];
+        [self presentViewController:pickerController animated:YES completion:nil];
     }];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
