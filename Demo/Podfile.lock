@@ -11,6 +11,7 @@ PODS:
     - MLCKit/Macro (= 0.0.3)
     - MLCKit/Photos (= 0.0.3)
     - MLCKit/Proxy (= 0.0.3)
+    - MLCKit/Scan (= 0.0.3)
     - MLCKit/UI (= 0.0.3)
     - MLCKit/Utility (= 0.0.3)
   - MLCKit/Cache (0.0.3):
@@ -25,6 +26,11 @@ PODS:
   - MLCKit/Photos (0.0.3):
     - MLCKit/Utility
   - MLCKit/Proxy (0.0.3)
+  - MLCKit/Scan (0.0.3):
+    - Masonry
+    - MLCKit/Category
+    - MLCKit/Macro
+    - MLCKit/Photos
   - MLCKit/UI (0.0.3):
     - Masonry
   - MLCKit/Utility (0.0.3)
@@ -49,10 +55,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MLCKit: 9b3a7e7dd53c2ab03292d3f321d9839124e48b70
+  MLCKit: 09bcbdafa0349278d648484b79a8dc08877e3e56
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 74910ab46a725bf4353039737f9f6b57a6bef113
+PODFILE CHECKSUM: 2622393432b3642ec11b7612fc91192cab73cfd1
 
 COCOAPODS: 1.9.3

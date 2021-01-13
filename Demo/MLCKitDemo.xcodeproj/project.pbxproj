@@ -32,6 +32,7 @@
 		8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */; };
 		8DE4A0FF2549773C0026653A /* gallery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE4A0FE2549773C0026653A /* gallery.jpg */; };
 		8DE4A10325497A360026653A /* LCHandleCornerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4A10225497A360026653A /* LCHandleCornerViewController.m */; };
+		8DE76D7B25A8650400414F91 /* LCUseScanQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE76D7A25A8650400414F91 /* LCUseScanQRCodeViewController.m */; };
 		8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE93F112530783C0022E552 /* LCJsonViewController.m */; };
 		B6F0184CB0111C6A1A58431E /* libPods-MLCKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E9931728D6BE47AE2F8DE15 /* libPods-MLCKitDemo.a */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,8 @@
 		8DE4A0FE2549773C0026653A /* gallery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gallery.jpg; sourceTree = "<group>"; };
 		8DE4A10125497A360026653A /* LCHandleCornerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCHandleCornerViewController.h; sourceTree = "<group>"; };
 		8DE4A10225497A360026653A /* LCHandleCornerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCHandleCornerViewController.m; sourceTree = "<group>"; };
+		8DE76D7925A8650400414F91 /* LCUseScanQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseScanQRCodeViewController.h; sourceTree = "<group>"; };
+		8DE76D7A25A8650400414F91 /* LCUseScanQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseScanQRCodeViewController.m; sourceTree = "<group>"; };
 		8DE93F102530783C0022E552 /* LCJsonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCJsonViewController.h; sourceTree = "<group>"; };
 		8DE93F112530783C0022E552 /* LCJsonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCJsonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +196,8 @@
 				8DE4A10225497A360026653A /* LCHandleCornerViewController.m */,
 				8DDD84B82563B2BC003346B3 /* LCShowAlertViewController.h */,
 				8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */,
+				8DE76D7925A8650400414F91 /* LCUseScanQRCodeViewController.h */,
+				8DE76D7A25A8650400414F91 /* LCUseScanQRCodeViewController.m */,
 				8D1766FB24EFCF3C000F6975 /* UseArchiver */,
 				8D5705E823ACC955003B89D8 /* Assets.xcassets */,
 				8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */,
@@ -214,6 +219,7 @@
 				8D5705D523ACC953003B89D8 /* Sources */,
 				8D5705D623ACC953003B89D8 /* Frameworks */,
 				8D5705D723ACC953003B89D8 /* Resources */,
+				CC48A7A41A30D74AD6CF3EC1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -292,6 +298,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		CC48A7A41A30D74AD6CF3EC1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLCKitDemo/Pods-MLCKitDemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MLCKitDemo/Pods-MLCKitDemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLCKitDemo/Pods-MLCKitDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -299,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DE76D7B25A8650400414F91 /* LCUseScanQRCodeViewController.m in Sources */,
 				8D1766DE24EFB713000F6975 /* LCViewGestureViewController.m in Sources */,
 				8D17670424EFCF79000F6975 /* LCDog.m in Sources */,
 				8D17670124EFCF3C000F6975 /* MengUseArchiverViewController.m in Sources */,
@@ -389,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -441,7 +465,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MLCKit"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "LCSKit的Objective-C版本，封装一些常用的iOS方法。"
 
   s.homepage     = "https://github.com/mlcldh/MLCKit"
@@ -17,9 +17,14 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/mlcldh/MLCKit.git", :tag => s.version.to_s }
 #  s.source_files = "MLCKit"
   s.source_files = 'MLCKit/MLCKit.h'
+  s.module_name = 'MLCKit'
 
   s.requires_arc = true
   s.static_framework = true
+
+#  s.xcconfig = {
+#    :modular_headers => true
+#  }
   
   s.subspec 'Cache' do |ss|
     ss.source_files = 'MLCKit/Cache/*.{h,m,mm}'
@@ -62,9 +67,28 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit'
   end
   
+  s.subspec 'Photos' do |ss|
+    ss.source_files = 'MLCKit/Photos/*.{h,m,mm}'
+    ss.frameworks = 'AVFoundation', 'Photos'
+    ss.dependency 'MLCKit/Utility'
+  end
+  
   s.subspec 'Proxy' do |ss|
     ss.source_files = 'MLCKit/Proxy/*.{h,m,mm}'
     ss.frameworks = 'Foundation'
+  end
+  
+  s.subspec 'Scan' do |ss|
+    ss.source_files = 'MLCKit/Scan/Classes/**/*'
+#    ss.resources = 'MLCKit/Scan/Resources/**/*'
+    ss.resource_bundles = {
+      'MLCKit' => ['MLCKit/Scan/Resources/**/*']
+    }
+    ss.frameworks = 'AVFoundation', 'Photos'
+    ss.dependency 'Masonry'
+    ss.dependency 'MLCKit/Category'
+    ss.dependency 'MLCKit/Macro'
+    ss.dependency 'MLCKit/Photos'
   end
   
   s.subspec 'UI' do |ss|
@@ -76,12 +100,6 @@ Pod::Spec.new do |s|
   s.subspec 'Utility' do |ss|
     ss.source_files = 'MLCKit/Utility/*.{h,m}'
     ss.frameworks = 'UIKit', 'AdSupport', 'CoreTelephony'
-  end
-  
-  s.subspec 'Photos' do |ss|
-    ss.source_files = 'MLCKit/Photos/*.{h,m,mm}'
-    ss.frameworks = 'AVFoundation', 'Photos'
-    ss.dependency 'MLCKit/Utility'
   end
   
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
