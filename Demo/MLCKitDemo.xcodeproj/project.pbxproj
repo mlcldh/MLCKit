@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705E823ACC955003B89D8 /* Assets.xcassets */; };
 		8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */; };
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
+		8DC2559425BADB2E00AC8478 /* LCShowLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */; };
 		8DD40A2B2580A60A00F98F8C /* LCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */; };
 		8DD40A442580BE9100F98F8C /* LCDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A432580BE9100F98F8C /* LCDocumentViewController.m */; };
 		8DD40A6B2580D4E700F98F8C /* LCColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A6A2580D4E700F98F8C /* LCColorViewController.m */; };
@@ -72,6 +73,8 @@
 		8D5705EB23ACC955003B89D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D5705ED23ACC955003B89D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D5705EE23ACC955003B89D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8DC2559225BADB2E00AC8478 /* LCShowLoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowLoadingViewController.h; sourceTree = "<group>"; };
+		8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowLoadingViewController.m; sourceTree = "<group>"; };
 		8DD40A292580A60A00F98F8C /* LCBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCBaseViewController.h; sourceTree = "<group>"; };
 		8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCBaseViewController.m; sourceTree = "<group>"; };
 		8DD40A422580BE9100F98F8C /* LCDocumentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDocumentViewController.h; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				8DE4A10225497A360026653A /* LCHandleCornerViewController.m */,
 				8DDD84B82563B2BC003346B3 /* LCShowAlertViewController.h */,
 				8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */,
+				8DC2559225BADB2E00AC8478 /* LCShowLoadingViewController.h */,
+				8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */,
 				8DE76D7925A8650400414F91 /* LCUseScanQRCodeViewController.h */,
 				8DE76D7A25A8650400414F91 /* LCUseScanQRCodeViewController.m */,
 				8D1766FB24EFCF3C000F6975 /* UseArchiver */,
@@ -342,6 +347,7 @@
 				8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */,
 				8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */,
 				8D17670024EFCF3C000F6975 /* LCPerson.m in Sources */,
+				8DC2559425BADB2E00AC8478 /* LCShowLoadingViewController.m in Sources */,
 				8DE4A10325497A360026653A /* LCHandleCornerViewController.m in Sources */,
 				8D5705DE23ACC953003B89D8 /* AppDelegate.m in Sources */,
 				8D5705EF23ACC955003B89D8 /* main.m in Sources */,
