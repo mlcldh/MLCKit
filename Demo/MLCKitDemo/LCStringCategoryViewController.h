@@ -1,5 +1,5 @@
 //
-//  LCUrlEncodeViewController.h
+//  LCStringCategoryViewController.h
 //  MLCKitDemo
 //
 //  Created by menglingchao on 2020/8/21.
@@ -8,6 +8,6 @@
 
 #import "LCBaseViewController.h"
 
-@interface LCUrlEncodeViewController : LCBaseViewController
+@interface LCStringCategoryViewController : LCBaseViewController
 
 @end

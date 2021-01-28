@@ -43,7 +43,16 @@
     }
     
     return output;
-    
+}
+- (NSString *)mlc_stringByTrimmingWhitespaceCharacters {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+- (NSString *)mlc_stringByTrimmingNewlineCharacters {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+}
+- (NSString *)mlc_stringByTrimmingWhitespaceAndNewlineCharacters {
+    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 - (id)mlc_JSONObject {
     NSData *jsonData = [self dataUsingEncoding:NSUTF8StringEncoding];

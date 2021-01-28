@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D0E725A24FE520900C52EE4 /* LCUseConstraintPurelyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */; };
 		8D1766DE24EFB713000F6975 /* LCViewGestureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */; };
-		8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */; };
+		8D1766E124EFBAA2000F6975 /* LCStringCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E024EFBAA2000F6975 /* LCStringCategoryViewController.m */; };
 		8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */; };
 		8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766E924EFBCCB000F6975 /* LCDeviceUtilityViewController.m */; };
 		8D1766ED24EFBD7D000F6975 /* LCPhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D1766EC24EFBD7D000F6975 /* LCPhotosViewController.m */; };
@@ -46,8 +46,8 @@
 		8D0E725924FE520900C52EE4 /* LCUseConstraintPurelyViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseConstraintPurelyViewController.m; sourceTree = "<group>"; };
 		8D1766DC24EFB713000F6975 /* LCViewGestureViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCViewGestureViewController.h; sourceTree = "<group>"; };
 		8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCViewGestureViewController.m; sourceTree = "<group>"; };
-		8D1766DF24EFBAA2000F6975 /* LCUrlEncodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUrlEncodeViewController.h; sourceTree = "<group>"; };
-		8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUrlEncodeViewController.m; sourceTree = "<group>"; };
+		8D1766DF24EFBAA2000F6975 /* LCStringCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCStringCategoryViewController.h; sourceTree = "<group>"; };
+		8D1766E024EFBAA2000F6975 /* LCStringCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCStringCategoryViewController.m; sourceTree = "<group>"; };
 		8D1766E524EFBB85000F6975 /* LCCombineViewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCombineViewsViewController.h; sourceTree = "<group>"; };
 		8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCombineViewsViewController.m; sourceTree = "<group>"; };
 		8D1766E824EFBCCB000F6975 /* LCDeviceUtilityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDeviceUtilityViewController.h; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 				8DD40A6E2580D4F400F98F8C /* LCFontViewController.m */,
 				8D1766DC24EFB713000F6975 /* LCViewGestureViewController.h */,
 				8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */,
-				8D1766DF24EFBAA2000F6975 /* LCUrlEncodeViewController.h */,
-				8D1766E024EFBAA2000F6975 /* LCUrlEncodeViewController.m */,
+				8D1766DF24EFBAA2000F6975 /* LCStringCategoryViewController.h */,
+				8D1766E024EFBAA2000F6975 /* LCStringCategoryViewController.m */,
 				8D1766E524EFBB85000F6975 /* LCCombineViewsViewController.h */,
 				8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */,
 				8D0E725824FE520900C52EE4 /* LCUseConstraintPurelyViewController.h */,
@@ -335,7 +335,7 @@
 				8DD40A442580BE9100F98F8C /* LCDocumentViewController.m in Sources */,
 				8DD40A6B2580D4E700F98F8C /* LCColorViewController.m in Sources */,
 				8D1766E724EFBB85000F6975 /* LCCombineViewsViewController.m in Sources */,
-				8D1766E124EFBAA2000F6975 /* LCUrlEncodeViewController.m in Sources */,
+				8D1766E124EFBAA2000F6975 /* LCStringCategoryViewController.m in Sources */,
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
 				8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */,
 				8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */,

@@ -34,12 +34,12 @@
     [button setMlc_touchUpInsideBlock:^{
         @strongify(button)
         [button mlc_showActivityIndicatorStyleLoadingWithHandler:^(UIActivityIndicatorView *activityIndicatorView) {
-            if (@available(iOS 13.0, *)) {
-                activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleLarge;
-            } else {
-                activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-            }
-            activityIndicatorView.color = [UIColor whiteColor];
+//            if (@available(iOS 13.0, *)) {
+//                activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleLarge;
+//            } else {
+//                activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+//            }
+//            activityIndicatorView.color = [UIColor lightGrayColor];
         }];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             @strongify(button)

@@ -19,6 +19,12 @@
 - (NSString *)mlc_urlDecode;
 /**使用SHA1计算hash*/
 - (NSString *)mlc_sha1String;
+/**去掉前后空格*/
+- (NSString *)mlc_stringByTrimmingWhitespaceCharacters;
+/**去掉前后回车符*/
+- (NSString *)mlc_stringByTrimmingNewlineCharacters;
+/**去掉前后空格和回车符*/
+- (NSString *)mlc_stringByTrimmingWhitespaceAndNewlineCharacters;
 /**将json字符串转换成字典或数组等*/
 - (id)mlc_JSONObject;
 

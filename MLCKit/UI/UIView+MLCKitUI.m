@@ -33,8 +33,29 @@
     objc_setAssociatedObject(self, @selector(mlc_activityIndicatorView), mlc_activityIndicatorView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 #pragma mark -
+- (void)mlc_showSuccessWithImage:(UIImage *)image status:(NSString*)status {
+    
+}
+- (void)mlc_showErrorWithImage:(UIImage *)image status:(NSString*)status {
+    
+}
+- (void)mlc_showToastWithStatus:(NSString *)status afterDelay:(NSTimeInterval)delay {
+    
+}
+- (void)mlc_hideHud {
+    
+}
 - (void)mlc_showActivityIndicatorStyleLoadingWithHandler:(void (^)(UIActivityIndicatorView *))handler {
-    if (!self.mlc_activityIndicatorView) {
+    if (self.mlc_activityIndicatorView) {
+        if (@available(iOS 13.0, *)) {
+            self.mlc_activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleMedium;
+        } else {
+            self.mlc_activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+        }
+        self.mlc_activityIndicatorView.color = [UIColor whiteColor];
+        
+        self.mlc_activityIndicatorBGView.hidden = NO;
+    } else {
         self.mlc_activityIndicatorBGView = [[UIView alloc]init];
         [self addSubview:self.mlc_activityIndicatorBGView];
         [self.mlc_activityIndicatorBGView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -51,14 +72,6 @@
             make.center.equalTo(self.mlc_activityIndicatorBGView);
         }];
     }
-    self.mlc_activityIndicatorBGView.hidden = NO;
-    
-    if (@available(iOS 13.0, *)) {
-        self.mlc_activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleMedium;
-    } else {
-        self.mlc_activityIndicatorView.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    }
-    self.mlc_activityIndicatorView.color = [UIColor whiteColor];
     [self.mlc_activityIndicatorView startAnimating];
     
     if (handler) {
