@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-//NS_ASSUME_NONNULL_BEGIN
 
 @interface MLCGradientLayerView : UIView
 
@@ -16,5 +15,3 @@
 - (CAGradientLayer *)gradientLayer;
 
 @end
-
-//NS_ASSUME_NONNULL_END
