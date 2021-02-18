@@ -25,6 +25,9 @@
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
 		8D6799A125C7A88B00AC184F /* LCUseAnnularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6799A025C7A88B00AC184F /* LCUseAnnularViewController.m */; };
 		8DC2559425BADB2E00AC8478 /* LCShowLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */; };
+		8DCFECB725DE688E001C4CED /* LCImageCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFECB625DE688E001C4CED /* LCImageCategoryViewController.m */; };
+		8DCFECBC25DE696D001C4CED /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DCFECBA25DE696D001C4CED /* girl.jpg */; };
+		8DCFECBD25DE696D001C4CED /* onePiece.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DCFECBB25DE696D001C4CED /* onePiece.jpg */; };
 		8DD40A2B2580A60A00F98F8C /* LCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */; };
 		8DD40A442580BE9100F98F8C /* LCDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A432580BE9100F98F8C /* LCDocumentViewController.m */; };
 		8DD40A6B2580D4E700F98F8C /* LCColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DD40A6A2580D4E700F98F8C /* LCColorViewController.m */; };
@@ -78,6 +81,10 @@
 		8D6799A025C7A88B00AC184F /* LCUseAnnularViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseAnnularViewController.m; sourceTree = "<group>"; };
 		8DC2559225BADB2E00AC8478 /* LCShowLoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowLoadingViewController.h; sourceTree = "<group>"; };
 		8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowLoadingViewController.m; sourceTree = "<group>"; };
+		8DCFECB525DE688E001C4CED /* LCImageCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCImageCategoryViewController.h; sourceTree = "<group>"; };
+		8DCFECB625DE688E001C4CED /* LCImageCategoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCImageCategoryViewController.m; sourceTree = "<group>"; };
+		8DCFECBA25DE696D001C4CED /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl.jpg; sourceTree = "<group>"; };
+		8DCFECBB25DE696D001C4CED /* onePiece.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = onePiece.jpg; sourceTree = "<group>"; };
 		8DD40A292580A60A00F98F8C /* LCBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCBaseViewController.h; sourceTree = "<group>"; };
 		8DD40A2A2580A60A00F98F8C /* LCBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCBaseViewController.m; sourceTree = "<group>"; };
 		8DD40A422580BE9100F98F8C /* LCDocumentViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCDocumentViewController.h; sourceTree = "<group>"; };
@@ -180,6 +187,8 @@
 				8D1766DD24EFB713000F6975 /* LCViewGestureViewController.m */,
 				8D1766DF24EFBAA2000F6975 /* LCStringCategoryViewController.h */,
 				8D1766E024EFBAA2000F6975 /* LCStringCategoryViewController.m */,
+				8DCFECB525DE688E001C4CED /* LCImageCategoryViewController.h */,
+				8DCFECB625DE688E001C4CED /* LCImageCategoryViewController.m */,
 				8D1766E524EFBB85000F6975 /* LCCombineViewsViewController.h */,
 				8D1766E624EFBB85000F6975 /* LCCombineViewsViewController.m */,
 				8D0E725824FE520900C52EE4 /* LCUseConstraintPurelyViewController.h */,
@@ -209,6 +218,7 @@
 				8D67999F25C7A88B00AC184F /* LCUseAnnularViewController.h */,
 				8D6799A025C7A88B00AC184F /* LCUseAnnularViewController.m */,
 				8D1766FB24EFCF3C000F6975 /* UseArchiver */,
+				8DCFECB925DE696D001C4CED /* images */,
 				8D5705E823ACC955003B89D8 /* Assets.xcassets */,
 				8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */,
 				8DE4A0FE2549773C0026653A /* gallery.jpg */,
@@ -216,6 +226,15 @@
 				8D5705EE23ACC955003B89D8 /* main.m */,
 			);
 			path = MLCKitDemo;
+			sourceTree = "<group>";
+		};
+		8DCFECB925DE696D001C4CED /* images */ = {
+			isa = PBXGroup;
+			children = (
+				8DCFECBA25DE696D001C4CED /* girl.jpg */,
+				8DCFECBB25DE696D001C4CED /* onePiece.jpg */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +297,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DE4A0FF2549773C0026653A /* gallery.jpg in Resources */,
+				8DCFECBC25DE696D001C4CED /* girl.jpg in Resources */,
+				8DCFECBD25DE696D001C4CED /* onePiece.jpg in Resources */,
 				8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */,
 				8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */,
 			);
@@ -344,6 +365,7 @@
 				8D1766E124EFBAA2000F6975 /* LCStringCategoryViewController.m in Sources */,
 				8D1766F324EFC363000F6975 /* LCUseProxyViewController.m in Sources */,
 				8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */,
+				8DCFECB725DE688E001C4CED /* LCImageCategoryViewController.m in Sources */,
 				8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */,
 				8D1766EA24EFBCCB000F6975 /* LCDeviceUtilityViewController.m in Sources */,
 				8DD40A2B2580A60A00F98F8C /* LCBaseViewController.m in Sources */,

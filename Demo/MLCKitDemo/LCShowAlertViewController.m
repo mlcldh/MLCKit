@@ -25,6 +25,7 @@
     [self showAlert];
     [self showConfirm];
     [self showConfirm2];
+    [self showActionSheet];
     [self showPrompt];
     [self showPrompt2];
 }
@@ -75,8 +76,9 @@
     @weakify(self)
     [button setMlc_touchUpInsideBlock:^{
         @strongify(self)
-        [self mlc_showConfirmWithTitle:@"title" message:@"message" optionTitles:@[@"选项1", @"选项2"] optionsHandler:^(NSInteger index) {
-            NSLog(@"menglc showConfirm2 选项%@", @(index + 1));
+        NSArray *optionTitles = @[@"选项1", @"选项2"];
+        [self mlc_showConfirmWithTitle:@"title" message:@"message" optionTitles:optionTitles optionsHandler:^(NSInteger index) {
+            NSLog(@"menglc showConfirm2 %@", optionTitles[index]);
         } cancelTitle:@"取消" cancelHandler:^{
             NSLog(@"menglc showConfirm 取消");
         }];
@@ -85,6 +87,27 @@
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(150);
         make.top.equalTo(self.view).offset(150);
+    }];
+}
+- (void)showActionSheet {
+    UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
+    button.backgroundColor = [UIColor purpleColor];
+    [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [button setTitle:@"弹出ActionSheet" forState:(UIControlStateNormal)];
+    @weakify(self)
+    [button setMlc_touchUpInsideBlock:^{
+        @strongify(self)
+        NSArray *optionTitles = @[@"选项1", @"选项2"];
+        [self mlc_showActionSheetWithTitle:@"title" message:@"message" optionTitles:optionTitles optionsHandler:^(NSInteger index) {
+            NSLog(@"menglc ActionSheet %@", optionTitles[index]);
+        } cancelTitle:@"取消" cancelHandler:^{
+            NSLog(@"menglc showConfirm 取消");
+        }];
+    }];
+    [self.view addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+        make.top.equalTo(self.view).offset(200);
     }];
 }
 - (void)showPrompt {
@@ -105,7 +128,7 @@
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);
-        make.top.equalTo(self.view).offset(200);
+        make.top.equalTo(self.view).offset(250);
     }];
 }
 - (void)showPrompt2 {
@@ -116,7 +139,7 @@
     @weakify(self)
     [button setMlc_touchUpInsideBlock:^{
         @strongify(self)
-        [self mlc_showPromptWithTitle:@"title" message:@"message" textFieldCount:2 configurationHandler:^(UITextField *textField, NSInteger index) {
+        [self mlc_showPromptWithTitle:@"title" message:@"message" textFieldCount:2 textFieldConfigurationHandler:^(UITextField *textField, NSInteger index) {
             switch (index) {
                 case 0: {
                     textField.placeholder = @"用户名";
@@ -140,7 +163,7 @@
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);
-        make.top.equalTo(self.view).offset(250);
+        make.top.equalTo(self.view).offset(300);
     }];
 }
 

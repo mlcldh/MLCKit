@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+MLCKit.h"
+#import "UIAlertController+MLCKit.h"
 
 @implementation UIViewController (MLCKit)
 
@@ -25,25 +26,15 @@
     } cancelTitle:cancelTitle cancelHandler:cancelHandler];
 }
 - (void)mlc_showConfirmWithTitle:(NSString *)title message:(NSString *)message optionTitles:(NSArray<NSString *> *)optionTitles optionsHandler:(void (^)(NSInteger))optionsHandler cancelTitle:(NSString *)cancelTitle cancelHandler:(void (^)(void))cancelHandler {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert)];
-    for (NSInteger i = 0; i < optionTitles.count; i ++) {
-        [alertController addAction:[UIAlertAction actionWithTitle:optionTitles[i] style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
-            if (optionsHandler) {
-                optionsHandler(i);
-            }
-        }]];
-    }
-    if (cancelTitle) {
-        [alertController addAction:[UIAlertAction actionWithTitle:cancelTitle style:(UIAlertActionStyleCancel) handler:^(UIAlertAction * _Nonnull action) {
-            if (cancelHandler) {
-                cancelHandler();
-            }
-        }]];
-    }
+    UIAlertController *alertController = [UIAlertController mlc_alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleAlert) optionTitles:optionTitles optionsHandler:optionsHandler cancelTitle:cancelTitle cancelHandler:cancelHandler];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+- (void)mlc_showActionSheetWithTitle:(NSString *)title message:(NSString *)message optionTitles:(NSArray<NSString *> *)optionTitles optionsHandler:(void (^)(NSInteger))optionsHandler cancelTitle:(NSString *)cancelTitle cancelHandler:(void (^)(void))cancelHandler {
+    UIAlertController *alertController = [UIAlertController mlc_alertControllerWithTitle:title message:message preferredStyle:(UIAlertControllerStyleActionSheet) optionTitles:optionTitles optionsHandler:optionsHandler cancelTitle:cancelTitle cancelHandler:cancelHandler];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 - (void)mlc_showPromptWithTitle:(NSString *)title message:(NSString *)message configurationHandler:(void (^)(UITextField *))configurationHandler resultHandler:(void (^)(BOOL, NSString *))resultHandler {
-    [self mlc_showPromptWithTitle:title message:message textFieldCount:1 configurationHandler:^(UITextField *textField, NSInteger index) {
+    [self mlc_showPromptWithTitle:title message:message textFieldCount:1 textFieldConfigurationHandler:^(UITextField *textField, NSInteger index) {
         if (configurationHandler) {
             configurationHandler(textField);
         }
@@ -53,15 +44,8 @@
         }
     }];
 }
-- (void)mlc_showPromptWithTitle:(NSString *)title message:(NSString *)message textFieldCount:(NSInteger)textFieldCount configurationHandler:(void (^)(UITextField *textField, NSInteger index))configurationHandler resultHandler:(void (^)(BOOL, NSArray<NSString *> *))resultHandler {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-    for (NSInteger i = 0; i < textFieldCount; i ++) {
-        [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            if (configurationHandler) {
-                configurationHandler(textField, i);
-            }
-        }];
-    }
+- (void)mlc_showPromptWithTitle:(NSString *)title message:(NSString *)message textFieldCount:(NSInteger)textFieldCount textFieldConfigurationHandler:(void (^)(UITextField *textField, NSInteger index))textFieldConfigurationHandler resultHandler:(void (^)(BOOL, NSArray<NSString *> *))resultHandler {
+    UIAlertController *alertController = [UIAlertController mlc_alertControllerWithTitle:title message:message textFieldCount:textFieldCount textFieldConfigurationHandler:textFieldConfigurationHandler resultHandler:resultHandler];
     [alertController addAction:([UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         NSMutableArray *results = [NSMutableArray array];
         for (NSInteger i = 0; i < textFieldCount; i ++) {

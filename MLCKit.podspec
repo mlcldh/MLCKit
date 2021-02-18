@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'Category' do |ss|
     ss.source_files = 'MLCKit/Category/*.{h,m,mm}'
-    ss.frameworks = 'UIKit'
+    ss.frameworks = 'UIKit', 'CoreImage'
   end
   
   s.subspec 'Color' do |ss|
