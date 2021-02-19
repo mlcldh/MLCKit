@@ -24,6 +24,7 @@
 		8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */; };
 		8D5705EF23ACC955003B89D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D5705EE23ACC955003B89D8 /* main.m */; };
 		8D6799A125C7A88B00AC184F /* LCUseAnnularViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D6799A025C7A88B00AC184F /* LCUseAnnularViewController.m */; };
+		8DB1757425DFAA5E008DBEF0 /* gallery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DB1757325DFAA5E008DBEF0 /* gallery.jpg */; };
 		8DC2559425BADB2E00AC8478 /* LCShowLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */; };
 		8DCFECB725DE688E001C4CED /* LCImageCategoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DCFECB625DE688E001C4CED /* LCImageCategoryViewController.m */; };
 		8DCFECBC25DE696D001C4CED /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DCFECBA25DE696D001C4CED /* girl.jpg */; };
@@ -35,7 +36,6 @@
 		8DDBF6A825763AFE00D0A48C /* LCOpenUtilityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6A725763AFE00D0A48C /* LCOpenUtilityViewController.m */; };
 		8DDBF6F1257657A900D0A48C /* LCLocationManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */; };
 		8DDD84BA2563B2BC003346B3 /* LCShowAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */; };
-		8DE4A0FF2549773C0026653A /* gallery.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8DE4A0FE2549773C0026653A /* gallery.jpg */; };
 		8DE4A10325497A360026653A /* LCHandleCornerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE4A10225497A360026653A /* LCHandleCornerViewController.m */; };
 		8DE76D7B25A8650400414F91 /* LCUseScanQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE76D7A25A8650400414F91 /* LCUseScanQRCodeViewController.m */; };
 		8DE93F122530783C0022E552 /* LCJsonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8DE93F112530783C0022E552 /* LCJsonViewController.m */; };
@@ -79,6 +79,7 @@
 		8D5705EE23ACC955003B89D8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D67999F25C7A88B00AC184F /* LCUseAnnularViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseAnnularViewController.h; sourceTree = "<group>"; };
 		8D6799A025C7A88B00AC184F /* LCUseAnnularViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCUseAnnularViewController.m; sourceTree = "<group>"; };
+		8DB1757325DFAA5E008DBEF0 /* gallery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gallery.jpg; sourceTree = "<group>"; };
 		8DC2559225BADB2E00AC8478 /* LCShowLoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowLoadingViewController.h; sourceTree = "<group>"; };
 		8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowLoadingViewController.m; sourceTree = "<group>"; };
 		8DCFECB525DE688E001C4CED /* LCImageCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCImageCategoryViewController.h; sourceTree = "<group>"; };
@@ -99,7 +100,6 @@
 		8DDBF6F0257657A900D0A48C /* LCLocationManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCLocationManagerViewController.m; sourceTree = "<group>"; };
 		8DDD84B82563B2BC003346B3 /* LCShowAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowAlertViewController.h; sourceTree = "<group>"; };
 		8DDD84B92563B2BC003346B3 /* LCShowAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowAlertViewController.m; sourceTree = "<group>"; };
-		8DE4A0FE2549773C0026653A /* gallery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gallery.jpg; sourceTree = "<group>"; };
 		8DE4A10125497A360026653A /* LCHandleCornerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCHandleCornerViewController.h; sourceTree = "<group>"; };
 		8DE4A10225497A360026653A /* LCHandleCornerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCHandleCornerViewController.m; sourceTree = "<group>"; };
 		8DE76D7925A8650400414F91 /* LCUseScanQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCUseScanQRCodeViewController.h; sourceTree = "<group>"; };
@@ -221,7 +221,6 @@
 				8DCFECB925DE696D001C4CED /* images */,
 				8D5705E823ACC955003B89D8 /* Assets.xcassets */,
 				8D5705EA23ACC955003B89D8 /* LaunchScreen.storyboard */,
-				8DE4A0FE2549773C0026653A /* gallery.jpg */,
 				8D5705ED23ACC955003B89D8 /* Info.plist */,
 				8D5705EE23ACC955003B89D8 /* main.m */,
 			);
@@ -231,6 +230,7 @@
 		8DCFECB925DE696D001C4CED /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8DB1757325DFAA5E008DBEF0 /* gallery.jpg */,
 				8DCFECBA25DE696D001C4CED /* girl.jpg */,
 				8DCFECBB25DE696D001C4CED /* onePiece.jpg */,
 			);
@@ -296,9 +296,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DE4A0FF2549773C0026653A /* gallery.jpg in Resources */,
 				8DCFECBC25DE696D001C4CED /* girl.jpg in Resources */,
 				8DCFECBD25DE696D001C4CED /* onePiece.jpg in Resources */,
+				8DB1757425DFAA5E008DBEF0 /* gallery.jpg in Resources */,
 				8D5705EC23ACC955003B89D8 /* LaunchScreen.storyboard in Resources */,
 				8D5705E923ACC955003B89D8 /* Assets.xcassets in Resources */,
 			);

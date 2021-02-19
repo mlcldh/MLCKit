@@ -21,11 +21,15 @@
     // Do any additional setup after loading the view.
     
     [self useFilter];
+//    [self showQRCodeImage];
 }
 #pragma mark -
-- (void)useFilter {
+- (void)useFilter {//使用图片滤镜
     UIImageView *imageView = [[UIImageView alloc]init];
-    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"onePiece" ofType:@"jpg"];
+    NSString *name = @"onePiece";
+//    NSString *name = @"girl";
+//    NSString *name = @"gallery";
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:name ofType:@"jpg"];
     UIImage *image = [UIImage imageWithContentsOfFile:filePath];
     imageView.image = image;
     @weakify(self)
@@ -38,7 +42,7 @@
             NSLog(@"menglc optionTitle = %@", optionTitles[index]);
             switch (index) {
                 case 0:
-                    imageView.image = [image mlc_gaussianBlurImageWithRadius:1];
+                    imageView.image = [image mlc_gaussianBlurImageWithRadius:10];
                     break;
                 case 1:
                     imageView.image = [image mlc_maximumComponentImage];
@@ -59,6 +63,17 @@
         make.top.equalTo(self.view).offset(100);
         make.width.equalTo(self.view).offset(-40);
         make.height.equalTo(imageView.mas_width).multipliedBy(image.size.height / image.size.width);
+    }];
+}
+- (void)showQRCodeImage {//显示二维码
+    UIImage *image = [UIImage mlc_imageWithQRCode:@"https://www.baidu.com/" imageWidth:100];
+    image = [image mlc_specialColorImageWithColor:[UIColor redColor]];
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:image];
+//    imageView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:imageView];
+    [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.view).offset(20);
+        make.top.equalTo(self.view).offset(100);
     }];
 }
 

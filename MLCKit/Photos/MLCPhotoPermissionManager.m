@@ -78,38 +78,38 @@
                 }];
                 break;
         }
-    } else {
-        if (@available(iOS 14, *)) {
-            PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite];
-            switch (authorizationStatus) {
-                case PHAuthorizationStatusNotDetermined: {
-                    [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelReadWrite handler:^(PHAuthorizationStatus status2) {
-                        [self handleStatus:status2 isNotDetermined:YES handler:handler];
-                    }];
-                }
-                    break;
-                default:
-                    [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
-                    break;
+        return;
+    }
+    if (@available(iOS 14, *)) {
+        PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite];
+        switch (authorizationStatus) {
+            case PHAuthorizationStatusNotDetermined: {
+                [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelReadWrite handler:^(PHAuthorizationStatus status2) {
+                    [self handleStatus:status2 isNotDetermined:YES handler:handler];
+                }];
             }
-        } else {
-            PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
-            switch (authorizationStatus) {
-                case PHAuthorizationStatusNotDetermined: {
-                    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status2) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            if (handler) {
-                                handler(YES, (status2 == PHAuthorizationStatusAuthorized), NO, YES);
-                            }
-                        });
-                    }];
-                }
-                    break;
-                default:
-                    [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
-                    break;
-            }
+                break;
+            default:
+                [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+                break;
         }
+        return;
+    }
+    PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
+    switch (authorizationStatus) {
+        case PHAuthorizationStatusNotDetermined: {
+            [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status2) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (handler) {
+                        handler(YES, (status2 == PHAuthorizationStatusAuthorized), NO, YES);
+                    }
+                });
+            }];
+        }
+            break;
+        default:
+            [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+            break;
     }
 }
 + (void)handleStatus:(PHAuthorizationStatus)status isNotDetermined:(BOOL)isNotDetermined handler:(void (^)(BOOL, BOOL, BOOL, BOOL))handler {

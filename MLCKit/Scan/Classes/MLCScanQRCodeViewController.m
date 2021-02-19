@@ -13,10 +13,10 @@
 #import "MLCMacror.h"
 #import "MLCImagePickerTool.h"
 #import "MLCCaptureVideoPreviewLayerView.h"
+#import "MLCScanUtility.h"
 
 @interface MLCScanQRCodeViewController ()<AVCaptureMetadataOutputObjectsDelegate>
 
-@property (nonatomic, strong) AVCaptureSession *session;//会话对象
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, strong) AVCaptureDevice *device;//
 @property (nonatomic) BOOL isLightOpen;//
@@ -139,10 +139,10 @@
 }
 - (void)setupScanningQRCode {
     // 初始化链接对象（会话对象）
-    self.session = [[AVCaptureSession alloc] init];
+    AVCaptureSession *session = [[AVCaptureSession alloc] init];
     // 实例化预览图层, 传递_session是为了告诉图层将来显示什么内容
-    self.preview = [[MLCCaptureVideoPreviewLayerView alloc]initWithFrame:CGRectZero session:_session];
-    [self scanningQRCodeWithSession:_session];
+    self.preview = [[MLCCaptureVideoPreviewLayerView alloc]initWithFrame:CGRectZero session:session];
+    [self scanningQRCodeWithSession:session];
 }
 //  扫描二维码 session    AVCaptureSession 对象 previewLayer    AVCaptureVideoPreviewLayer
 - (void)scanningQRCodeWithSession:(AVCaptureSession *)session {
@@ -192,17 +192,7 @@
     [session startRunning];
 }
 - (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
-    // CIDetector(CIDetector可用于人脸识别)进行图片解析，从而使我们可以便捷的从相册中获取到二维码
-    // 声明一个CIDetector，并设定识别类型 CIDetectorTypeQRCode
-    CIDetector *detector = [CIDetector detectorOfType:CIDetectorTypeQRCode context:nil options:@{ CIDetectorAccuracy : CIDetectorAccuracyHigh }];
-    
-    // 取得识别结果
-    NSArray *features = [detector featuresInImage:[CIImage imageWithCGImage:image.CGImage]];
-    NSMutableArray *qrCodeStrings = [NSMutableArray array];
-    for (CIQRCodeFeature *feature in features) {
-        NSString *qrCodeString = feature.messageString;
-        [qrCodeStrings addObject:qrCodeString];
-    }
+    NSArray *qrCodeStrings = [MLCScanUtility QRCodeStringsWithImage:image];
     if (self.scanSuccessHandler) {
         self.scanSuccessHandler(qrCodeStrings);
     }
