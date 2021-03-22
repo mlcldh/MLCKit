@@ -91,6 +91,13 @@ Pod::Spec.new do |s|
     ss.dependency 'MLCKit/Photos'
   end
   
+  s.subspec 'TableView' do |ss|
+    ss.source_files = 'MLCKit/TableView/*.{h,m,mm}'
+    ss.frameworks = 'UIKit'
+    ss.dependency 'Masonry'
+    ss.dependency 'MJRefresh'
+  end
+  
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
     ss.frameworks = 'UIKit'
