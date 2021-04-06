@@ -96,6 +96,7 @@ Pod::Spec.new do |s|
     ss.frameworks = 'UIKit'
     ss.dependency 'Masonry'
     ss.dependency 'MJRefresh'
+    ss.dependency 'MLCKit/Category'
   end
   
   s.subspec 'UI' do |ss|

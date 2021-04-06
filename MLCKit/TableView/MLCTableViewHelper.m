@@ -3,118 +3,131 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2021/3/19.
+//  Copyright © 2021 MengLingChao. All rights reserved.
 //
 
 #import "MLCTableViewHelper.h"
+#import "MLCTableViewDelegate.h"
 
 @interface MLCTableViewHelper ()
 
-@property (nonatomic, strong) NSMutableArray<MLCTableViewSection *> *sections;//
+@property (nonatomic, strong) MLCTableViewDelegate *tableViewDelegate;//
 
 @end
 
 @implementation MLCTableViewHelper
 
-- (instancetype)initWithTableView:(UITableView *)tableView {
+- (instancetype)initWithTableView:(UITableView *)tableView cellClasses:(NSArray<Class> *)cellClasses refreshHeaderClass:(Class)refreshHeaderClass refreshFooterClass:(Class)refreshFooterClass {
     self = [super init];
     if (self) {
-        _tableView = tableView;
-        tableView.delegate = self;
-        tableView.dataSource = self;
+        _tableViewDelegate = [[MLCTableViewDelegate alloc]initWithTableView:tableView cellClasses:cellClasses];
+        
+        __weak __typeof__(self) weak_self = self;
+        tableView.mj_header = [refreshHeaderClass headerWithRefreshingBlock:^{
+            if (weak_self.refreshHandler) {
+                weak_self.refreshHandler();
+            }
+        }];
+        tableView.mj_footer = [refreshFooterClass footerWithRefreshingBlock:^{
+            if (weak_self.loadMoreHandler) {
+                weak_self.loadMoreHandler();
+            }
+        }];
+        tableView.mj_footer.hidden = YES;
     }
     return self;
 }
 #pragma mark - Getter
-- (NSMutableArray<MLCTableViewSection *> *)sections {
-    if (!_sections) {
-        _sections = [NSMutableArray array];
-    }
-    return _sections;
+- (UIView *(^)(void))emptyViewHandler {
+    return self.tableViewDelegate.emptyViewHandler;
 }
-#pragma mark - UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section >= self.sections.count) {
-        return 0;
-    }
-    MLCTableViewSection *section = self.sections[indexPath.section];
-    if (indexPath.row >= section.rows.count) {
-        return 0;
-    }
-    MLCTableViewRow *row = section.rows[indexPath.row];
-    if (row.cellHeightHandler) {
-        CGFloat cellHeight = row.cellHeightHandler();
-        return cellHeight;
-    }
-    return 0;
+- (UIView *(^)(NSError *))errorViewHandler {
+    return self.tableViewDelegate.errorViewHandler;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (!self.sections.count && self.canShowEmptyView) {
-        return CGRectGetHeight(tableView.frame);
-    }
-    if (section >= self.sections.count) {
-        return 0;
-    }
-    MLCTableViewSection *aSection = self.sections[section];
-    if (aSection.headerHeightHandler) {
-        CGFloat headerHeight = aSection.headerHeightHandler();
-        return headerHeight;
-    }
-    return 0;
+#pragma mark - Setter
+- (void)setEmptyViewHandler:(UIView *(^)(void))emptyViewHandler {
+    self.tableViewDelegate.emptyViewHandler = emptyViewHandler;
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (!self.sections.count && self.canShowEmptyView && self.emptyViewHandler) {
-        UIView *emptyView = self.emptyViewHandler();
-        return emptyView;
-    }
-    if (section >= self.sections.count) {
-        return nil;
-    }
-    MLCTableViewSection *aSection = self.sections[section];
-    if (aSection.headeViewHandler) {
-        UIView *headeView = aSection.headeViewHandler();
-        return headeView;
-    }
-    return 0;
+- (void)setErrorViewHandler:(UIView *(^)(NSError *))errorViewHandler {
+    self.tableViewDelegate.errorViewHandler = errorViewHandler;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.section >= self.sections.count) {
+#pragma mark -
+- (void)handleRequestSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount isRefresh:(BOOL)isRefresh {
+    if (isRefresh) {
+        [self handleRefreshSuccessWithModels:models totalCount:totalCount];
+    } else {
+        [self handleLoadMoreSuccessWithModels:models totalCount:totalCount];
+    }
+}
+- (void)handleRefreshSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount {
+    if (totalCount <= 0) {
+        [self handleEmpty];
         return;
     }
-    MLCTableViewSection *section = self.sections[indexPath.section];
-    if (indexPath.row >= section.rows.count) {
-        return;
+    [self.tableViewDelegate.tableView.mj_header endRefreshing];
+    self.tableViewDelegate.tableView.mj_footer.hidden = YES;
+    
+    [self.tableViewDelegate.sections removeAllObjects];
+    self.tableViewDelegate.error = nil;
+    
+    MLCTableViewSection *section = [[MLCTableViewSection alloc]init];
+    if (self.configSectionHandler) {
+        self.configSectionHandler(section);
     }
-    MLCTableViewRow *row = section.rows[indexPath.row];
-    if (row.didSelectHandler) {
-        row.didSelectHandler();
+    if (models) {
+        [section.models addObjectsFromArray:models];
     }
+    if (section.models.count >= totalCount) {
+        [self.tableViewDelegate.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableViewDelegate.tableView.mj_footer endRefreshing];
+    }
+    
+    self.tableViewDelegate.tableView.mj_footer.hidden = NO;
+    [self.tableViewDelegate.sections addObject:section];
+    [self.tableViewDelegate.tableView reloadData];
 }
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section >= self.sections.count) {
-        return 0;
-    }
-    MLCTableViewSection *aSection = self.sections[section];
-    return aSection.rows.count;
+- (void)handleEmpty {
+    [self.tableViewDelegate.tableView.mj_header endRefreshing];
+    self.tableViewDelegate.tableView.mj_footer.hidden = YES;
+    
+    self.tableViewDelegate.canShowEmptyView = YES;
+    [self.tableViewDelegate.sections removeAllObjects];
+    self.tableViewDelegate.error = nil;
+    [self.tableViewDelegate.tableView reloadData];
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section >= self.sections.count) {
-        return [[UITableViewCell alloc]init];
+- (void)handleLoadMoreSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount {
+    self.tableViewDelegate.error = nil;
+    
+    MLCTableViewSection *section = self.tableViewDelegate.sections.firstObject;
+    if (models) {
+        [section.models addObjectsFromArray:models];
     }
-    MLCTableViewSection *section = self.sections[indexPath.section];
-    if (indexPath.row >= section.rows.count) {
-        return [[UITableViewCell alloc]init];
+    if (section.models.count >= totalCount) {
+        [self.tableViewDelegate.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableViewDelegate.tableView.mj_footer endRefreshing];
     }
-    MLCTableViewRow *row = section.rows[indexPath.row];
-    if (row.configCellHandler) {
-        UITableViewCell *cell = row.configCellHandler();
-        return cell;
-    }
-    return [[UITableViewCell alloc]init];
+    [self.tableViewDelegate.tableView reloadData];
 }
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.sections.count;
+- (void)handleLoadError:(NSError *)error {
+    [self.tableViewDelegate.tableView.mj_header endRefreshing];
+    self.tableViewDelegate.tableView.mj_footer.hidden = YES;
+    
+    [self.tableViewDelegate.sections removeAllObjects];
+    self.tableViewDelegate.error = error;
+    [self.tableViewDelegate.tableView reloadData];
+}
+- (void)removeModelAtIndex:(NSInteger)index {
+    [self.tableViewDelegate.sections.firstObject.models removeObjectAtIndex:index];
+}
+- (void)deleteRowAtIndex:(NSInteger)index totalCount:(NSInteger)totalCount {
+    [self removeModelAtIndex:index];
+    if (totalCount <= 0) {
+        [self.tableViewDelegate.tableView reloadData];
+    } else {
+        [self.tableViewDelegate.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:(UITableViewRowAnimationAutomatic)];
+    }
 }
 
 @end

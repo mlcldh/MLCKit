@@ -19,9 +19,9 @@
 + (NSString*)homeDirectoryPath;
 /**获取Cache文件目录*/
 + (NSString*)cachesDirectoryPath;
-/**创建目录*/
+/**创建文件夹*/
 + (BOOL)creatDirectoryWithPath:(NSString *)path;
-/**删除目录或文件*/
+/**删除文件夹或文件*/
 + (BOOL)removeItemAtPath:(NSString *)path;
 /**移动文件*/
 + (BOOL)moveItemAtPath:(NSString *)srcPath toPath:(NSString *)dstPath error:(NSError **)error;

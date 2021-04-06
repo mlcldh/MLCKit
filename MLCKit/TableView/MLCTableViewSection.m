@@ -3,23 +3,24 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2021/3/19.
+//  Copyright © 2021 MengLingChao. All rights reserved.
 //
 
 #import "MLCTableViewSection.h"
 
 @interface MLCTableViewSection ()
 
-@property (nonatomic, strong) NSMutableArray<MLCTableViewRow *> *rows;//
+@property (nonatomic, strong) NSMutableArray *models;//
 
 @end
 
 @implementation MLCTableViewSection
 
-- (NSMutableArray<MLCTableViewRow *> *)rows {
-    if (!_rows) {
-        _rows = [NSMutableArray array];
+- (NSMutableArray *)models {
+    if (!_models) {
+        _models = [NSMutableArray array];
     }
-    return _rows;
+    return _models;
 }
 
 @end

@@ -138,6 +138,45 @@
     CGColorSpaceRelease(colorSpaceRef);
     return img;
 }
+- (UIColor *)mlc_colorAtPoint:(CGPoint)point {
+    // 如果点超出图像范围，则退出
+    if (!CGRectContainsPoint(CGRectMake(0.0f, 0.0f, self.size.width, self.size.height), point)) {
+        return nil;
+    }
+
+    // Create a 1x1 pixel byte array and bitmap context to draw the pixel into.
+    NSInteger pointX = trunc(point.x);
+    NSInteger pointY = trunc(point.y);
+    CGImageRef cgImage = self.CGImage;
+    NSUInteger width = self.size.width;
+    NSUInteger height = self.size.height;
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    int bytesPerPixel = 4;
+    int bytesPerRow = bytesPerPixel * 1;
+    NSUInteger bitsPerComponent = 8;
+    unsigned char pixelData[4] = { 0, 0, 0, 0 };
+    CGContextRef context = CGBitmapContextCreate(pixelData,
+                                                 1,
+                                                 1,
+                                                 bitsPerComponent,
+                                                 bytesPerRow,
+                                                 colorSpace,
+                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+    CGColorSpaceRelease(colorSpace);
+    CGContextSetBlendMode(context, kCGBlendModeCopy);
+
+    // Draw the pixel we are interested in onto the bitmap context
+    CGContextTranslateCTM(context, -pointX, pointY-(CGFloat)height);
+    CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, (CGFloat)width, (CGFloat)height), cgImage);
+    CGContextRelease(context);
+
+    // 把[0,255]的颜色值映射至[0,1]区间
+    CGFloat red   = (CGFloat)pixelData[0] / 255.0f;
+    CGFloat green = (CGFloat)pixelData[1] / 255.0f;
+    CGFloat blue  = (CGFloat)pixelData[2] / 255.0f;
+    CGFloat alpha = (CGFloat)pixelData[3] / 255.0f;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
 void MLCProviderReleaseData (void *info, const void *data, size_t size){
     free((void*)data);
 }

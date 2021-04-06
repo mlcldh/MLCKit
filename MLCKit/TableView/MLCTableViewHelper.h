@@ -3,23 +3,35 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2021/3/19.
+//  Copyright © 2021 MengLingChao. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <MJRefresh/MJRefresh.h>
 #import "MLCTableViewSection.h"
 
-/***/
-@interface MLCTableViewHelper : NSObject<UITableViewDelegate, UITableViewDataSource>
+/// TableView助手
+@interface MLCTableViewHelper : NSObject
 
-/***/
-@property (nonatomic, weak, readonly) UITableView *tableView;
-/***/
-@property (nonatomic, readonly) NSMutableArray<MLCTableViewSection *> *sections;
-/**空白页回调*/
+/// 下拉刷新回调
+@property (nonatomic, copy) void(^refreshHandler)(void);
+/// 加载更多回调
+@property (nonatomic, copy) void(^loadMoreHandler)(void);
+/// 配置Section回调
+@property (nonatomic, copy) void(^configSectionHandler)(MLCTableViewSection *section);
+/// 空白页回调
 @property (nonatomic, copy) UIView *(^emptyViewHandler)(void);
-/**是否在数据为空时显示空白页，默认是NO，即不显示*/
-@property (nonatomic) BOOL canShowEmptyView;
-/***/
-- (instancetype)initWithTableView:(UITableView *)tableView;
+/// 错误页回调
+@property (nonatomic, copy) UIView *(^errorViewHandler)(NSError *error);
+
+- (instancetype)initWithTableView:(UITableView *)tableView cellClasses:(NSArray<Class> *)cellClasses refreshHeaderClass:(Class)refreshHeaderClass refreshFooterClass:(Class)refreshFooterClass;
+
+- (void)handleRequestSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount isRefresh:(BOOL)isRefresh;
+- (void)handleRefreshSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount;
+- (void)handleEmpty;
+- (void)handleLoadMoreSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount;
+- (void)handleLoadError:(NSError *)error;
+- (void)removeModelAtIndex:(NSInteger)index;
+- (void)deleteRowAtIndex:(NSInteger)index totalCount:(NSInteger)totalCount;
 
 @end

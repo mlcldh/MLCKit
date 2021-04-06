@@ -5,6 +5,7 @@ platform :ios,			'8.0'
 target:'MLCKitDemo'
 
 pod 'Masonry', '1.1.0'
+pod 'MJRefresh','3.5.0'
 pod 'YYCache', '1.0.4'
 pod 'YYModel', '1.0.4'
 pod 'MLCKit', :path => '../', :modular_headers => true
