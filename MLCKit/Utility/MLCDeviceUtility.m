@@ -85,6 +85,9 @@ static CTTelephonyNetworkInfo *MLCNetworkInfo = nil;
     }
     return NO;
 }
++ (BOOL)isSystemVersionGreaterThanOrEqualToVersion:(NSString *)version {
+    return ([[UIDevice currentDevice].systemVersion compare:version options:(NSNumericSearch)] != NSOrderedAscending);
+}
 + (NSString *)carrierName {
     if (!MLCNetworkInfo) {
         MLCNetworkInfo = CTTelephonyNetworkInfo.new;

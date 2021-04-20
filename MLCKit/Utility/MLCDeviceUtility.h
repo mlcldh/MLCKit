@@ -32,6 +32,8 @@
 + (NSString *)machine;
 /**是否越狱*/
 + (BOOL)isJailbroken;
+/// 当前系统版本号是否大于或等于版本号version
++ (BOOL)isSystemVersionGreaterThanOrEqualToVersion:(NSString *)version;
 
 /**运营商名字*/
 + (NSString *)carrierName;

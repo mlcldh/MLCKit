@@ -201,9 +201,9 @@ typedef NS_ENUM(NSInteger, LCRefreshType) {
             
             return editActions;
         }];
-        [section setTrailingSwipeActionsConfigurationHandler:^UISwipeActionsConfiguration *(NSIndexPath *indexPath, id model) {
-            UISwipeActionsConfiguration *configuration = ;
-        }];
+//        [section setTrailingSwipeActionsConfigurationHandler:^UISwipeActionsConfiguration *(NSIndexPath *indexPath, id model) {
+//            UISwipeActionsConfiguration *configuration = ;
+//        }];
         [section setEditingStyleHandler:^UITableViewCellEditingStyle(NSIndexPath *indexPath, id model) {
             return UITableViewCellEditingStyleDelete;
         }];

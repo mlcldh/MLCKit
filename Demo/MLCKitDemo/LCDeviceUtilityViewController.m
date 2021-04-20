@@ -21,6 +21,7 @@
     
     [self getIdfaAndIdfv];
     [self getIPInfo];
+    [self compareSystemVersion];
 }
 #pragma mark -
 - (void)getIdfaAndIdfv {
@@ -32,6 +33,9 @@
     NSString *deviceIP = [MLCDeviceUtility deviceIPAdress];
     NSString *wifiName = [MLCDeviceUtility wifiName];
     NSLog(@"menglc getIPInfo %@, %@", deviceIP, wifiName);
+}
+- (void)compareSystemVersion {
+    NSLog(@"menglc compareSystemVersion %@, %@", [UIDevice currentDevice].systemVersion, @([MLCDeviceUtility isSystemVersionGreaterThanOrEqualToVersion:@"11.4.1"]));
 }
 
 @end
