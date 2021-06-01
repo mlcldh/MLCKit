@@ -41,6 +41,9 @@ static CTTelephonyNetworkInfo *MLCNetworkInfo = nil;
 //    NSAssert(string.length, @"不能为空");
     return string;
 }
++ (NSString *)systemVersion {
+    return [UIDevice currentDevice].systemVersion;
+}
 + (NSString *)appName {
     static NSString * string = nil;
     if (!string.length) {

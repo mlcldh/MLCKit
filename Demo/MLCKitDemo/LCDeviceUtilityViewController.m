@@ -20,14 +20,20 @@
     // Do any additional setup after loading the view.
     
     [self getIdfaAndIdfv];
+    [self getIsJailbroken];
     [self getIPInfo];
     [self compareSystemVersion];
 }
 #pragma mark -
 - (void)getIdfaAndIdfv {
     NSString *idfa = [MLCDeviceUtility idfa];
+    NSLog(@"menglc idfa %@", idfa);
+    NSLog(@"menglc advertisingTrackingEnabled %@", @([MLCDeviceUtility advertisingTrackingEnabled]));
     NSString *idfv = [MLCDeviceUtility identifierForVendor];
-    NSLog(@"menglc getIdfaAndIdfv %@, %@", idfa, idfv);
+    NSLog(@"menglc identifierForVendor %@", idfv);
+}
+- (void)getIsJailbroken {
+    NSLog(@"menglc isJailbroken %@", @([MLCDeviceUtility isJailbroken]));
 }
 - (void)getIPInfo {
     NSString *deviceIP = [MLCDeviceUtility deviceIPAdress];

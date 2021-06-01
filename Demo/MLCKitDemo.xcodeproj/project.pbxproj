@@ -89,6 +89,7 @@
 		8D7FDF192608407F004C54D2 /* LCATableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCATableViewCell.h; sourceTree = "<group>"; };
 		8D7FDF1A2608407F004C54D2 /* LCATableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCATableViewCell.m; sourceTree = "<group>"; };
 		8DB1757325DFAA5E008DBEF0 /* gallery.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gallery.jpg; sourceTree = "<group>"; };
+		8DB76D0F2665E1A2004F5AFE /* MLCKitDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MLCKitDemo.entitlements; sourceTree = "<group>"; };
 		8DC2559225BADB2E00AC8478 /* LCShowLoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCShowLoadingViewController.h; sourceTree = "<group>"; };
 		8DC2559325BADB2E00AC8478 /* LCShowLoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LCShowLoadingViewController.m; sourceTree = "<group>"; };
 		8DCFECB525DE688E001C4CED /* LCImageCategoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LCImageCategoryViewController.h; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 		8D5705DB23ACC953003B89D8 /* MLCKitDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8DB76D0F2665E1A2004F5AFE /* MLCKitDemo.entitlements */,
 				8D5705DC23ACC953003B89D8 /* AppDelegate.h */,
 				8D5705DD23ACC953003B89D8 /* AppDelegate.m */,
 				8D5705E223ACC953003B89D8 /* ViewController.h */,
@@ -538,16 +540,19 @@
 			baseConfigurationReference = 3325DB394482C779B27B6273 /* Pods-MLCKitDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MLCKitDemo/MLCKitDemo.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J32AD5KDR3;
+				DEVELOPMENT_TEAM = JY8H2TYU9C;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -557,16 +562,19 @@
 			baseConfigurationReference = 7B26288BF695D298AA9C8D0D /* Pods-MLCKitDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MLCKitDemo/MLCKitDemo.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J32AD5KDR3;
+				DEVELOPMENT_TEAM = JY8H2TYU9C;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehea;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

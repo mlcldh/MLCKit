@@ -16,6 +16,8 @@
 + (NSString *)appVersion;
 /**app构建版本号*/
 + (NSString *)appBuildVersion;
+/// 系统版本号
++ (NSString *)systemVersion;
 /**app名字*/
 + (NSString *)appName;
 /**app的bundle ID*/

@@ -9,6 +9,7 @@
 #import "MLCPHPickerViewControllerManager.h"
 #import <objc/runtime.h>
 
+#if !TARGET_OS_MACCATALYST
 static char *MLCPHPickerViewControllerManagerKey = "MLCPHPickerViewControllerManagerKey";
 
 @implementation MLCPHPickerViewControllerManager
@@ -36,3 +37,4 @@ static char *MLCPHPickerViewControllerManagerKey = "MLCPHPickerViewControllerMan
 }
 
 @end
+#endif

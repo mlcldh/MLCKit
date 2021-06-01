@@ -27,12 +27,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>需要访问您的相机，以便于您正常使用拍摄照片或视频功能</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>需要您的同意,才能在使用期间访问位置新加</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>需要您的同意,才能始终访问位置</string>
 	<key>NSLocationUsageDescription</key>
 	<string>需要您的同意,才能访问位置</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>需要您的同意,才能在使用期间访问位置新加</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>需要您的同意,才能在使用期间访问位置</string>
 	<key>NSMicrophoneUsageDescription</key>

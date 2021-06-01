@@ -8,6 +8,7 @@
 #import "MLCColorPickerViewControllerManager.h"
 #import <objc/runtime.h>
 
+#if !TARGET_OS_MACCATALYST
 static char *MLCColorPickerViewControllerManagerKey = "MLCColorPickerViewControllerManager";
 
 @implementation MLCColorPickerViewControllerManager
@@ -46,3 +47,4 @@ static char *MLCColorPickerViewControllerManagerKey = "MLCColorPickerViewControl
 }
 
 @end
+#endif

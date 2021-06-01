@@ -80,6 +80,7 @@
         }
         return;
     }
+#if !TARGET_OS_MACCATALYST
     if (@available(iOS 14, *)) {
         PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatusForAccessLevel:PHAccessLevelReadWrite];
         switch (authorizationStatus) {
@@ -95,6 +96,7 @@
         }
         return;
     }
+#endif
     PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
     switch (authorizationStatus) {
         case PHAuthorizationStatusNotDetermined: {
@@ -125,11 +127,13 @@
                 handler(YES, YES, NO, isNotDetermined);
             }
             break;
+#if !TARGET_OS_MACCATALYST
         case PHAuthorizationStatusLimited:
             if (handler) {
                 handler(YES, YES, YES, isNotDetermined);
             }
             break;
+#endif
         case PHAuthorizationStatusRestricted:
             if (handler) {
                 handler(YES, NO, NO, isNotDetermined);

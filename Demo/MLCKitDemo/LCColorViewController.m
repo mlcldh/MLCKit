@@ -27,8 +27,10 @@
     button.backgroundColor = [UIColor purpleColor];
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [button setTitle:@"选择颜色" forState:(UIControlStateNormal)];
+#if !TARGET_OS_MACCATALYST
     @weakify(self)
     [button setMlc_touchUpInsideBlock:^{
+
         @strongify(self)
         if (@available(iOS 14.0, *)) {
             UIColorPickerViewController *pickerVC = [[UIColorPickerViewController alloc]init];
@@ -44,6 +46,7 @@
             [self presentViewController:pickerVC animated:YES completion:nil];
         }
     }];
+#endif
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);

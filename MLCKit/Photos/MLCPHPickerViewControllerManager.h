@@ -8,6 +8,7 @@
 
 #import <PhotosUI/PhotosUI.h>
 
+#if !TARGET_OS_MACCATALYST
 /**将PHPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(14))
 @interface MLCPHPickerViewControllerManager : NSObject<PHPickerViewControllerDelegate>
@@ -21,3 +22,4 @@ API_AVAILABLE(ios(14))
 - (instancetype)initWithPickerViewController:(PHPickerViewController *)pickerViewController;
 
 @end
+#endif

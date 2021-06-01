@@ -7,7 +7,9 @@
 //
 
 #import "LCDocumentViewController.h"
+#if !TARGET_OS_MACCATALYST
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
+#endif
 #import "MLCDocumentPickerViewControllerManager.h"
 
 @interface LCDocumentViewController ()
@@ -22,9 +24,12 @@
     
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     
+#if !TARGET_OS_MACCATALYST
     [self addPickButton];
+#endif
 }
 #pragma mark -
+#if !TARGET_OS_MACCATALYST
 - (void)addPickButton {
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeSystem)];
     button.backgroundColor = [UIColor purpleColor];
@@ -64,5 +69,7 @@
         make.top.equalTo(self.view).offset(100);
     }];
 }
+#endif
 
 @end
+

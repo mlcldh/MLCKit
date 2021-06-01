@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
+#if !TARGET_OS_MACCATALYST
 /**将UIColorPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(14.0))
 @interface MLCColorPickerViewControllerManager : NSObject<UIColorPickerViewControllerDelegate>
@@ -22,3 +23,4 @@ API_AVAILABLE(ios(14.0))
 - (instancetype)initWithPickerViewController:(UIColorPickerViewController *)pickerViewController;
 
 @end
+#endif

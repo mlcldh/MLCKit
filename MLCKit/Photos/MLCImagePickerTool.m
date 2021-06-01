@@ -12,6 +12,7 @@
 @implementation MLCImagePickerTool
 
 + (void)pickSingleImageInViewController:(UIViewController *)viewController didFinishPickingHandler:(void(^)(UIImage *image))didFinishPickingHandler {
+#if !TARGET_OS_MACCATALYST
     if (@available(iOS 14, *)) {
         PHPickerConfiguration *configuration = [[PHPickerConfiguration alloc] init];
         configuration.filter = [PHPickerFilter imagesFilter];
@@ -42,6 +43,7 @@
         }];
         return;
     }
+#endif
     UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
     pickerController.allowsEditing = YES;
     // 3. 设置打开照片相册类型(显示所有相簿)
