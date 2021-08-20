@@ -25,5 +25,8 @@
 + (UIImage *)mlc_imageWithCIImage:(CIImage *)image imageWidth:(CGFloat) imageWidth;
 /**改变图片颜色*/
 - (UIImage *)mlc_specialColorImageWithColor:(UIColor *)color;
+/// 图片取色
+/// @param point 取色位置
+- (UIColor *)mlc_colorAtPoint:(CGPoint)point;
 
 @end

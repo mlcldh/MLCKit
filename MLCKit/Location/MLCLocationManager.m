@@ -24,6 +24,13 @@
     });
     return instance;
 }
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self locationmanager];
+    }
+    return self;
+}
 #pragma mark - Getter
 - (CLLocationManager *)locationmanager {
     if (!_locationmanager) {
@@ -32,10 +39,14 @@
         self.locationmanager.desiredAccuracy = kCLLocationAccuracyBest;
         self.locationmanager.distanceFilter = 5.0;
         _locationmanager.delegate = self;
-        [self.locationmanager requestAlwaysAuthorization];
-        [self.locationmanager requestWhenInUseAuthorization];
     }
     return _locationmanager;
+}
+- (CLAuthorizationStatus)authorizationStatus {
+    if (@available(iOS 14.0, *)) {
+        return self.locationmanager.authorizationStatus;
+    }
+    return [CLLocationManager authorizationStatus];
 }
 #pragma mark -
 - (void)startUpdatingLocation {
@@ -43,6 +54,8 @@
     if (![CLLocationManager locationServicesEnabled]) {
         return;
     }
+    [self.locationmanager requestAlwaysAuthorization];
+    [self.locationmanager requestWhenInUseAuthorization];
     [self.locationmanager startUpdatingLocation];
 }
 - (void)stopUpdatingLocation {
@@ -50,6 +63,19 @@
         return;
     }
     [self.locationmanager stopUpdatingLocation];
+}
+- (void)handleDidChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    if (self.didChangeAuthorizationStatusHandler) {
+        self.didChangeAuthorizationStatusHandler(status);
+    }
+    switch (status) {
+        case kCLAuthorizationStatusAuthorizedAlways:
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            [self startUpdatingLocation];
+            break;
+        default:
+            break;
+    }
 }
 #pragma mark - CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -65,6 +91,14 @@
     if (_didFailHandler) {
         _didFailHandler(error);
     }
+}
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    NSLog(@"menglc didChangeAuthorizationStatus %@", @(status));
+    [self handleDidChangeAuthorizationStatus:status];
+}
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
+    NSLog(@"menglc didChangeAuthorizationStatus %@", @([CLLocationManager authorizationStatus]));
+    [self handleDidChangeAuthorizationStatus:[CLLocationManager authorizationStatus]];
 }
 
 @end

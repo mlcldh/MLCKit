@@ -543,14 +543,14 @@
 				CODE_SIGN_ENTITLEMENTS = MLCKitDemo/MLCKitDemo.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JY8H2TYU9C;
+				DEVELOPMENT_TEAM = J32AD5KDR3;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehea;
+				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,14 +565,14 @@
 				CODE_SIGN_ENTITLEMENTS = MLCKitDemo/MLCKitDemo.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JY8H2TYU9C;
+				DEVELOPMENT_TEAM = J32AD5KDR3;
 				INFOPLIST_FILE = MLCKitDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehea;
+				PRODUCT_BUNDLE_IDENTIFIER = com.menglingchao.hehe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

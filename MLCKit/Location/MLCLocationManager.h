@@ -9,16 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-/**定位管理*/
+/// 定位管理
 @interface MLCLocationManager : NSObject
 
-/**单例*/
+/// 单例
 + (instancetype)sharedInstance;
-/**更新位置回调*/
+/// 更新位置回调
 @property (nonatomic, copy) BOOL(^didUpdateLocationsHandler)(NSArray<CLLocation *> *locations);
-/**失败回调*/
+/// 失败回调
 @property (nonatomic, copy) void(^didFailHandler)(NSError *error);
+/// 定位权限改变回调
+@property (nonatomic, copy) void(^didChangeAuthorizationStatusHandler)(CLAuthorizationStatus status);
 
+/// 定位权限
+- (CLAuthorizationStatus)authorizationStatus;
 /**开始更新位置*/
 - (void)startUpdatingLocation;
 /**停止更新位置*/

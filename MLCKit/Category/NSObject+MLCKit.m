@@ -45,5 +45,11 @@
     if (jsonData.length == 0) return nil;
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
+- (NSUInteger)mlc_retainCount {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    return (NSUInteger)[self performSelector:NSSelectorFromString(@"retainCount")];
+#pragma clang diagnostic pop
+}
 
 @end

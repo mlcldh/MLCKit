@@ -44,7 +44,7 @@
         return nil;
     }
     MLCCache *cache = [[self alloc]init];
-    cache.yyCache = [[self alloc]initWithPath:path];
+    cache.yyCache = [[YYCache alloc]initWithPath:path];
     return cache;
 }
 - (BOOL)containsObjectForKey:(NSString *)key {

@@ -19,5 +19,7 @@
 - (void)mlc_encodeWithCoder:(NSCoder *)aCoder;
 /**转换成json字符串*/
 - (NSString *)mlc_JSONString;
+/// 引用计数
+- (NSUInteger)mlc_retainCount;
 
 @end

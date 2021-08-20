@@ -23,6 +23,7 @@
     
     [self getJSONString];
     [self getJSONObject];
+    [self seeRetainCount];
 }
 #pragma mark -
 - (void)getJSONString {
@@ -40,6 +41,22 @@
     NSString *jsonString = @"{\"name\": \"Tom\", \"age\": 22, \"height\": 1.98}";
     id jsonObject = [jsonString mlc_JSONObject];
     NSLog(@"menglc getJSONObject %@", jsonObject);
+}
+- (void)seeRetainCount {
+    UIView *view = [[UIView alloc]init];
+    NSLog(@"menglc mlc_retainCount 0 %@", @(view.mlc_retainCount));
+//    [self.view addSubview:view];
+    NSMutableArray *array = [NSMutableArray array];
+    [array addObject:view];
+//    @weakify(view)
+//    void (^block)(void) = ^{
+////        @strongify(view)
+//        NSLog(@"%@",view);
+//    };
+    NSLog(@"menglc mlc_retainCount 1 %@", @(view.mlc_retainCount));
+//    block();
+//    block = nil;
+//    NSLog(@"menglc mlc_retainCount 2 %@", @(view.mlc_retainCount));
 }
 
 @end
