@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 /**移除自己的某一些约束*/
 - (void)mlc_removeConstraintsWithFirstItem:(id)firstItem firstAttribute:(NSLayoutAttribute)firstAttribute;
 /**移除firstItem是自己的某一些约束*/
-- (void)mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttribute)firstAttribute secondItem:(id)secondItem;
+- (void)mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttribute)firstAttribute secondItem:(UIView *)secondItem;
 /**添加约束*/
 - (void)mlc_addConstraintWithFirstAttribute:(NSLayoutAttribute)firstAttribute relation:(NSLayoutRelation)relation secondItem:(id)secondItem secondAttribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant;
 /**返回离两个view最近的父视图*/

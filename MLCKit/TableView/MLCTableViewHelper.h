@@ -26,6 +26,7 @@
 
 - (instancetype)initWithTableView:(UITableView *)tableView cellClasses:(NSArray<Class> *)cellClasses refreshHeaderClass:(Class)refreshHeaderClass refreshFooterClass:(Class)refreshFooterClass;
 
+- (NSArray *)models;
 - (void)handleRequestSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount isRefresh:(BOOL)isRefresh;
 - (void)handleRefreshSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount;
 - (void)handleEmpty;

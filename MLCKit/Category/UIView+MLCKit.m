@@ -104,26 +104,31 @@
         }
     }
 }
-- (void)mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttribute)firstAttribute secondItem:(id)secondItem {//移除firstItem是自己的某一些约束
-    BOOL isSizeAttribute = (firstAttribute == NSLayoutAttributeWidth) || (firstAttribute == NSLayoutAttributeHeight);
-    UIView *superview = self;
-    if (!isSizeAttribute) {
-        superview = [self mlc_closestCommonSuperview:secondItem];
+- (void)mlc_removeConstraintsWithFirstAttribute:(NSLayoutAttribute)firstAttribute secondItem:(UIView *)secondItem {//移除firstItem是自己的某一些约束
+    UIView *installedView = nil;
+    if (secondItem) {
+        installedView = [self mlc_closestCommonSuperview:secondItem];
+    } else if ((firstAttribute == NSLayoutAttributeWidth) || (firstAttribute == NSLayoutAttributeHeight)) {
+        installedView = self;
+    } else {
+        installedView = self.superview;
     }
-    [superview mlc_removeConstraintsWithFirstItem:self firstAttribute:firstAttribute];
+    [installedView mlc_removeConstraintsWithFirstItem:self firstAttribute:firstAttribute];
 }
 - (void)mlc_addConstraintWithFirstAttribute:(NSLayoutAttribute)firstAttribute relation:(NSLayoutRelation)relation secondItem:(id)secondItem secondAttribute:(NSLayoutAttribute)secondAttribute multiplier:(CGFloat)multiplier constant:(CGFloat)constant {
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self attribute:firstAttribute relatedBy:relation toItem:secondItem attribute:secondAttribute multiplier:multiplier constant:constant];
     if (@available(iOS 8.0, *)) {
         constraint.active = YES;
     } else {
-        BOOL isSizeAttribute = (firstAttribute == NSLayoutAttributeWidth) || (firstAttribute == NSLayoutAttributeHeight);
-        if (isSizeAttribute) {
-            [self addConstraint:constraint];
+        UIView *installedView = nil;
+        if (secondItem) {
+            installedView = [self mlc_closestCommonSuperview:secondItem];
+        } else if ((firstAttribute == NSLayoutAttributeWidth) || (firstAttribute == NSLayoutAttributeHeight)) {
+            installedView = self;
         } else {
-            UIView *superview = [self mlc_closestCommonSuperview:secondItem];
-            [superview addConstraint:constraint];
+            installedView = self.superview;
         }
+        [installedView addConstraint:constraint];
     }
 }
 - (instancetype)mlc_closestCommonSuperview:(UIView *)view {

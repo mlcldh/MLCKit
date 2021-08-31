@@ -22,7 +22,7 @@
 + (instancetype)sharedInstance;
 
 /**判断、获取相册/相机权限*/
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType handler:(void (^)(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined))handler;
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType sourceTypeUnavailableHandler:(void (^)(void))sourceTypeUnavailableHandler isNotDeterminedHandler:(void (^)(void))isNotDeterminedHandler handler:(void (^)(BOOL success, BOOL isLimited))handler;
 /**判断、获取相册/相机权限，权限不足时，弹出alert*/
 + (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)sourceType handler:(void (^)(BOOL isLimited))handler fromViewController:(UIViewController *)viewController;
 

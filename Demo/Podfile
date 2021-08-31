@@ -9,6 +9,7 @@ pod 'MJRefresh','3.5.0'
 pod 'YYCache', '1.0.4'
 pod 'YYModel', '1.0.4'
 pod 'MLCKit', :path => '../', :modular_headers => true
+pod 'LCDemo', :path => '../', :modular_headers => true
 #pod 'MLCKit', :git => 'https://github.com/mlcldh/MLCKit.git', :commit => '3fe5931'
 
 #use_modular_headers!

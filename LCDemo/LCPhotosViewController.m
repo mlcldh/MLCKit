@@ -39,14 +39,11 @@
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [button setTitle:@"请求相册权限" forState:(UIControlStateNormal)];
     [button setMlc_touchUpInsideBlock:^{
-        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
-            if (!isSourceTypeAvailable) {
-                NSLog(@"当前设备没有相册功能");
-                return;
-            }
-            if (isNotDetermined) {
-                NSLog(@"相册权限之前还未处理");
-            }
+        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) sourceTypeUnavailableHandler:^{
+            NSLog(@"当前设备没有相册功能");
+        } isNotDeterminedHandler:^{
+            NSLog(@"相册权限之前还未处理");
+        } handler:^(BOOL success, BOOL isLimited) {
             if (success) {
                 NSLog(@"已经获得相册权限");
                 if (isLimited) {
@@ -56,7 +53,7 @@
                 NSLog(@"相册权限被拒绝");
             }
         }];
-            }];
+    }];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);
@@ -90,14 +87,11 @@
     [button setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [button setTitle:@"请求相机权限" forState:(UIControlStateNormal)];
     [button setMlc_touchUpInsideBlock:^{
-        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
-            if (!isSourceTypeAvailable) {
-                NSLog(@"当前设备没有相机功能");
-                return;
-            }
-            if (isNotDetermined) {
-                NSLog(@"相机权限之前还未处理");
-            }
+        [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) sourceTypeUnavailableHandler:^{
+            NSLog(@"当前设备没有相机功能");
+        } isNotDeterminedHandler:^{
+            NSLog(@"相机权限之前还未处理");
+        } handler:^(BOOL success, BOOL isLimited) {
             if (success) {
                 NSLog(@"已经获得相机权限");
                 if (isLimited) {
@@ -107,7 +101,7 @@
                 NSLog(@"相机权限被拒绝");
             }
         }];
-            }];
+    }];
     [self.view addSubview:button];
     [button mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);

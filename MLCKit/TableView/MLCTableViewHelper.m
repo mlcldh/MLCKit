@@ -52,6 +52,12 @@
     self.tableViewDelegate.errorViewHandler = errorViewHandler;
 }
 #pragma mark -
+- (NSArray *)models {
+    if (!self.tableViewDelegate.sections.firstObject) {
+        return @[];
+    }
+    return self.tableViewDelegate.sections.firstObject.models;
+}
 - (void)handleRequestSuccessWithModels:(NSArray *)models totalCount:(NSInteger)totalCount isRefresh:(BOOL)isRefresh {
     if (isRefresh) {
         [self handleRefreshSuccessWithModels:models totalCount:totalCount];

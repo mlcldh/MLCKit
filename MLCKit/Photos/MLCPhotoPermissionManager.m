@@ -45,11 +45,11 @@
     return _cameraPermissionModel;
 }
 #pragma mark -
-+ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType handler:(void (^)(BOOL, BOOL, BOOL, BOOL))handler {
++ (void)requestPermissionWithSourceType:(UIImagePickerControllerSourceType)souceType sourceTypeUnavailableHandler:(void (^)(void))sourceTypeUnavailableHandler isNotDeterminedHandler:(void (^)(void))isNotDeterminedHandler handler:(void (^)(BOOL, BOOL))handler {
     
     if (![UIImagePickerController isSourceTypeAvailable:souceType]) {
-        if (handler) {
-            handler(NO, NO, NO, NO);
+        if (sourceTypeUnavailableHandler) {
+            sourceTypeUnavailableHandler();
         }
         return;
     }
@@ -58,21 +58,24 @@
         switch (authorizationStatus) {
             case AVAuthorizationStatusAuthorized:
                 if (handler) {
-                    handler(YES, YES, NO, NO);
+                    handler(YES, NO);
                 }
                 break;
             case AVAuthorizationStatusDenied:
             case AVAuthorizationStatusRestricted:
                 if (handler) {
-                    handler(YES, NO, NO, NO);
+                    handler(NO, NO);
                 }
                 break;
             case AVAuthorizationStatusNotDetermined:
+                if (isNotDeterminedHandler) {
+                    isNotDeterminedHandler();
+                }
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                                          completionHandler:^(BOOL granted) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         if (handler) {
-                            handler(YES, granted, NO, YES);
+                            handler(granted, NO);
                         }
                     });
                 }];
@@ -86,12 +89,12 @@
         switch (authorizationStatus) {
             case PHAuthorizationStatusNotDetermined: {
                 [PHPhotoLibrary requestAuthorizationForAccessLevel:PHAccessLevelReadWrite handler:^(PHAuthorizationStatus status2) {
-                    [self handleStatus:status2 isNotDetermined:YES handler:handler];
+                    [self handleStatus:status2 isNotDetermined:YES isNotDeterminedHandler:isNotDeterminedHandler handler:handler];
                 }];
             }
                 break;
             default:
-                [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+                [self handleStatus:authorizationStatus isNotDetermined:NO isNotDeterminedHandler:isNotDeterminedHandler handler:handler];
                 break;
         }
         return;
@@ -100,48 +103,54 @@
     PHAuthorizationStatus authorizationStatus = [PHPhotoLibrary authorizationStatus];
     switch (authorizationStatus) {
         case PHAuthorizationStatusNotDetermined: {
+            if (isNotDeterminedHandler) {
+                isNotDeterminedHandler();
+            }
             [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status2) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (handler) {
-                        handler(YES, (status2 == PHAuthorizationStatusAuthorized), NO, YES);
+                        handler((status2 == PHAuthorizationStatusAuthorized), NO);
                     }
                 });
             }];
         }
             break;
         default:
-            [self handleStatus:authorizationStatus isNotDetermined:NO handler:handler];
+            [self handleStatus:authorizationStatus isNotDetermined:NO isNotDeterminedHandler:isNotDeterminedHandler handler:handler];
             break;
     }
 }
-+ (void)handleStatus:(PHAuthorizationStatus)status isNotDetermined:(BOOL)isNotDetermined handler:(void (^)(BOOL, BOOL, BOOL, BOOL))handler {
++ (void)handleStatus:(PHAuthorizationStatus)status isNotDetermined:(BOOL)isNotDetermined isNotDeterminedHandler:(void (^)(void))isNotDeterminedHandler handler:(void (^)(BOOL, BOOL))handler {
     if (![NSThread isMainThread]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self handleStatus:status isNotDetermined:isNotDetermined handler:handler];
+            [self handleStatus:status isNotDetermined:isNotDetermined isNotDeterminedHandler:isNotDeterminedHandler handler:handler];
         });
         return;
+    }
+    if (isNotDetermined && isNotDeterminedHandler) {
+        isNotDeterminedHandler();
     }
     switch (status) {
         case PHAuthorizationStatusAuthorized:
             if (handler) {
-                handler(YES, YES, NO, isNotDetermined);
+                handler(YES, NO);
             }
             break;
 #if !TARGET_OS_MACCATALYST
         case PHAuthorizationStatusLimited:
             if (handler) {
-                handler(YES, YES, YES, isNotDetermined);
+                handler(YES, YES);
             }
             break;
 #endif
         case PHAuthorizationStatusRestricted:
             if (handler) {
-                handler(YES, NO, NO, isNotDetermined);
+                handler(NO, NO);
             }
             break;
         case PHAuthorizationStatusDenied:
             if (handler) {
-                handler(YES, NO, NO, isNotDetermined);
+                handler(NO, NO);
             }
             break;
         default:
@@ -152,21 +161,21 @@
     if (!viewController) {
         return;
     }
-    [self requestPermissionWithSourceType:sourceType handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isLimited, BOOL isNotDetermined) {
-        if (!isSourceTypeAvailable) {
-            NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
-            NSString *message = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableMessage : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableMessage;
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                                     message:message
-                                                                              preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"确定"
-                                                                style:UIAlertActionStyleDefault
-                                                              handler:nil]];
-            [viewController presentViewController:alertController
-                                         animated:YES
-                                       completion:nil];
-            return;
-        }
+    [self requestPermissionWithSourceType:sourceType sourceTypeUnavailableHandler:^{
+        NSString *title = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableTitle : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableTitle;
+        NSString *message = (sourceType == UIImagePickerControllerSourceTypeCamera) ? [MLCPhotoPermissionManager sharedInstance].cameraPermissionModel.unavailableMessage : [MLCPhotoPermissionManager sharedInstance].albumPermissionModel.unavailableMessage;
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                                 message:message
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"确定"
+                                                            style:UIAlertActionStyleDefault
+                                                          handler:nil]];
+        [viewController presentViewController:alertController
+                                     animated:YES
+                                   completion:nil];
+    } isNotDeterminedHandler:^{
+        
+    } handler:^(BOOL success, BOOL isLimited) {
         if (success) {
             handler(isLimited);
             return;
