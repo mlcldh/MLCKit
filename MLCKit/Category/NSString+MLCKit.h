@@ -27,5 +27,9 @@
 - (NSString *)mlc_stringByTrimmingWhitespaceAndNewlineCharacters;
 /**将json字符串转换成字典或数组等*/
 - (id)mlc_JSONObject;
+/// 将十六进制字符串转换为整形
+- (void)lcs_handleHexStringWithValueHandler:(void(^)(unsigned unsignedValue))valueHandler failureHandler:(void(^)(void))failureHandler;
+/// 将十六进制字符串转换为整形
+- (unsigned long long)lcs_unsignedLongLongFromHexString;
 
 @end

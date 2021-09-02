@@ -103,6 +103,7 @@ Pod::Spec.new do |s|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
     ss.frameworks = 'UIKit'
     ss.dependency 'Masonry'
+    ss.dependency 'MLCKit/Proxy'
   end
   
   s.subspec 'Utility' do |ss|

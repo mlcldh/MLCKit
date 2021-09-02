@@ -61,5 +61,25 @@
                                                     options:kNilOptions error:&err];
     return jsonObject;
 }
+- (void)lcs_handleHexStringWithValueHandler:(void (^)(unsigned int))valueHandler failureHandler:(void (^)(void))failureHandler {
+    unsigned intValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:self];
+    BOOL ok = [scanner scanHexInt:&intValue];
+    if (ok) {
+        if (valueHandler) {
+            valueHandler(intValue);
+        }
+        return;
+    }
+    if (failureHandler) {
+        failureHandler();
+    }
+}
+- (unsigned long long)lcs_unsignedLongLongFromHexString {
+    unsigned long long intValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:self];
+    [scanner scanHexLongLong:&intValue];
+    return intValue;
+}
 
 @end

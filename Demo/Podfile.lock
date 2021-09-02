@@ -40,6 +40,7 @@ PODS:
     - MLCKit/Category
   - MLCKit/UI (0.0.4):
     - Masonry
+    - MLCKit/Proxy
   - MLCKit/Utility (0.0.4)
   - YYCache (1.0.4)
   - YYModel (1.0.4)
@@ -69,7 +70,7 @@ SPEC CHECKSUMS:
   LCDemo: ff603c58f16dfcda0a2fada087f3e3ba9c58e9a8
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  MLCKit: adb9c293be579d5784a47d61083200f95e13e3c7
+  MLCKit: e02c56f276d4d17f50a7c3a3997024f498b15aeb
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 

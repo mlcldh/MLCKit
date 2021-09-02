@@ -3,11 +3,14 @@
 //  MLCKit
 //
 //  Created by menglingchao on 2021/1/22.
+//  Copyright © 2021 MengLingChao. All rights reserved.
 //
 
 #import "UIView+MLCKitUI.h"
 #import <objc/runtime.h>
 #import "Masonry.h"
+#import "UIColor+MLCKit.h"
+#import "MLCProgressHUD.h"
 
 @interface UIView ()
 
@@ -33,17 +36,34 @@
     objc_setAssociatedObject(self, @selector(mlc_activityIndicatorView), mlc_activityIndicatorView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 #pragma mark -
-- (void)mlc_showSuccessWithImage:(UIImage *)image status:(NSString*)status {
-    
+- (void)mlc_showToastWithTitle:(NSString *)title afterDelay:(NSTimeInterval)delay {
+    MLCProgressHUD *hud = [[MLCProgressHUD alloc] initForView:self type:(MLCProgressHUDTypeToast)];
+    hud.bezelView.backgroundColor = [UIColor mlc_colorWithHexString:@"000000" alpha:0.7];
+    hud.bezelView.layer.cornerRadius = 5;
+    hud.bezelViewMaxWidthRate = 0.7;
+    hud.titleLabel.textColor = [UIColor whiteColor];
+    hud.titleLabel.font = [UIFont systemFontOfSize:13];
+    hud.titleLabel.numberOfLines = 0;
+    hud.titleLabel.text = title.length > 0 ? title : @" ";
+    hud.titleLabelEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
+    [hud hideAfterDelay:delay];
 }
-- (void)mlc_showErrorWithImage:(UIImage *)image status:(NSString*)status {
-    
+- (void)mlc_showLoadingWithTitle:(NSString *)title {
+    MLCProgressHUD *hud = [[MLCProgressHUD alloc] initForView:self type:(MLCProgressHUDTypeLoading) annularWidth:24];
+    hud.rotateDuration = 0.8;
+//    hud.bezelView.backgroundColor = [UIColor mlc_colorWithHexString:@"000000" alpha:0.7];
+//        hud.bezelView.backgroundColor = .lcs_color(hexString: "000000", alpha: 0.7)
+//        hud.bezelView.layer.cornerRadius = 5
+    [hud.annularView.line shapeLayer].strokeEnd = 0.1;
+//        hud.annularViewTopMargin = 12
+    hud.titleLabel.textColor = [UIColor mlc_colorWithHexString:@"C6C9CC"];
+    hud.titleLabel.font = [UIFont systemFontOfSize:14];
+    hud.titleLabel.numberOfLines = 0;
+    hud.titleLabel.text = title.length > 0 ? title : @"加载中...";
+    hud.titleLabelEdgeInsets = UIEdgeInsetsMake(12, 12, 12, 12);
 }
-- (void)mlc_showToastWithStatus:(NSString *)status afterDelay:(NSTimeInterval)delay {
-    
-}
-- (void)mlc_hideHud {
-    
+- (void)mlc_removeHud {
+    [MLCProgressHUD hideHUDForView:self];
 }
 - (void)mlc_showActivityIndicatorStyleLoadingWithHandler:(void (^)(UIActivityIndicatorView *))handler {
     if (self.mlc_activityIndicatorView) {
