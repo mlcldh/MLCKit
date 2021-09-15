@@ -23,7 +23,7 @@
 + (UIImage *)mlc_imageWithQRCode:(NSString *)QRCode imageWidth:(CGFloat)imageWidth;
 /**修改图片大小*/
 + (UIImage *)mlc_imageWithCIImage:(CIImage *)image imageWidth:(CGFloat) imageWidth;
-/**改变图片颜色*/
+/**改变图片颜色，可以用来修改二维码的颜色*/
 - (UIImage *)mlc_specialColorImageWithColor:(UIColor *)color;
 /// 图片取色
 /// @param point 取色位置

@@ -21,7 +21,7 @@
     // Do any additional setup after loading the view.
     
     [self useFilter];
-//    [self showQRCodeImage];
+    [self showQRCodeImage];
 }
 #pragma mark -
 - (void)useFilter {//使用图片滤镜
@@ -73,7 +73,7 @@
     [self.view addSubview:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view).offset(20);
-        make.top.equalTo(self.view).offset(100);
+        make.top.equalTo(self.view).offset(500);
     }];
 }
 

@@ -1,7 +1,9 @@
 # MLCKit
 MLCKit封装一些常用的iOS方法。
 
-分成Cache、Category、Color、Document、Font、LocalFolder、Macro、Photos、Proxy、UI、Utility等子pods。
+分成Cache、Category、Color、Document、Font、LocalFolder、Location、Macro、Photos、Proxy、Scan、TableView、UI、Utility等子pods。
+
+Swift版本是[LCSKit](https://github.com/mlcldh/LCSKit)，功能基本相同。
 
 ## Cache
 
@@ -315,28 +317,31 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 判断相册权限，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-                if (!isSourceTypeAvailable) {
-                    NSLog(@"当前设备没有相册功能");
-                    return;
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) sourceTypeUnavailableHandler:^{
+            NSLog(@"当前设备没有相册功能");
+        } isNotDeterminedHandler:^{
+            NSLog(@"相册权限之前还未处理");
+        } handler:^(BOOL success, BOOL isLimited) {
+            if (success) {
+                NSLog(@"已经获得相册权限");
+                if (isLimited) {
+                    NSLog(@"读取相册受限");
                 }
-                if (isNotDetermined) {
-                    NSLog(@"相册权限还未处理");
-                }
-                if (success) {
-                    NSLog(@"已经获得相册权限");
-                } else {
-                    NSLog(@"相册权限被拒绝");
-                }
-            }];
+            } else {
+                NSLog(@"相册权限被拒绝");
+            }
+        }];
 ```
 
 判断相册权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^{
-                NSLog(@"已经获得相册权限");
-            } fromViewController:self];
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isLimited) {
+            NSLog(@"已经获得相册权限");
+            if (isLimited) {
+                NSLog(@"读取相册受限");
+            }
+        } fromViewController:self];
 ```
 
 #### 相机权限
@@ -344,28 +349,28 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 判断相机权限，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isSourceTypeAvailable, BOOL success, BOOL isNotDetermined) {
-                if (!isSourceTypeAvailable) {
-                    NSLog(@"当前设备没有相机功能");
-                    return;
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) sourceTypeUnavailableHandler:^{
+            NSLog(@"当前设备没有相机功能");
+        } isNotDeterminedHandler:^{
+            NSLog(@"相机权限之前还未处理");
+        } handler:^(BOOL success, BOOL isLimited) {
+            if (success) {
+                NSLog(@"已经获得相机权限");
+                if (isLimited) {
+                    NSLog(@"读取受限");
                 }
-                if (isNotDetermined) {
-                    NSLog(@"相机权限还未处理");
-                }
-                if (success) {
-                    NSLog(@"已经获得相机权限");
-                } else {
-                    NSLog(@"相机权限被拒绝");
-                }
-            }];
+            } else {
+                NSLog(@"相机权限被拒绝");
+            }
+        }];
 ```
 
 判断相机权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
 ```objective-c
-[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^{
-                NSLog(@"已经获得相机权限");
-            } fromViewController:self];
+[MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isLimited) {
+            NSLog(@"已经获得相机权限");
+        } fromViewController:self];
 ```
 
 ### PHPickerViewController
@@ -436,6 +441,14 @@ _timer = [NSTimer timerWithTimeInterval:interval target:[MLCProxy proxyWithTarge
 ```
 
 `pod 'MLCKit/Proxy'`
+
+## Scan
+
+Scan里面有扫码二维码视图控制器MLCScanQRCodeViewController，还有识别二维码的方法。
+
+## TableView
+
+里面封装了UITableView下拉刷新、加载更多等的处理，将UITableView的代理回调改成使用block回调。
 
 ## UI
 

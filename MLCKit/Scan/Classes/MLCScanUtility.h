@@ -15,4 +15,3 @@
 + (NSArray<NSString *> *)QRCodeStringsWithImage:(UIImage *)image;
 
 @end
-
