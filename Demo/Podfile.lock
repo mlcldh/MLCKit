@@ -15,6 +15,7 @@ PODS:
     - MLCKit/Proxy (= 0.0.4)
     - MLCKit/Scan (= 0.0.4)
     - MLCKit/TableView (= 0.0.4)
+    - MLCKit/Timer (= 0.0.4)
     - MLCKit/UI (= 0.0.4)
     - MLCKit/Utility (= 0.0.4)
   - MLCKit/Cache (0.0.4):
@@ -38,6 +39,7 @@ PODS:
     - Masonry
     - MJRefresh
     - MLCKit/Category
+  - MLCKit/Timer (0.0.4)
   - MLCKit/UI (0.0.4):
     - Masonry
     - MLCKit/Proxy
@@ -70,10 +72,10 @@ SPEC CHECKSUMS:
   LCDemo: ff603c58f16dfcda0a2fada087f3e3ba9c58e9a8
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  MLCKit: e02c56f276d4d17f50a7c3a3997024f498b15aeb
+  MLCKit: 1638dcca51a0ef8b41e362c74131edeabb73413e
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
 PODFILE CHECKSUM: 6ffa03fc112305488c297d14df406754ca3fe899
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2

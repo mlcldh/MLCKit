@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) NSTimer *timer;//
 
-
 @end
 
 @implementation LCUseProxyViewController
@@ -33,8 +32,17 @@
 }
 #pragma mark -
 - (void)useProxy {
+    NSLog(@"menglc useProxy");
     self.timer = [NSTimer timerWithTimeInterval:1 target:[MLCProxy proxyWithTarget:self] selector:@selector(timerAction:) userInfo:nil repeats:YES];
+//    @weakify(self)
+//    self.timer = [NSTimer timerWithTimeInterval:1 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//        @strongify(self)
+//        [self timerAction:self.timer];
+//    }];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+//    [self.timer invalidate];
+//    [self.timer fire];
+//    [self.timer fire];
 }
 
 @end

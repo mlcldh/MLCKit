@@ -99,6 +99,11 @@ Pod::Spec.new do |s|
     ss.dependency 'MLCKit/Category'
   end
   
+  s.subspec 'Timer' do |ss|
+    ss.source_files = 'MLCKit/Timer/*.{h,m}'
+    ss.frameworks = 'Foundation'
+  end
+  
   s.subspec 'UI' do |ss|
     ss.source_files = 'MLCKit/UI/*.{h,m,mm}'
     ss.frameworks = 'UIKit'
