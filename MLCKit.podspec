@@ -26,6 +26,11 @@ Pod::Spec.new do |s|
 #    :modular_headers => true
 #  }
   
+  s.subspec 'Algorithm' do |ss|
+    ss.source_files = 'MLCKit/Algorithm/*.{h,m,mm}'
+    ss.frameworks = 'Foundation'
+  end
+  
   s.subspec 'Cache' do |ss|
     ss.source_files = 'MLCKit/Cache/*.{h,m,mm}'
     ss.dependency 'YYCache'

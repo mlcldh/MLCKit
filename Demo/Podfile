@@ -4,6 +4,8 @@ platform :ios,			'8.0'
 
 target:'MLCKitDemo'
 
+#use_frameworks!
+
 pod 'Masonry', '1.1.0'
 pod 'MJRefresh','3.5.0'
 pod 'YYCache', '1.0.4'

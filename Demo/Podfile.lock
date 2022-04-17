@@ -3,6 +3,7 @@ PODS:
   - Masonry (1.1.0)
   - MJRefresh (3.5.0)
   - MLCKit (0.0.4):
+    - MLCKit/Algorithm (= 0.0.4)
     - MLCKit/Cache (= 0.0.4)
     - MLCKit/Category (= 0.0.4)
     - MLCKit/Color (= 0.0.4)
@@ -18,6 +19,7 @@ PODS:
     - MLCKit/Timer (= 0.0.4)
     - MLCKit/UI (= 0.0.4)
     - MLCKit/Utility (= 0.0.4)
+  - MLCKit/Algorithm (0.0.4)
   - MLCKit/Cache (0.0.4):
     - YYCache
   - MLCKit/Category (0.0.4)
@@ -72,10 +74,10 @@ SPEC CHECKSUMS:
   LCDemo: ff603c58f16dfcda0a2fada087f3e3ba9c58e9a8
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  MLCKit: 1638dcca51a0ef8b41e362c74131edeabb73413e
+  MLCKit: d834522e2c012b025cfc1f4e039bcabc4c0bb2ed
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
-PODFILE CHECKSUM: 6ffa03fc112305488c297d14df406754ca3fe899
+PODFILE CHECKSUM: 09a744550bbadebd2b5035a04cd1ce5b56d9efa3
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.10.2
