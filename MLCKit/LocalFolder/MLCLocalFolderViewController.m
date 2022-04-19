@@ -124,7 +124,7 @@
         case 0: {
             NSString *fileName = [_folderPath stringByAppendingPathComponent:_subpaths[indexPath.row]];
             MLCLocalFolderViewController *viewController = [[MLCLocalFolderViewController alloc] initWithFolderPath:fileName];
-            
+            viewController.canOpenFileHandler = self.canOpenFileHandler;
             [self.navigationController pushViewController:viewController animated:YES];
         } break;
         case 1: {
