@@ -35,6 +35,9 @@
         @strongify(self)
         NSString *folderPath = NSHomeDirectory();
         MLCLocalFolderViewController *localFolderVC = [[MLCLocalFolderViewController alloc]initWithFolderPath:folderPath];
+//        [localFolderVC setCanOpenFileHandler:^BOOL(NSString *filePath) {
+//            return NO;
+//        }];
         [self.navigationController pushViewController:localFolderVC animated:YES];
     }];
     [self.view addSubview:seeLocalFileButton];

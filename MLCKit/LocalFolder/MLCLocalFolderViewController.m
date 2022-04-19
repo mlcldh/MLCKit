@@ -129,6 +129,9 @@
         } break;
         case 1: {
             NSString *fileName = [_folderPath stringByAppendingPathComponent:_files[indexPath.row]];
+            if (self.canOpenFileHandler && !self.canOpenFileHandler(fileName)) {
+                return;
+            }
             fileName = [fileName stringByStandardizingPath];
             
             _documentIC = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:fileName]];
