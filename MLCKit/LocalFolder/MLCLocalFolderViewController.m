@@ -39,6 +39,9 @@
     NSError *error = nil;
     BOOL isDirectory = NO;
     NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:_folderPath error:&error];
+    files = [files sortedArrayUsingComparator:^NSComparisonResult(NSString *  _Nonnull obj1, NSString *  _Nonnull obj2) {
+        return [obj1 compare:obj2];
+    }];
     
     [_subpaths addObject:@".."];
     
