@@ -36,6 +36,43 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self tableView];
+    [self refresh];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - Getter
+- (UITableView *)tableView {
+    if (! _tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+        _tableView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
+        UIViewAutoresizingFlexibleTopMargin |
+        UIViewAutoresizingFlexibleWidth |
+        UIViewAutoresizingFlexibleHeight;
+        _tableView.rowHeight = 44.0f;
+        if (@available(iOS 10.0, *)) {
+            _tableView.refreshControl = [[UIRefreshControl alloc] init];
+            [_tableView.refreshControl addTarget:self action:@selector(refresh) forControlEvents:(UIControlEventTouchDragExit)];
+        }
+        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        [self.view addSubview:_tableView];
+//        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.edges.equalTo(self.view);
+////            if (@available(iOS 11.0, *)) {
+////                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+////            } else {
+////                make.top.equalTo(self.mas_topLayoutGuideBottom);
+////            }
+//        }];
+    }
+    return _tableView;
+}
+#pragma mark -
+- (void)refresh {
     NSError *error = nil;
     BOOL isDirectory = NO;
     NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:_folderPath error:&error];
@@ -55,35 +92,7 @@
             [_files addObject:fileName];
         }
     }
-    [self tableView];
-}
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-#pragma mark - Getter
-- (UITableView *)tableView {
-    if (! _tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
-        UIViewAutoresizingFlexibleTopMargin |
-        UIViewAutoresizingFlexibleWidth |
-        UIViewAutoresizingFlexibleHeight;
-        _tableView.rowHeight = 44.0f;
-        [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        [self.view addSubview:_tableView];
-//        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.edges.equalTo(self.view);
-////            if (@available(iOS 11.0, *)) {
-////                make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-////            } else {
-////                make.top.equalTo(self.mas_topLayoutGuideBottom);
-////            }
-//        }];
-    }
-    return _tableView;
+    [self.tableView reloadData];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -150,6 +159,19 @@
         default:
             break;
     }
+}
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive) title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+    }];
+    UITableViewRowAction *renameRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal) title:@"重命名" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        
+    }];
+    return @[renameRowAction, deleteRowAction];
+}
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)){
+    UISwipeActionsConfiguration *swipeActionsConfiguration = nil;
+    return swipeActionsConfiguration;
 }
 #pragma mark - UIDocumentInteractionControllerDelegate
 - (UIViewController *)documentInteractionControllerViewControllerForPreview:(UIDocumentInteractionController *)controller {
