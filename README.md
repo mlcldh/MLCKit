@@ -13,7 +13,7 @@ Swift版本是[LCSKit](https://github.com/mlcldh/LCSKit)，功能基本相同。
 
 支持对缓存数据的同步/异步读取、设置。
 
-```objective-c
+```objc
 /**单例，存放在Documents文件夹内，app设置里面清理缓存不可以删除的缓存*/
 + (instancetype)coreCache;
 
@@ -34,7 +34,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 使用归档、反归档进行序列化、反序列化的话，可以下面的方法：
 
-```objective-c
+```objc
 @interface NSObject (MLCKit)
 
 /**反序列化*/
@@ -49,7 +49,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 ### NSArray
 
-```objective-c
+```objc
 @interface NSArray (MLCKit)
 
 /**将数组的view根据先后顺序，根据相同间距连接起来*/
@@ -64,7 +64,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 ### NSDate
 
-```objective-c
+```objc
 @interface NSDate (MLCKit)
 
 /**当前日期在当前日历的年*/
@@ -99,7 +99,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 使用URL编解码的话，可以使用下面的方法：
 
-```objective-c
+```objc
 @interface NSString (MLCKit)
 
 /**URL编码*/
@@ -118,7 +118,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 通过block获取UIControl及其子类的事件回调。UIControl的子类有UIButton、UISwitch、UISlider、UISegmentedControl、UIPageControl、UITextField、UIDatePicker等。
 
-```objective-c
+```objc
 @interface UIControl (MLCKit)
 
 /**点击回调*/
@@ -137,7 +137,7 @@ Category里面是常用类目，有URL编解码、UIView的点击回调、UICont
 
 通过block获取UIView及其子类的手势回调；移除某一些约束。
 
-```objective-c
+```objc
 /**手势类型枚举 */
 typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
     MLCGestureRecognizerTypeTap = 0,//
@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 
 ### UIViewController
 
-```objective-c
+```objc
 @interface UIViewController (MLCKit)
 
 /**弹出alert*/
@@ -196,7 +196,7 @@ typedef NS_ENUM(NSInteger, MLCGestureRecognizerType) {
 
 颜色相关。
 
-```objective-c
+```objc
 /**将UIColorPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(14.0))
 @interface MLCColorPickerViewControllerManager : NSObject<UIColorPickerViewControllerDelegate>
@@ -220,7 +220,7 @@ API_AVAILABLE(ios(14.0))
 
 文件相关。
 
-```objective-c
+```objc
 /**将UIDocumentPickerViewController协议方法通过block回调出来*/
 @interface MLCDocumentPickerViewControllerManager : NSObject<UIDocumentPickerDelegate>
 
@@ -243,7 +243,7 @@ API_AVAILABLE(ios(14.0))
 
 字体相关。
 
-```objective-c
+```objc
 /**将UIFontPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(13.0))
 @interface MLCFontPickerViewControllerManager : NSObject<UIFontPickerViewControllerDelegate>
@@ -265,11 +265,27 @@ API_AVAILABLE(ios(13.0))
 
 ## LocalFolder
 
-LocalFolder里面有查看app沙盒文件的视图控制器。
+LocalFolder里面有查看app沙盒文件的视图控制器，支持对文件、文件夹进行打开、重命名、查看文件信息等功能，同时支持自定义文件打开操作。
+
+```objc
+/// 本地文件查看
+@interface MLCLocalFolderViewController : UIViewController
+
+/// 初始化文件夹
+@property (nonatomic, copy, readonly) NSString *folderPath;
+/// 是否能够打开文件的回调
+@property (nonatomic, copy) BOOL(^canOpenFileHandler)(NSString *filePath);
+
+/// 初始化方法
+/// - Parameter folderPath: 文件夹路径
+- (instancetype)initWithFolderPath:(NSString *)folderPath;
+
+@end
+```
 
 如果想查看整个app沙盒文件，可以如下调用：
 
-```objective-c
+```objc
 NSString *folderPath = NSHomeDirectory();
 MLCLocalFolderViewController *localFolderVC = [[MLCLocalFolderViewController alloc]initWithFolderPath:folderPath];
 [self.navigationController pushViewController:localFolderVC animated:YES];
@@ -279,7 +295,7 @@ MLCLocalFolderViewController *localFolderVC = [[MLCLocalFolderViewController all
 
 ## Location
 
-```objective-c
+```objc
 /**定位管理*/
 @interface MLCLocationManager : NSObject
 
@@ -316,7 +332,7 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 判断相册权限，可以如下调用：
 
-```objective-c
+```objc
 [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) sourceTypeUnavailableHandler:^{
             NSLog(@"当前设备没有相册功能");
         } isNotDeterminedHandler:^{
@@ -335,7 +351,7 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 判断相册权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
-```objective-c
+```objc
 [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypePhotoLibrary) handler:^(BOOL isLimited) {
             NSLog(@"已经获得相册权限");
             if (isLimited) {
@@ -348,7 +364,7 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 判断相机权限，可以如下调用：
 
-```objective-c
+```objc
 [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) sourceTypeUnavailableHandler:^{
             NSLog(@"当前设备没有相机功能");
         } isNotDeterminedHandler:^{
@@ -367,7 +383,7 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 判断相机权限，并且在权限被拒绝时弹出alert提醒，可以如下调用：
 
-```objective-c
+```objc
 [MLCPhotoPermissionManager requestPermissionWithSourceType:(UIImagePickerControllerSourceTypeCamera) handler:^(BOOL isLimited) {
             NSLog(@"已经获得相机权限");
         } fromViewController:self];
@@ -377,7 +393,7 @@ Macro里有只在Debug环境下打印NSLog，还有weakify、strongify。
 
 MLCPHPickerViewControllerManager将PHPickerViewController的协议方法回调改成了block回调：
 
-```objective-c
+```objc
 /**将PHPickerViewController协议方法通过block回调出来*/
 API_AVAILABLE(ios(14))
 @interface MLCPHPickerViewControllerManager : NSObject<PHPickerViewControllerDelegate>
@@ -397,7 +413,7 @@ API_AVAILABLE(ios(14))
 
 MLCImagePickerControllerManager将UIImagePickerController的协议方法回调改成了block回调：
 
-```objective-c
+```objc
 /**
  * 将UIImagePickerController部分协议方法通过block回调出来
  * 想扩展到更多部分协议方法的话，可以继承该类
@@ -432,11 +448,11 @@ MLCImagePickerControllerManager将UIImagePickerController的协议方法回调�
 
 使用MLCProxy的话，可以如下调用：
 
-```objective-c
+```objc
 _timer = [NSTimer timerWithTimeInterval:interval target:[MLCProxy proxyWithTarget:self] selector:@selector(pollLastNotice) userInfo:nil repeats:YES];
 ```
 
-```objective-c
+```objc
 [configuration.userContentController addScriptMessageHandler:(id <WKScriptMessageHandler>)[MLCProxy proxyWithTarget:self] name:@"log"];
 ```
 
@@ -472,7 +488,7 @@ Utility里面是工具类。
 
 MLCDeviceUtility封装获取设备信息的方法。
 
-```objective-c
+```objc
 /**设备相关工具类*/
 @interface MLCDeviceUtility : NSObject
 
@@ -532,7 +548,7 @@ MLCDeviceUtility封装获取设备信息的方法。
 
 ### MLCFileUtility
 
-```objective-c
+```objc
 /**文件相关工具类*/
 @interface MLCFileUtility : NSObject
 
@@ -560,7 +576,7 @@ MLCDeviceUtility封装获取设备信息的方法。
 
 ### MLCNotificationUtility
 
-```objective-c
+```objc
 /**通知工具类*/
 @interface MLCNotificationUtility : NSObject
 
@@ -579,7 +595,7 @@ MLCDeviceUtility封装获取设备信息的方法。
 
 ### MLCOpenUtility
 
-```objective-c
+```objc
 /**打开相关工具类*/
 @interface MLCOpenUtility : NSObject
 

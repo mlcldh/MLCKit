@@ -26,7 +26,9 @@ PODS:
   - MLCKit/Color (0.0.4)
   - MLCKit/Document (0.0.4)
   - MLCKit/Font (0.0.4)
-  - MLCKit/LocalFolder (0.0.4)
+  - MLCKit/LocalFolder (0.0.4):
+    - MLCKit/Category
+    - MLCKit/Utility
   - MLCKit/Location (0.0.4)
   - MLCKit/Macro (0.0.4)
   - MLCKit/Photos (0.0.4):
@@ -74,10 +76,10 @@ SPEC CHECKSUMS:
   LCDemo: ff603c58f16dfcda0a2fada087f3e3ba9c58e9a8
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
-  MLCKit: d834522e2c012b025cfc1f4e039bcabc4c0bb2ed
+  MLCKit: 813d8e5248ed9aad9a03105262e6d79d32aa091e
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
 
 PODFILE CHECKSUM: 09a744550bbadebd2b5035a04cd1ce5b56d9efa3
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.9.3

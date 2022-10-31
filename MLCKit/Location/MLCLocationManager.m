@@ -93,11 +93,11 @@
     }
 }
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    NSLog(@"menglc didChangeAuthorizationStatus %@", @(status));
+//    NSLog(@"MLCKit didChangeAuthorizationStatus %@", @(status));
     [self handleDidChangeAuthorizationStatus:status];
 }
 - (void)locationManagerDidChangeAuthorization:(CLLocationManager *)manager {
-    NSLog(@"menglc didChangeAuthorizationStatus %@", @([CLLocationManager authorizationStatus]));
+//    NSLog(@"MLCKit didChangeAuthorizationStatus %@", @([CLLocationManager authorizationStatus]));
     [self handleDidChangeAuthorizationStatus:[CLLocationManager authorizationStatus]];
 }
 

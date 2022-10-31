@@ -60,6 +60,8 @@ Pod::Spec.new do |s|
   s.subspec 'LocalFolder' do |ss|
     ss.source_files = 'MLCKit/LocalFolder/*.{h,m,mm}'
     ss.frameworks = 'UIKit'
+    ss.dependency 'MLCKit/Category'
+    ss.dependency 'MLCKit/Utility'
   end
   
   s.subspec 'Location' do |ss|

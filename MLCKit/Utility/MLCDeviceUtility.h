@@ -25,7 +25,7 @@
 /**IDFA，广告标示符*/
 + (NSString *)idfa;
 /**广告跟踪是否开启*/
-+ (BOOL)advertisingTrackingEnabled;
++ (BOOL)advertisingTrackingEnabled API_DEPRECATED("This has been replaced by functionality in AppTrackingTransparency's ATTrackingManager class.", ios(6, 14));
 /**IDFV*/
 + (NSString *)identifierForVendor;
 /**IDFA或IDFV，IDFA能获取到就返回IDFA*/

@@ -34,7 +34,7 @@
 @implementation MLCScanQRCodeViewController
 
 - (void)dealloc {
-    NSLog(@"menglc MLCScanQRCodeViewController dealloc");
+//    NSLog(@"menglc MLCScanQRCodeViewController dealloc");
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

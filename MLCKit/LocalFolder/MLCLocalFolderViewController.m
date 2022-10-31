@@ -7,20 +7,23 @@
 //
 
 #import "MLCLocalFolderViewController.h"
-//#import "MLCMacror.h"
-//#import "Masonry.h"
+#import "UIViewController+MLCKit.h"
+#import "MLCFileUtility.h"
+#import "NSDate+MLCKit.h"
 
 @interface MLCLocalFolderViewController ()<UITableViewDelegate, UITableViewDataSource, UIDocumentInteractionControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;//
 @property (nonatomic, strong) NSMutableArray *subpaths;//
 @property (nonatomic, strong) NSMutableArray *files;//
-@property (nonatomic,strong) UIDocumentInteractionController * documentIC;
 
 @end
 
 @implementation MLCLocalFolderViewController
 
+//- (void)dealloc {
+//    NSLog(@"MLCKit %@ dealloc", self);
+//}
 - (instancetype)initWithFolderPath:(NSString *)folderPath {
     self = [super init];
     if (self) {
@@ -54,7 +57,7 @@
         _tableView.rowHeight = 44.0f;
         if (@available(iOS 10.0, *)) {
             _tableView.refreshControl = [[UIRefreshControl alloc] init];
-            [_tableView.refreshControl addTarget:self action:@selector(refresh) forControlEvents:(UIControlEventTouchDragExit)];
+            [_tableView.refreshControl addTarget:self action:@selector(refresh) forControlEvents:(UIControlEventValueChanged)];
         }
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:NSStringFromClass([UITableViewCell class])];
         _tableView.delegate = self;
@@ -73,6 +76,9 @@
 }
 #pragma mark -
 - (void)refresh {
+    [_subpaths removeAllObjects];
+    [_files removeAllObjects];
+    
     NSError *error = nil;
     BOOL isDirectory = NO;
     NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:_folderPath error:&error];
@@ -93,6 +99,9 @@
         }
     }
     [self.tableView reloadData];
+    if (@available(iOS 10.0, *)) {
+        [self.tableView.refreshControl endRefreshing];
+    }
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -115,12 +124,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([UITableViewCell class])];
     switch (indexPath.section) {
         case 0: {
-            cell.backgroundColor = [UIColor yellowColor];
+            cell.backgroundColor = [UIColor systemYellowColor];
             cell.textLabel.text = _subpaths[indexPath.row];
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         } break;
         case 1: {
-            cell.backgroundColor = [UIColor lightGrayColor];
+            cell.backgroundColor = [UIColor systemGrayColor];
             cell.textLabel.text = _files[indexPath.row];
             cell.accessoryType = UITableViewCellAccessoryNone;
         } break;
@@ -134,23 +143,23 @@
     
     switch (indexPath.section) {
         case 0: {
-            NSString *fileName = [_folderPath stringByAppendingPathComponent:_subpaths[indexPath.row]];
-            MLCLocalFolderViewController *viewController = [[MLCLocalFolderViewController alloc] initWithFolderPath:fileName];
+            NSString *folderPath = [_folderPath stringByAppendingPathComponent:_subpaths[indexPath.row]];
+            MLCLocalFolderViewController *viewController = [[MLCLocalFolderViewController alloc] initWithFolderPath:folderPath];
             viewController.canOpenFileHandler = self.canOpenFileHandler;
             [self.navigationController pushViewController:viewController animated:YES];
         } break;
         case 1: {
-            NSString *fileName = [_folderPath stringByAppendingPathComponent:_files[indexPath.row]];
-            if (self.canOpenFileHandler && !self.canOpenFileHandler(fileName)) {
+            NSString *filePath = [_folderPath stringByAppendingPathComponent:_files[indexPath.row]];
+            if (self.canOpenFileHandler && !self.canOpenFileHandler(filePath)) {
                 return;
             }
-            fileName = [fileName stringByStandardizingPath];
+            filePath = [filePath stringByStandardizingPath];
             
-            _documentIC = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:fileName]];
+            UIDocumentInteractionController *_documentIC = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:filePath]];
             _documentIC.delegate = self;
             BOOL canPresentPreview =   [_documentIC presentPreviewAnimated:YES];
             if (!canPresentPreview) {
-                BOOL canOpen = [self.documentIC presentOpenInMenuFromRect:self.view.bounds inView:self.view animated:YES];
+                BOOL canOpen = [_documentIC presentOpenInMenuFromRect:self.view.bounds inView:self.view animated:YES];
                 if(!canOpen) {
                     NSLog(@"沒有程序可以打开选中的文件");
                 }
@@ -161,13 +170,46 @@
     }
 }
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!indexPath.section && !indexPath.row) {
+        return nil;
+    }
+    UITableViewRowAction *infoAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal) title:@"文件信息" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSArray *files = indexPath.section ? self.files : self.subpaths;
+        NSString *filePath = [self.folderPath stringByAppendingPathComponent:files[indexPath.row]];
+        NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+        NSString *dateFormat = @"yyyy/MM/dd HH:mm";
+        [self mlc_showAlertWithTitle:@"" message:[NSString stringWithFormat:@"文件大小：%@B。\n 创建时间：%@。\n 修改时间：%@。", @([MLCFileUtility sizeAtPath:filePath]), [attributes.fileCreationDate mlc_stringWithFormat:dateFormat], [attributes.fileModificationDate mlc_stringWithFormat:dateFormat]] actionTitle:@"确定" handler:nil];
+    }];
+    infoAction.backgroundColor = [UIColor systemBlueColor];
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive) title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         
+        NSArray *files = indexPath.section ? self.files : self.subpaths;
+        NSString *filePath = [self.folderPath stringByAppendingPathComponent:files[indexPath.row]];
+        NSError *error = nil;
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
+        if (error) {
+            NSLog(@"MLCKit error %@", error);
+        }
+        [self refresh];
     }];
     UITableViewRowAction *renameRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal) title:@"重命名" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        
+        [self mlc_showPromptWithTitle:@"重命名" message:nil configurationHandler:^(UITextField *textField) {
+            NSArray *files = indexPath.section ? self.files : self.subpaths;
+            textField.placeholder = @"新文件名";
+            textField.text = files[indexPath.row];
+        } resultHandler:^(BOOL isCancel, NSString *result) {
+            if (isCancel) {
+                return;
+            }
+            NSArray *files = indexPath.section ? self.files : self.subpaths;
+            NSString *filePath = [self.folderPath stringByAppendingPathComponent:files[indexPath.row]];
+            NSString *newFilePath = [self.folderPath stringByAppendingPathComponent:result];
+            [MLCFileUtility moveItemAtPath:filePath toPath:newFilePath error:nil];
+            [self refresh];
+        }];
     }];
-    return @[renameRowAction, deleteRowAction];
+    renameRowAction.backgroundColor = [UIColor systemGrayColor];
+    return @[infoAction, renameRowAction, deleteRowAction];
 }
 - (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)){
     UISwipeActionsConfiguration *swipeActionsConfiguration = nil;

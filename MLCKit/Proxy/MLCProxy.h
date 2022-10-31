@@ -3,7 +3,7 @@
 //  MLCKit
 //
 //  Created by MengLingChao on 2019/9/17.
-//  Copyright © 2019 ximalaya. All rights reserved.
+//  Copyright © 2019 MengLingChao. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

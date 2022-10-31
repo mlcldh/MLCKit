@@ -16,6 +16,8 @@
 /// 是否能够打开文件的回调
 @property (nonatomic, copy) BOOL(^canOpenFileHandler)(NSString *filePath);
 
+/// 初始化方法
+/// - Parameter folderPath: 文件夹路径
 - (instancetype)initWithFolderPath:(NSString *)folderPath;
 
 @end

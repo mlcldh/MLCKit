@@ -80,19 +80,17 @@
 }
 + (unsigned long long)sizeAtPath:(NSString *)path {
     NSFileManager *fm = [NSFileManager defaultManager];
-    BOOL isDir = YES;
-    if (![fm fileExistsAtPath:path isDirectory:&isDir]) {
+    BOOL isDirectory = YES;
+    if (![fm fileExistsAtPath:path isDirectory:&isDirectory]) {
         return 0;
     };
     unsigned long long fileSize = 0;
-    // directory
-    if (isDir) {
+    if (isDirectory) {
         NSDirectoryEnumerator *enumerator = [fm enumeratorAtPath:path];
         while (enumerator.nextObject) {
             fileSize += enumerator.fileAttributes.fileSize;
         }
     } else {
-        // file
         fileSize = [fm attributesOfItemAtPath:path error:nil].fileSize;
     }
     return fileSize;
