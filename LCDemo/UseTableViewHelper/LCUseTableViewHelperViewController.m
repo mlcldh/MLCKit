@@ -110,8 +110,22 @@ typedef NS_ENUM(NSInteger, LCRefreshType) {
 }
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc]init];
+        _tableView = [[UITableView alloc] init];
         _tableView.backgroundColor = [UIColor lightGrayColor];
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.sectionHeaderHeight = 0;
+        _tableView.sectionFooterHeight = 0;
+        _tableView.estimatedRowHeight = 44;
+        _tableView.estimatedSectionHeaderHeight = 0;
+        _tableView.estimatedSectionFooterHeight = 0;
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        }
+#ifdef __IPHONE_15_0
+        if (@available(iOS 15.0, *)) {
+            _tableView.sectionHeaderTopPadding = 0;
+        }
+#endif
         _tableView.tableFooterView = [[UIView alloc]init];
         [self.view addSubview:_tableView];
         [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
