@@ -176,9 +176,23 @@
     UITableViewRowAction *infoAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleNormal) title:@"文件信息" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         NSArray *files = indexPath.section ? self.files : self.subpaths;
         NSString *filePath = [self.folderPath stringByAppendingPathComponent:files[indexPath.row]];
+        UInt64 size = [MLCFileUtility sizeAtPath:filePath];
+        NSString *sizeString = nil;
+        if (size >= 1073741824) {// 1024 * 1024 * 1024
+            CGFloat f = size / 1073741824.f;
+            sizeString = [NSString stringWithFormat:@"%.2lfG", f];
+        } else if (size >= 1048576) {// 1024 * 1024
+            CGFloat f = size / 1048576.f;
+            sizeString = [NSString stringWithFormat:@"%.2lfM", f];
+        } else if (size > 1024) {
+            CGFloat f = size / 1024.0;
+            sizeString = [NSString stringWithFormat:@"%.2lfKB", f];
+        } else {
+            sizeString = [NSString stringWithFormat:@"%lldB", size];
+        }
         NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
         NSString *dateFormat = @"yyyy/MM/dd HH:mm";
-        [self mlc_showAlertWithTitle:@"" message:[NSString stringWithFormat:@"文件大小：%@B。\n 创建时间：%@。\n 修改时间：%@。", @([MLCFileUtility sizeAtPath:filePath]), [attributes.fileCreationDate mlc_stringWithFormat:dateFormat], [attributes.fileModificationDate mlc_stringWithFormat:dateFormat]] actionTitle:@"确定" handler:nil];
+        [self mlc_showAlertWithTitle:@"" message:[NSString stringWithFormat:@"文件大小：%@。\n 创建时间：%@。\n 修改时间：%@。", sizeString, [attributes.fileCreationDate mlc_stringWithFormat:dateFormat], [attributes.fileModificationDate mlc_stringWithFormat:dateFormat]] actionTitle:@"确定" handler:nil];
     }];
     infoAction.backgroundColor = [UIColor systemBlueColor];
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:(UITableViewRowActionStyleDestructive) title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
