@@ -141,6 +141,7 @@ typedef NS_ENUM(NSInteger, LCRefreshType) {
         @weakify(self)
         [_helper setEmptyViewHandler:^UIView *{
             UILabel *label = [[UILabel alloc]init];
+//            label.backgroundColor = [UIColor purpleColor];
             label.textAlignment = NSTextAlignmentCenter;
             label.text = @"空页面";
             return label;
@@ -229,6 +230,7 @@ typedef NS_ENUM(NSInteger, LCRefreshType) {
     }];
     [self.helper setEmptyViewHandler:^UIView *{
         UILabel *label = [[UILabel alloc]init];
+//        label.backgroundColor = [UIColor orangeColor];
         label.textAlignment = NSTextAlignmentCenter;
         label.text = @"空页面";
         return label;
