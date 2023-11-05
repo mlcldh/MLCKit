@@ -98,6 +98,12 @@
             [_files addObject:fileName];
         }
     }
+    [_subpaths sortUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    [_files sortUsingComparator:^NSComparisonResult(NSString * _Nonnull obj1, NSString * _Nonnull obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
     [self.tableView reloadData];
     if (@available(iOS 10.0, *)) {
         [self.tableView.refreshControl endRefreshing];
